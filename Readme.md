@@ -2194,3 +2194,923 @@ New value    → smallest
 ```
 
 This **single-pass technique** is an important foundation for more advanced array and optimization problems.
+
+# 4.🔄 Reverse the Given Array
+
+A fundamental **array manipulation problem** commonly useful for coding assessments such as **TCS NQT**.
+
+The objective is to reverse the elements of a given array **in-place** without using Python's built-in `reverse()` function or array slicing.
+
+The problem can be solved efficiently using the **two-pointer approach**.
+
+---
+
+## 📌 Problem Statement
+
+Given an array of `N` integers, reverse the elements of the array and print the reversed array.
+
+### Input Format
+
+* The first line contains an integer `N`, representing the number of elements.
+* The second line contains `N` space-separated integers representing the array.
+
+### Output Format
+
+Print the elements of the array in reverse order.
+
+---
+
+# 🧪 Example
+
+### Input
+
+```text
+5
+10 20 30 40 50
+```
+
+### Output
+
+```text
+50 40 30 20 10
+```
+
+### Explanation
+
+The given array is:
+
+```text
+10 20 30 40 50
+```
+
+We reverse the array by swapping elements from both ends:
+
+```text
+10 20 30 40 50
+↑           ↑
+L           R
+```
+
+Swap `10` and `50`:
+
+```text
+50 20 30 40 10
+```
+
+Move the pointers towards the center:
+
+```text
+50 20 30 40 10
+   ↑       ↑
+   L       R
+```
+
+Swap `20` and `40`:
+
+```text
+50 40 30 20 10
+```
+
+The pointers meet at the middle, so the reversal is complete.
+
+Therefore, the reversed array is:
+
+```text
+50 40 30 20 10
+```
+
+---
+
+# 💡 Approach
+
+We can solve this problem using the **two-pointer approach**.
+
+Instead of creating another array, we use two pointers:
+
+```text
+left
+right
+```
+
+The `left` pointer starts at the beginning of the array, while the `right` pointer starts at the end.
+
+We repeatedly swap the elements at these two positions and move both pointers towards the center.
+
+This allows us to reverse the array **in-place**.
+
+---
+
+# 🧠 Algorithm
+
+1. Read the number of elements `N`.
+2. Read the array.
+3. Initialize:
+
+   * `left = 0`
+   * `right = N - 1`
+4. Repeat while `left < right`:
+
+   * Swap `arr[left]` and `arr[right]`.
+   * Increment `left`.
+   * Decrement `right`.
+5. Print the reversed array.
+
+---
+
+# 💻 Python Code
+
+```python
+n = int(input())
+
+arr = list(map(int, input().split()))
+
+left = 0
+right = n - 1
+
+while left < right:
+    arr[left], arr[right] = arr[right], arr[left]
+
+    left += 1
+    right -= 1
+
+print(*arr)
+```
+
+---
+
+# 🔍 Code Explanation
+
+## 1. Read the Size of the Array
+
+```python
+n = int(input())
+```
+
+`input()` reads the value as a string.
+
+`int()` converts it into an integer.
+
+For example:
+
+```text
+5
+```
+
+becomes:
+
+```python
+n = 5
+```
+
+---
+
+## 2. Read the Array
+
+```python
+arr = list(map(int, input().split()))
+```
+
+This line performs three operations.
+
+### `input()`
+
+Reads the complete line:
+
+```text
+10 20 30 40 50
+```
+
+### `.split()`
+
+Splits the input into individual strings:
+
+```python
+["10", "20", "30", "40", "50"]
+```
+
+### `map(int, ...)`
+
+Converts each string into an integer:
+
+```python
+[10, 20, 30, 40, 50]
+```
+
+Finally, `list()` creates the Python list.
+
+So:
+
+```python
+arr = [10, 20, 30, 40, 50]
+```
+
+---
+
+# 🔄 Two-Pointer Approach
+
+## 3. Initialize the Left Pointer
+
+```python
+left = 0
+```
+
+The `left` pointer starts at the first index of the array.
+
+For:
+
+```text
+[10, 20, 30, 40, 50]
+```
+
+we have:
+
+```text
+left = 0
+```
+
+which points to:
+
+```text
+10
+```
+
+---
+
+## 4. Initialize the Right Pointer
+
+```python
+right = n - 1
+```
+
+The `right` pointer starts at the last index.
+
+If:
+
+```text
+n = 5
+```
+
+then:
+
+```text
+right = 4
+```
+
+So the pointer points to:
+
+```text
+50
+```
+
+The initial state is:
+
+```text
+10 20 30 40 50
+↑           ↑
+L           R
+```
+
+---
+
+## 5. Continue While the Pointers Have Not Crossed
+
+```python
+while left < right:
+```
+
+The loop continues as long as the `left` pointer is before the `right` pointer.
+
+Once:
+
+```text
+left >= right
+```
+
+all required swaps have been completed.
+
+---
+
+## 6. Swap the Elements
+
+```python
+arr[left], arr[right] = arr[right], arr[left]
+```
+
+This swaps the elements at the two pointer positions.
+
+For example:
+
+```text
+10 20 30 40 50
+↑           ↑
+L           R
+```
+
+After the swap:
+
+```text
+50 20 30 40 10
+```
+
+Python allows both values to be swapped in a single statement without using a temporary variable.
+
+---
+
+## 7. Move the Left Pointer
+
+```python
+left += 1
+```
+
+After the first swap, move the `left` pointer one position towards the center.
+
+For example:
+
+```text
+50 20 30 40 10
+   ↑
+   L
+```
+
+---
+
+## 8. Move the Right Pointer
+
+```python
+right -= 1
+```
+
+Similarly, move the `right` pointer one position towards the center.
+
+The pointers now become:
+
+```text
+50 20 30 40 10
+   ↑       ↑
+   L       R
+```
+
+---
+
+## 9. Print the Reversed Array
+
+```python
+print(*arr)
+```
+
+The `*` operator unpacks the list elements.
+
+Instead of printing:
+
+```text
+[50, 40, 30, 20, 10]
+```
+
+it prints:
+
+```text
+50 40 30 20 10
+```
+
+which matches the required output format.
+
+---
+
+# 📊 Dry Run
+
+Consider:
+
+```text
+N = 5
+Array = [10, 20, 30, 40, 50]
+```
+
+## Initial State
+
+```text
+10 20 30 40 50
+↑           ↑
+L           R
+```
+
+```text
+left = 0
+right = 4
+```
+
+---
+
+## Step 1
+
+Swap:
+
+```text
+10 ↔ 50
+```
+
+Array becomes:
+
+```text
+50 20 30 40 10
+```
+
+Move pointers:
+
+```text
+left = 1
+right = 3
+```
+
+---
+
+## Step 2
+
+Current array:
+
+```text
+50 20 30 40 10
+   ↑       ↑
+   L       R
+```
+
+Swap:
+
+```text
+20 ↔ 40
+```
+
+Array becomes:
+
+```text
+50 40 30 20 10
+```
+
+Move pointers:
+
+```text
+left = 2
+right = 2
+```
+
+---
+
+## Step 3
+
+Now:
+
+```text
+left = 2
+right = 2
+```
+
+The condition:
+
+```text
+left < right
+```
+
+is false.
+
+The loop terminates.
+
+### Final Array
+
+```text
+50 40 30 20 10
+```
+
+---
+
+# 🔁 Visual Representation
+
+The two-pointer process can be represented as:
+
+```text
+Initial:
+
+10  20  30  40  50
+↑                   ↑
+L                   R
+
+
+After Swap 1:
+
+50  20  30  40  10
+    ↑           ↑
+    L           R
+
+
+After Swap 2:
+
+50  40  30  20  10
+        ↑   ↑
+        L   R
+
+
+Pointers meet:
+
+50  40  30  20  10
+        ↑
+      L = R
+```
+
+The array is now completely reversed.
+
+---
+
+# 🚫 Why Not Use `reverse()`?
+
+Python provides a built-in method:
+
+```python
+arr.reverse()
+```
+
+We could also use slicing:
+
+```python
+arr = arr[::-1]
+```
+
+Both approaches are valid Python.
+
+However, for **DSA preparation and coding assessments**, implementing the reversal manually is better practice because it teaches the **two-pointer technique**.
+
+The two-pointer pattern can be reused in many problems involving:
+
+* Array reversal
+* String reversal
+* Palindrome checking
+* Pair-sum problems
+* Two-pointer searching
+* In-place array manipulation
+* Partitioning problems
+
+The objective is to understand the underlying algorithm rather than simply use a built-in function.
+
+---
+
+# 🎯 Key DSA Pattern
+
+This problem teaches the:
+
+## **Two-Pointer Technique**
+
+The general idea is:
+
+```text
+Initialize two pointers
+       ↓
+Left → beginning
+Right → end
+       ↓
+Compare / Swap / Process
+       ↓
+Move Left forward
+Move Right backward
+       ↓
+Repeat until pointers meet
+```
+
+For this problem:
+
+```text
+left  → 0
+right → N - 1
+```
+
+Then:
+
+```text
+arr[left] ↔ arr[right]
+```
+
+followed by:
+
+```text
+left += 1
+right -= 1
+```
+
+This continues until:
+
+```text
+left >= right
+```
+
+---
+
+# ⏱️ Complexity Analysis
+
+## Time Complexity
+
+```text
+O(N)
+```
+
+Each element is processed at most once.
+
+Although the loop performs approximately `N / 2` swaps, constants are ignored in Big-O notation.
+
+Therefore:
+
+```text
+Time Complexity = O(N)
+```
+
+---
+
+## Space Complexity
+
+```text
+O(1)
+```
+
+The array is reversed **in-place**.
+
+We only use two pointer variables:
+
+```text
+left
+right
+```
+
+No additional array is created.
+
+Therefore, the **auxiliary space complexity** is:
+
+```text
+O(1)
+```
+
+> **Note:** The input array itself requires `O(N)` memory. `O(1)` refers to the additional/auxiliary space used by the reversal algorithm.
+
+---
+
+# 🧪 Test Cases
+
+## Test Case 1 — Normal Case
+
+### Input
+
+```text
+5
+10 20 30 40 50
+```
+
+### Output
+
+```text
+50 40 30 20 10
+```
+
+---
+
+## Test Case 2 — Even Number of Elements
+
+### Input
+
+```text
+6
+1 2 3 4 5 6
+```
+
+### Output
+
+```text
+6 5 4 3 2 1
+```
+
+---
+
+## Test Case 3 — Odd Number of Elements
+
+### Input
+
+```text
+5
+1 2 3 4 5
+```
+
+### Output
+
+```text
+5 4 3 2 1
+```
+
+---
+
+## Test Case 4 — Negative Numbers
+
+### Input
+
+```text
+5
+-10 -20 -30 -40 -50
+```
+
+### Output
+
+```text
+-50 -40 -30 -20 -10
+```
+
+---
+
+## Test Case 5 — Duplicate Elements
+
+### Input
+
+```text
+6
+10 20 10 30 20 10
+```
+
+### Output
+
+```text
+10 20 30 10 20 10
+```
+
+---
+
+## Test Case 6 — Single Element
+
+### Input
+
+```text
+1
+25
+```
+
+### Output
+
+```text
+25
+```
+
+A single-element array is already reversed.
+
+---
+
+# ⚠️ Important Edge Cases
+
+## 1. Single Element
+
+```text
+[10]
+```
+
+The array remains:
+
+```text
+[10]
+```
+
+No swap is required.
+
+---
+
+## 2. Two Elements
+
+```text
+[10, 20]
+```
+
+After one swap:
+
+```text
+[20, 10]
+```
+
+---
+
+## 3. Duplicate Elements
+
+For:
+
+```text
+[5, 10, 5, 20, 10]
+```
+
+the reversal is performed normally.
+
+Duplicates do not require any special handling.
+
+---
+
+## 4. Negative Numbers
+
+The algorithm works exactly the same way for negative values.
+
+For:
+
+```text
+[-5, -10, -15]
+```
+
+the result is:
+
+```text
+[-15, -10, -5]
+```
+
+---
+
+# 📚 What You Learn From This Problem
+
+By solving this problem, you practice:
+
+* Array input handling
+* Python lists
+* `input()`
+* `.split()`
+* `map()`
+* Integer conversion
+* Array indexing
+* `while` loops
+* Multiple pointer variables
+* Two-pointer technique
+* Swapping elements
+* In-place array manipulation
+* `print(*arr)`
+* Time complexity analysis
+* Space complexity analysis
+
+---
+
+# 🚀 TCS NQT Relevance
+
+This is an important **basic array manipulation problem** because it introduces the **two-pointer technique**.
+
+The technique is useful for solving more advanced coding problems efficiently.
+
+### Recommended Thought Process During an Exam
+
+When you see a problem asking you to reverse an array:
+
+```text
+1. Can I reverse it in-place?
+        ↓
+2. Can I use two pointers?
+        ↓
+3. One pointer starts from the beginning.
+        ↓
+4. One pointer starts from the end.
+        ↓
+5. Swap the two elements.
+        ↓
+6. Move both pointers toward the center.
+        ↓
+7. Stop when the pointers meet.
+```
+
+For this problem:
+
+```text
+Left Pointer   → 0
+Right Pointer  → N - 1
+
+Swap           → arr[left], arr[right]
+Move Left      → left += 1
+Move Right     → right -= 1
+
+Time           → O(N)
+Auxiliary Space → O(1)
+```
+
+---
+
+# 📌 Summary
+
+| Property                  | Value                              |
+| ------------------------- | ---------------------------------- |
+| Problem                   | Reverse an Array                   |
+| Technique                 | Two-Pointer                        |
+| Pattern                   | In-Place Array Manipulation        |
+| Time Complexity           | `O(N)`                             |
+| Auxiliary Space           | `O(1)`                             |
+| Built-in `reverse()` Used | ❌ No                               |
+| Array Slicing Used        | ❌ No                               |
+| In-Place                  | ✅ Yes                              |
+| Difficulty                | Easy                               |
+| Language                  | Python                             |
+| Suitable For              | DSA / Coding Assessments / TCS NQT |
+
+---
+
+## ⭐ Key Takeaway
+
+> **Use two pointers—one at the beginning and one at the end—swap their elements, and move both pointers toward the center until the array is completely reversed.**
+
+The key pattern to remember is:
+
+```text
+Left →→→       ←←← Right
+       Swap
+        ↓
+Left moves right
+Right moves left
+```
+
+This **two-pointer technique** is one of the most important patterns to learn for array and string problems.
