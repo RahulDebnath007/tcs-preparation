@@ -4114,19 +4114,22 @@ Count += 1      Count = 1
 This **frequency counting / hash map technique** is one of the most important patterns for solving array and string problems efficiently.
 
 
-# 6. 🔢 Count Frequency of Each Element in an Array
+# 6.🔢 Rearrange Array in Increasing and Decreasing Order
 
-A fundamental **array traversal and frequency counting problem** commonly useful for coding assessments such as **TCS NQT**.
+A fundamental **array sorting and rearrangement problem** commonly useful for coding assessments such as **TCS NQT**.
 
-The objective is to find and print the **frequency of each distinct element** present in a given array.
+The objective is to rearrange the elements of a given array such that the **first half is in increasing order** and the **second half is in decreasing order**.
 
-The problem can be solved efficiently using a **Python dictionary (hash map)** to store each element and its corresponding frequency.
+The problem can be solved by first sorting the array and then rearranging its two halves.
 
 ---
 
 # 📌 Problem Statement
 
-Given an array of `N` integers, count how many times each distinct element appears in the array.
+Given an array of `N` integers, rearrange the elements such that:
+
+* The first half of the array is arranged in **increasing order**.
+* The second half of the array is arranged in **decreasing order**.
 
 ### Input Format
 
@@ -4135,9 +4138,10 @@ Given an array of `N` integers, count how many times each distinct element appea
 
 ### Output Format
 
-Print each distinct element along with its frequency.
+Print the rearranged array where:
 
-The elements are printed in the order in which they first appear in the array.
+* The first half is in increasing order.
+* The second half is in decreasing order.
 
 ---
 
@@ -4146,17 +4150,14 @@ The elements are printed in the order in which they first appear in the array.
 ### Input
 
 ```text
-7
-10 20 10 30 20 10 40
+8
+10 5 20 8 15 3 12 7
 ```
 
 ### Output
 
 ```text
-10 3
-20 2
-30 1
-40 1
+3 5 7 8 20 15 12 10
 ```
 
 ### Explanation
@@ -4164,56 +4165,102 @@ The elements are printed in the order in which they first appear in the array.
 The given array is:
 
 ```text
-10 20 10 30 20 10 40
+10 5 20 8 15 3 12 7
 ```
 
-We count how many times each element occurs:
+First, sort the array in increasing order:
 
 ```text
-10 → 3 times
-20 → 2 times
-30 → 1 time
-40 → 1 time
+3 5 7 8 10 12 15 20
 ```
 
-Therefore, the frequency of each element is:
+Now divide the sorted array into two halves:
+
+### Increasing Half
 
 ```text
-10 3
-20 2
-30 1
-40 1
+3 5 7 8
+```
+
+### Second Half
+
+```text
+10 12 15 20
+```
+
+Reverse the second half:
+
+```text
+20 15 12 10
+```
+
+Therefore, the final rearranged array is:
+
+```text
+3 5 7 8 20 15 12 10
 ```
 
 ---
 
 # 💡 Approach
 
-We can solve this problem efficiently using a **dictionary/hash map**.
+We can solve this problem using **sorting and array rearrangement**.
 
-A dictionary stores data in the form:
+The approach consists of three main steps:
 
-```text
-element → frequency
+### Step 1: Sort the Array
+
+Sort the complete array in increasing order.
+
+```python
+arr.sort()
 ```
 
 For example:
 
 ```text
-10 → 3
-20 → 2
-30 → 1
-40 → 1
+10 5 20 8 15 3 12 7
 ```
 
-We traverse the array once.
+becomes:
 
-For every element:
+```text
+3 5 7 8 10 12 15 20
+```
 
-* If the element already exists in the dictionary, increase its frequency by `1`.
-* Otherwise, add the element to the dictionary with frequency `1`.
+### Step 2: Divide the Array
 
-This allows us to count all frequencies in a **single traversal**.
+Find the middle position:
+
+```python
+mid = n // 2
+```
+
+Then divide the sorted array into two parts:
+
+```text
+First Half:
+3 5 7 8
+
+Second Half:
+10 12 15 20
+```
+
+### Step 3: Reverse the Second Half
+
+The first half remains in increasing order.
+
+The second half is reversed to make it decreasing:
+
+```text
+20 15 12 10
+```
+
+Finally, combine both parts:
+
+```text
+3 5 7 8 20 15 12 10
+```
 
 ---
 
@@ -4221,14 +4268,13 @@ This allows us to count all frequencies in a **single traversal**.
 
 1. Read the number of elements `N`.
 2. Read the array.
-3. Create an empty dictionary called `frequency`.
-4. Traverse every element in the array.
-5. For each element:
-
-   * If the element already exists in `frequency`, increment its count.
-   * Otherwise, initialize its count to `1`.
-6. Traverse the dictionary.
-7. Print each element along with its frequency.
+3. Sort the array in increasing order.
+4. Calculate the middle index using `N // 2`.
+5. Store the first half in `increasing`.
+6. Store the second half in `decreasing`.
+7. Reverse the `decreasing` part.
+8. Combine the two parts.
+9. Print the resulting array.
 
 ---
 
@@ -4239,16 +4285,18 @@ n = int(input())
 
 arr = list(map(int, input().split()))
 
-frequency = {}
+arr.sort()
 
-for num in arr:
-    if num in frequency:
-        frequency[num] += 1
-    else:
-        frequency[num] = 1
+mid = n // 2
 
-for num in frequency:
-    print(num, frequency[num])
+increasing = arr[:mid]
+decreasing = arr[mid:]
+
+decreasing.reverse()
+
+result = increasing + decreasing
+
+print(*result)
 ```
 
 ---
@@ -4268,13 +4316,13 @@ n = int(input())
 For example:
 
 ```text
-7
+8
 ```
 
 becomes:
 
 ```python
-n = 7
+n = 8
 ```
 
 ---
@@ -4292,7 +4340,7 @@ This line performs three operations.
 Reads the complete line:
 
 ```text
-10 20 10 30 20 10 40
+10 5 20 8 15 3 12 7
 ```
 
 ### `.split()`
@@ -4300,7 +4348,7 @@ Reads the complete line:
 Splits the input into individual strings:
 
 ```python
-["10", "20", "10", "30", "20", "10", "40"]
+["10", "5", "20", "8", "15", "3", "12", "7"]
 ```
 
 ### `map(int, ...)`
@@ -4308,7 +4356,7 @@ Splits the input into individual strings:
 Converts each string into an integer:
 
 ```python
-[10, 20, 10, 30, 20, 10, 40]
+[10, 5, 20, 8, 15, 3, 12, 7]
 ```
 
 Finally, `list()` creates the Python list.
@@ -4316,205 +4364,167 @@ Finally, `list()` creates the Python list.
 So:
 
 ```python
-arr = [10, 20, 10, 30, 20, 10, 40]
+arr = [10, 5, 20, 8, 15, 3, 12, 7]
 ```
 
 ---
 
-# 📊 Frequency Counting Using a Dictionary
+# 📊 Sorting and Rearranging the Array
 
-## 3. Create an Empty Dictionary
+## 3. Sort the Array
 
 ```python
-frequency = {}
+arr.sort()
 ```
 
-This dictionary will store:
+This sorts the array in increasing order.
+
+Before sorting:
 
 ```text
-element → frequency
+10 5 20 8 15 3 12 7
 ```
 
-Initially:
+After sorting:
 
-```python
-{}
-```
-
-As we process the array, it will become:
-
-```python
-{10: 3, 20: 2, 30: 1, 40: 1}
+```text
+3 5 7 8 10 12 15 20
 ```
 
 ---
 
-## 4. Traverse the Array
+## 4. Find the Middle Position
 
 ```python
-for num in arr:
+mid = n // 2
 ```
 
-This loop visits every element in the array.
+The `//` operator performs integer division.
 
 For:
 
 ```text
-[10, 20, 10, 30, 20, 10, 40]
+n = 8
 ```
 
-the values of `num` will be:
+we get:
 
 ```text
-10
-20
-10
-30
-20
-10
-40
+mid = 8 // 2
+mid = 4
+```
+
+Therefore, the array is divided at index `4`.
+
+---
+
+## 5. Store the Increasing Half
+
+```python
+increasing = arr[:mid]
+```
+
+This takes all elements from the beginning of the array up to, but not including, `mid`.
+
+For:
+
+```python
+arr = [3, 5, 7, 8, 10, 12, 15, 20]
+```
+
+we get:
+
+```python
+increasing = [3, 5, 7, 8]
+```
+
+This part is already in increasing order because the complete array was sorted first.
+
+---
+
+## 6. Store the Second Half
+
+```python
+decreasing = arr[mid:]
+```
+
+This takes all elements from `mid` to the end.
+
+Therefore:
+
+```python
+decreasing = [10, 12, 15, 20]
+```
+
+At this point, this part is still in increasing order.
+
+---
+
+## 7. Reverse the Second Half
+
+```python
+decreasing.reverse()
+```
+
+The second half becomes:
+
+```text
+[20, 15, 12, 10]
+```
+
+Now it is in decreasing order.
+
+---
+
+## 8. Combine Both Parts
+
+```python
+result = increasing + decreasing
+```
+
+The two lists are joined together.
+
+### Increasing
+
+```text
+3 5 7 8
+```
+
+### Decreasing
+
+```text
+20 15 12 10
+```
+
+### Result
+
+```text
+3 5 7 8 20 15 12 10
 ```
 
 ---
 
-## 5. Check Whether the Element Already Exists
+## 9. Print the Result
 
 ```python
-if num in frequency:
+print(*result)
 ```
 
-This checks whether the current element already exists as a key in the dictionary.
+The `*` operator unpacks the list elements.
 
-For example, after processing:
+Instead of printing:
 
 ```text
-10
-20
+[3, 5, 7, 8, 20, 15, 12, 10]
 ```
 
-the dictionary is:
-
-```python
-{10: 1, 20: 1}
-```
-
-When `10` appears again:
-
-```python
-if 10 in frequency:
-```
-
-the condition is `True`.
-
----
-
-## 6. Increase the Frequency
-
-```python
-frequency[num] += 1
-```
-
-If the element already exists, increase its frequency by `1`.
-
-For example:
-
-```python
-frequency[10] = 1
-```
-
-After another `10`:
-
-```python
-frequency[10] = 2
-```
-
-After another `10`:
-
-```python
-frequency[10] = 3
-```
-
----
-
-## 7. Add a New Element
-
-```python
-else:
-    frequency[num] = 1
-```
-
-If the element does not exist in the dictionary, add it with an initial frequency of `1`.
-
-For example, when `30` is encountered for the first time:
-
-```python
-frequency[30] = 1
-```
-
-The dictionary becomes:
-
-```python
-{10: 2, 20: 1, 30: 1}
-```
-
----
-
-## 8. Traverse the Frequency Dictionary
-
-```python
-for num in frequency:
-```
-
-After the entire array has been processed, the dictionary contains every distinct element and its frequency.
-
-For example:
-
-```python
-{10: 3, 20: 2, 30: 1, 40: 1}
-```
-
-The loop visits:
+it prints:
 
 ```text
-10
-20
-30
-40
+3 5 7 8 20 15 12 10
 ```
 
-Because Python dictionaries preserve insertion order, the elements are printed in the order in which they first appeared.
-
----
-
-## 9. Print the Element and Frequency
-
-```python
-print(num, frequency[num])
-```
-
-This prints the element followed by its frequency.
-
-For example:
-
-```text
-10 3
-```
-
-means:
-
-```text
-Element = 10
-Frequency = 3
-```
-
-The final output is:
-
-```text
-10 3
-20 2
-30 1
-40 1
-```
+which matches the required output format.
 
 ---
 
@@ -4523,147 +4533,140 @@ The final output is:
 Consider:
 
 ```text
-N = 7
-Array = [10, 20, 10, 30, 20, 10, 40]
+N = 8
+Array = [10, 5, 20, 8, 15, 3, 12, 7]
 ```
 
-We process each element one by one.
+## Step 1 — Sort the Array
 
-| Step | Current Element | Frequency Dictionary           |
-| ---- | --------------- | ------------------------------ |
-| 1    | 10              | `{10: 1}`                      |
-| 2    | 20              | `{10: 1, 20: 1}`               |
-| 3    | 10              | `{10: 2, 20: 1}`               |
-| 4    | 30              | `{10: 2, 20: 1, 30: 1}`        |
-| 5    | 20              | `{10: 2, 20: 2, 30: 1}`        |
-| 6    | 10              | `{10: 3, 20: 2, 30: 1}`        |
-| 7    | 40              | `{10: 3, 20: 2, 30: 1, 40: 1}` |
-
-### Final Frequency Table
+### Original
 
 ```text
-10 → 3
-20 → 2
-30 → 1
-40 → 1
+10 5 20 8 15 3 12 7
 ```
 
-Therefore:
+### Sorted
 
 ```text
-10 3
-20 2
-30 1
-40 1
+3 5 7 8 10 12 15 20
 ```
 
 ---
 
-# 🔁 How the Dictionary Changes
+## Step 2 — Find the Middle
 
-The frequency dictionary evolves as follows.
+```text
+N = 8
 
-### Initially
-
-```python
-{}
-```
-
-### After processing `10`
-
-```python
-{10: 1}
-```
-
-### After processing `20`
-
-```python
-{10: 1, 20: 1}
-```
-
-### After processing another `10`
-
-```python
-{10: 2, 20: 1}
-```
-
-### After processing `30`
-
-```python
-{10: 2, 20: 1, 30: 1}
-```
-
-### After processing another `20`
-
-```python
-{10: 2, 20: 2, 30: 1}
-```
-
-### After processing another `10`
-
-```python
-{10: 3, 20: 2, 30: 1}
-```
-
-### After processing `40`
-
-```python
-{10: 3, 20: 2, 30: 1, 40: 1}
+mid = 8 // 2
+mid = 4
 ```
 
 ---
 
-# 🚫 Why Not Use `count()`?
+## Step 3 — Divide the Array
 
-Python provides a built-in `count()` method:
-
-```python
-arr.count(num)
-```
-
-We could write:
-
-```python
-for num in arr:
-    print(num, arr.count(num))
-```
-
-However, this approach has a major problem.
-
-`count()` traverses the array every time it is called.
-
-If the array contains `N` elements and we call `count()` for every element, the time complexity can become:
+### First Half
 
 ```text
-O(N²)
+3 5 7 8
 ```
 
-For example:
+### Second Half
 
 ```text
-Array = [10, 20, 10, 30, 20, 10]
+10 12 15 20
 ```
 
-The array is repeatedly scanned to count each element.
+---
 
-The dictionary approach is much more efficient because we count every element during a **single traversal**.
+## Step 4 — Reverse the Second Half
+
+### Before
+
+```text
+10 12 15 20
+```
+
+### After
+
+```text
+20 15 12 10
+```
+
+---
+
+## Step 5 — Combine Both Parts
+
+```text
+3 5 7 8 + 20 15 12 10
+```
+
+### Final Result
+
+```text
+3 5 7 8 20 15 12 10
+```
+
+---
+
+# 🔁 Visual Representation
+
+The complete process can be represented as:
+
+```text
+Original Array
+      ↓
+    Sort
+      ↓
+3  5  7  8  10  12  15  20
+      ↓
+  Split at middle
+      ↓
+3  5  7  8 | 10  12  15  20
+      ↓
+First Half  |  Reverse Second Half
+      ↓
+3  5  7  8 | 20  15  12  10
+      ↓
+     Combine
+        ↓
+3  5  7  8  20  15  12  10
+```
+
+---
+
+# 🚫 Why Not Use Only `sort()`?
+
+Simply sorting the array:
+
+```python
+arr.sort()
+```
+
+produces:
+
+```text
+3 5 7 8 10 12 15 20
+```
+
+But this does **not** satisfy the required arrangement because the second half is still increasing.
+
+We need:
+
+```text
+3 5 7 8 20 15 12 10
+```
+
+Therefore, after sorting, the second half must be reversed.
 
 ---
 
 # 🚫 Why Not Use Nested Loops?
 
-Another possible approach is:
+We could manually compare and rearrange elements using nested loops.
 
-```python
-for i in range(n):
-    count = 0
-
-    for j in range(n):
-        if arr[i] == arr[j]:
-            count += 1
-```
-
-This also requires:
+However, that would make the solution unnecessarily complicated and could result in:
 
 ```text
 O(N²)
@@ -4671,13 +4674,9 @@ O(N²)
 
 time complexity.
 
-The dictionary/hash map approach reduces the average time complexity to:
+Python's sorting algorithm provides an efficient way to arrange the elements.
 
-```text
-O(N)
-```
-
-Therefore, it is the preferred approach for larger arrays.
+The important part is understanding how to manipulate the sorted array into the required increasing/decreasing structure.
 
 ---
 
@@ -4686,74 +4685,54 @@ Therefore, it is the preferred approach for larger arrays.
 ## Time Complexity
 
 ```text
+O(N log N)
+```
+
+The dominant operation is:
+
+```python
+arr.sort()
+```
+
+Python's sorting algorithm takes:
+
+```text
+O(N log N)
+```
+
+time in the general case.
+
+The remaining operations such as slicing, reversing, and combining the two halves are linear:
+
+```text
 O(N)
 ```
 
-We traverse the array once to build the frequency dictionary.
-
-Dictionary lookup and update operations are **O(1) on average**.
-
-Therefore:
+Therefore, the overall complexity is:
 
 ```text
-Time Complexity = O(N)
+Time Complexity = O(N log N)
 ```
-
-> **Note:** Python dictionary operations such as membership checking, insertion, and updating are average-case `O(1)`.
 
 ---
 
 ## Space Complexity
 
-```text
-O(K)
-```
-
-where `K` is the number of **distinct elements** in the array.
-
-For example:
+The solution creates additional lists:
 
 ```text
-[10, 10, 10, 10]
+increasing
+decreasing
+result
 ```
 
-has:
+Therefore, the additional space used is proportional to the number of elements.
 
 ```text
-N = 4
-K = 1
+Auxiliary Space = O(N)
 ```
 
-while:
-
-```text
-[10, 20, 30, 40]
-```
-
-has:
-
-```text
-N = 4
-K = 4
-```
-
-Therefore, the frequency dictionary requires space proportional to the number of distinct elements.
-
-```text
-Auxiliary Space = O(K)
-```
-
-In the worst case, when every element is unique:
-
-```text
-K = N
-```
-
-so the space complexity becomes:
-
-```text
-O(N)
-```
+> **Note:** Python's sorting implementation also uses additional memory internally. The exact implementation details are handled by Python.
 
 ---
 
@@ -4764,55 +4743,48 @@ O(N)
 ### Input
 
 ```text
-7
-10 20 10 30 20 10 40
+8
+10 5 20 8 15 3 12 7
 ```
 
 ### Output
 
 ```text
-10 3
-20 2
-30 1
-40 1
+3 5 7 8 20 15 12 10
 ```
 
 ---
 
-## Test Case 2 — All Elements Are Unique
+## Test Case 2 — Even Number of Elements
+
+### Input
+
+```text
+6
+1 6 3 5 2 4
+```
+
+### Output
+
+```text
+1 2 3 6 5 4
+```
+
+---
+
+## Test Case 3 — Odd Number of Elements
 
 ### Input
 
 ```text
 5
-10 20 30 40 50
+10 2 8 4 6
 ```
 
 ### Output
 
 ```text
-10 1
-20 1
-30 1
-40 1
-50 1
-```
-
----
-
-## Test Case 3 — All Elements Are Same
-
-### Input
-
-```text
-5
-7 7 7 7 7
-```
-
-### Output
-
-```text
-7 5
+2 4 8 10 6
 ```
 
 ---
@@ -4822,55 +4794,48 @@ O(N)
 ### Input
 
 ```text
-7
--5 -10 -5 -20 -10 -5 -20
+6
+-10 -5 -20 -2 -15 -8
 ```
 
 ### Output
 
 ```text
--5 3
--10 2
--20 2
+-20 -15 -10 -2 -5 -8
 ```
 
 ---
 
-## Test Case 5 — Positive and Negative Numbers
+## Test Case 5 — Duplicate Elements
 
 ### Input
 
 ```text
 8
-10 -5 10 -5 20 -5 30 10
+10 5 10 20 5 15 20 10
 ```
 
 ### Output
 
 ```text
-10 3
--5 3
-20 1
-30 1
+5 5 10 10 20 20 15 10
 ```
 
 ---
 
-## Test Case 6 — Duplicate Elements
+## Test Case 6 — Already Sorted Array
 
 ### Input
 
 ```text
-8
-5 10 5 20 10 5 20 10
+6
+1 2 3 4 5 6
 ```
 
 ### Output
 
 ```text
-5 3
-10 3
-20 2
+1 2 3 6 5 4
 ```
 
 ---
@@ -4886,67 +4851,76 @@ For:
 25
 ```
 
-the frequency is:
+the result remains:
 
 ```text
-25 1
+25
 ```
+
+There is only one element, so no rearrangement is required.
 
 ---
 
-## 2. All Elements Are Identical
+## 2. Two Elements
 
 For:
 
 ```text
-5
-10 10 10 10 10
+2
+20 10
 ```
 
-there is only one distinct element:
+after sorting:
 
 ```text
-10 5
+10 20
+```
+
+The first half contains `10` and the second half contains `20`.
+
+Final result:
+
+```text
+10 20
 ```
 
 ---
 
-## 3. All Elements Are Unique
+## 3. Duplicate Elements
 
 For:
 
 ```text
-4
-10 20 30 40
+8
+10 5 10 20 5 15 20 10
 ```
 
-every element has frequency `1`:
+duplicates are retained.
 
-```text
-10 1
-20 1
-30 1
-40 1
-```
+The algorithm does not remove or modify duplicate values.
 
 ---
 
 ## 4. Negative Numbers
 
-The dictionary approach works with negative integers without any special modification.
+The sorting approach works with negative values as well.
 
 For:
 
 ```text
--2 -5 -2 -10
+-10 -5 -20 -2 -15 -8
 ```
 
-the result is:
+the sorted array is:
 
 ```text
--2 2
--5 1
--10 1
+-20 -15 -10 -8 -5 -2
+```
+
+The required arrangement becomes:
+
+```text
+-20 -15 -10 -2 -5 -8
 ```
 
 ---
@@ -4955,43 +4929,39 @@ the result is:
 
 This problem teaches the:
 
-## **Frequency Counting / Hash Map Pattern**
+## **Sorting + Array Partitioning Pattern**
 
 The general idea is:
 
 ```text
-Read an element
-       ↓
-Check if it exists in the dictionary
-       ↓
-    ┌──┴──┐
-    ↓     ↓
-   Yes    No
-    ↓     ↓
-Increase  Set to 1
-frequency
-    ↓     ↓
-    └──┬──┘
-       ↓
-Process next element
+Sort the array
+      ↓
+Find the middle
+      ↓
+Separate into two halves
+      ↓
+First half → Increasing
+      ↓
+Second half → Reverse
+      ↓
+Combine both halves
 ```
 
-The dictionary stores:
+The important operations are:
 
 ```text
-Element → Number of Occurrences
+arr.sort()
+     ↓
+mid = n // 2
+     ↓
+arr[:mid]
+     ↓
+arr[mid:]
+     ↓
+reverse()
 ```
 
-For example:
-
-```text
-10 → 3
-20 → 2
-30 → 1
-40 → 1
-```
-
-This pattern is extremely useful in array and string problems.
+This pattern is useful for problems where an array must be rearranged according to different ordering rules.
 
 ---
 
@@ -5005,109 +4975,112 @@ By solving this problem, you practice:
 * `.split()`
 * `map()`
 * Integer conversion
-* `for` loops
-* Conditional statements
-* Python dictionaries
-* Key-value pairs
-* Dictionary membership checking
-* Frequency counting
-* Hash map technique
-* Handling duplicate values
-* Handling negative values
+* Python sorting
+* `.sort()`
+* Integer division
+* Array slicing
+* List reversal
+* List concatenation
+* Array partitioning
+* Increasing order
+* Decreasing order
 * Time complexity analysis
 * Space complexity analysis
-* Single-pass algorithms
 
 ---
 
 # 🚀 TCS NQT Relevance
 
-Frequency counting is an important pattern for coding assessments such as **TCS NQT**.
+This is a useful **array sorting and manipulation problem** for coding assessments such as **TCS NQT**.
 
-The same concept can be used in many problems involving arrays and strings.
+It combines multiple basic concepts instead of testing only one operation.
 
-### Problems Based on the Same Pattern
+### Problems Based on Similar Concepts
 
-* Count frequency of each element
-* Find the most frequent element
-* Find the least frequent element
-* Find the first non-repeating element
-* Find duplicate elements
-* Count duplicate elements
-* Find unique elements
-* Find the frequency of a particular number
-* Check whether two arrays contain the same frequencies
-* Check whether two strings are anagrams
-* Count character frequency in a string
+* Sort an array in increasing order
+* Sort an array in decreasing order
+* Rearrange positive and negative elements
+* Rearrange even and odd elements
+* Move zeros to the end
+* Move negative elements to one side
+* Separate elements based on a condition
+* Find the median of an array
+* Find the Kth largest element
+* Find the Kth smallest element
 
 ### Recommended Thought Process During an Exam
 
-When you see a problem involving frequency:
+When you see a problem involving increasing and decreasing arrangement:
 
 ```text
-1. Do I need to count occurrences?
+1. What exact ordering is required?
         ↓
-2. Can I use a dictionary/hash map?
+2. Can sorting simplify the problem?
         ↓
-3. What should be the key?
+3. Where should the array be divided?
         ↓
-4. What should be the value?
+4. Which part should be increasing?
         ↓
-5. Can I solve it in one traversal?
+5. Which part should be decreasing?
         ↓
-6. What is the final complexity?
+6. Can I rearrange the parts without nested loops?
+        ↓
+7. What is the final complexity?
 ```
 
 For this problem:
 
 ```text
-Key       → Array Element
-Value     → Frequency
-Traversal → O(N)
-Space     → O(K)
+Sorting          → O(N log N)
+Middle           → N // 2
+First Half       → Increasing
+Second Half      → Decreasing
+Final Complexity → O(N log N)
 ```
-
-where `K` is the number of distinct elements.
 
 ---
 
 # 📌 Summary
 
-| Property                | Value                              |
-| ----------------------- | ---------------------------------- |
-| Problem                 | Count Frequency of Each Element    |
-| Technique               | Frequency Counting                 |
-| Pattern                 | Hash Map / Dictionary              |
-| Time Complexity         | `O(N)` Average                     |
-| Auxiliary Space         | `O(K)`                             |
-| Worst-Case Space        | `O(N)`                             |
-| Built-in `count()` Used | ❌ No                               |
-| Nested Loop Used        | ❌ No                               |
-| Duplicate Values        | ✅ Handled                          |
-| Negative Values         | ✅ Handled                          |
-| Difficulty              | Easy–Medium                        |
-| Language                | Python                             |
-| Suitable For            | DSA / Coding Assessments / TCS NQT |
+| Property           | Value                                            |
+| ------------------ | ------------------------------------------------ |
+| Problem            | Rearrange Array in Increasing & Decreasing Order |
+| Technique          | Sorting + Partitioning                           |
+| Pattern            | Array Rearrangement                              |
+| Time Complexity    | `O(N log N)`                                     |
+| Auxiliary Space    | `O(N)`                                           |
+| Sorting Used       | ✅ Yes                                            |
+| Array Slicing Used | ✅ Yes                                            |
+| Duplicate Values   | ✅ Handled                                        |
+| Negative Values    | ✅ Handled                                        |
+| Difficulty         | Easy–Medium                                      |
+| Language           | Python                                           |
+| Suitable For       | DSA / Coding Assessments / TCS NQT               |
 
 ---
 
 ## ⭐ Key Takeaway
 
-> **Use a dictionary to store each array element as a key and its frequency as the value. Traverse the array once and update the frequency whenever an element is encountered.**
+> **Sort the array first, keep the first half in increasing order, reverse the second half to make it decreasing, and combine both parts.**
 
 The key pattern to remember is:
 
 ```text
-Element
-   ↓
-Exists in Dictionary?
-   ↓
- ┌───────┴───────┐
- ↓               ↓
-Yes              No
- ↓                ↓
-Count += 1      Count = 1
+Original Array
+      ↓
+    Sort
+      ↓
+3  5  7  8  10  12  15  20
+      ↓
+  Split at middle
+      ↓
+3  5  7  8 | 10  12  15  20
+      ↓
+Reverse second half
+      ↓
+3  5  7  8 | 20  15  12  10
+      ↓
+Final Answer
 ```
 
-This **frequency counting / hash map technique** is one of the most important patterns for solving array and string problems efficiently.
-
+This **sorting + partitioning technique** is a useful foundation for more advanced array rearrangement and ordering problems.
