@@ -582,11 +582,11 @@ Answer          → smallest
 
 This simple pattern is a foundation for solving many array problems efficiently.
 
-# 2.🔢 Find the Largest Element in an Array
+# 2. 🔢 Find the Largest Element in an Array
 
 A simple and fundamental **array traversal problem** commonly used in coding assessments such as **TCS NQT**.
 
-The objective is to find the **maximum/largest element** present in a given array **without using Python's built-in** **`max()`** **function**.
+The objective is to find the **maximum/largest element** present in a given array **without using Python's built-in `max()` function**.
 
 ---
 
@@ -596,8 +596,8 @@ Given an array of `N` integers, find and print the **largest element** in the ar
 
 ### Input Format
 
-- The first line contains an integer `N`, representing the number of elements.
-- The second line contains `N` space-separated integers representing the array.
+* The first line contains an integer `N`, representing the number of elements.
+* The second line contains `N` space-separated integers representing the array.
 
 ### Output Format
 
@@ -612,63 +612,114 @@ Print the largest element present in the array.
 ```text
 5
 8 3 12 1 6
-Output
+```
+
+### Output
+
+```text
 12
-Explanation
+```
+
+### Explanation
 
 The given array is:
 
+```text
 8 3 12 1 6
+```
 
 We compare each element with the current largest value:
 
-8 → largest = 8
-3 → no change
+```text
+8  → largest = 8
+3  → no change
 12 → largest = 12
-1 → no change
-6 → no change
+1  → no change
+6  → no change
+```
 
 Therefore, the largest element is:
 
+```text
 12
-💡 Approach
+```
 
-We can solve this problem using linear traversal of the array.
+---
 
-Step 1: Initialize the Maximum
+# 💡 Approach
+
+We can solve this problem using **linear traversal** of the array.
+
+The idea is simple:
+
+1. Assume the first element is the largest.
+2. Traverse the remaining elements.
+3. Compare each element with the current largest value.
+4. If a larger element is found, update `largest`.
+5. After traversing the entire array, `largest` contains the answer.
+
+---
+
+## Step 1: Initialize the Maximum
 
 Assume that the first element of the array is the largest:
 
+```python
 largest = arr[0]
-Step 2: Traverse the Remaining Elements
+```
 
-Start from the second element and compare every element with largest.
+---
 
+## Step 2: Traverse the Remaining Elements
+
+Start from the second element and compare every element with `largest`.
+
+```python
 for i in range(1, n):
-Step 3: Update the Maximum
+```
 
-If the current element is greater than largest, update the value:
+---
 
+## Step 3: Update the Maximum
+
+If the current element is greater than `largest`, update the value:
+
+```python
 if arr[i] > largest:
     largest = arr[i]
-Step 4: Print the Result
+```
+
+---
+
+## Step 4: Print the Result
 
 After checking all elements:
 
+```python
 print(largest)
+```
 
-The final value stored in largest is the maximum element of the array.
+The final value stored in `largest` is the maximum element of the array.
 
-🧠 Algorithm
-Read the number of elements N.
-Read the array.
-Set largest = arr[0].
-Traverse the array from index 1 to N - 1.
-For every element:
-Compare the current element with largest.
-If it is greater, update largest.
-Print largest.
-💻 Python Code
+---
+
+# 🧠 Algorithm
+
+1. Read the number of elements `N`.
+2. Read the array.
+3. Set `largest = arr[0]`.
+4. Traverse the array from index `1` to `N - 1`.
+5. For every element:
+
+   * Compare the current element with `largest`.
+   * If it is greater, update `largest`.
+6. Print `largest`.
+
+---
+
+# 💻 Python Code
+
+```python
 n = int(input())
 
 arr = list(map(int, input().split()))
@@ -680,198 +731,556 @@ for i in range(1, n):
         largest = arr[i]
 
 print(largest)
-🔍 Code Explanation
-1. Read the Size of the Array
+```
+
+---
+
+# 🔍 Code Explanation
+
+## 1. Read the Size of the Array
+
+```python
 n = int(input())
+```
 
-input() reads the value as a string.
+`input()` reads the value as a string.
 
-int() converts it into an integer.
+`int()` converts it into an integer.
 
 For example:
 
+```text
 5
+```
 
 becomes:
 
+```python
 n = 5
-2. Read the Array
+```
+
+---
+
+## 2. Read the Array
+
+```python
 arr = list(map(int, input().split()))
+```
 
 This line performs three operations.
 
-input()
+### `input()`
 
 Reads the complete line:
 
+```text
 8 3 12 1 6
-.split()
+```
+
+### `.split()`
 
 Splits the input into individual strings:
 
+```python
 ["8", "3", "12", "1", "6"]
-map(int, ...)
+```
+
+### `map(int, ...)`
 
 Converts each string into an integer:
 
+```python
 [8, 3, 12, 1, 6]
+```
 
-Finally, list() creates the Python list.
+Finally, `list()` creates the Python list.
 
 So:
 
+```python
 arr = [8, 3, 12, 1, 6]
-3. Assume the First Element Is the Largest
+```
+
+---
+
+## 3. Assume the First Element Is the Largest
+
+```python
 largest = arr[0]
+```
 
 Initially:
 
+```text
 largest = 8
+```
 
-We don't initialize largest with 0 or another fixed value because the array may contain negative numbers.
+We don't initialize `largest` with `0` or another fixed value because the array may contain negative numbers.
 
 For example:
 
+```text
 -10 -5 -20
+```
 
 The correct largest value is:
 
+```text
 -5
+```
 
-If we initialized largest = 0, the answer would incorrectly remain 0.
+If we initialized:
+
+```python
+largest = 0
+```
+
+the answer would incorrectly remain `0`.
 
 Therefore, using:
 
+```python
 largest = arr[0]
+```
 
 is the correct approach.
 
-4. Traverse the Array
-for i in range(1, n):
+---
 
-The loop starts from index 1 because the element at index 0 has already been stored in largest.
+## 4. Traverse the Array
+
+```python
+for i in range(1, n):
+```
+
+The loop starts from index `1` because the element at index `0` has already been stored in `largest`.
 
 For:
 
+```python
 arr = [8, 3, 12, 1, 6]
+```
 
 the loop checks:
 
+```text
 3
 12
 1
 6
-5. Compare the Current Element
+```
+
+---
+
+## 5. Compare the Current Element
+
+```python
 if arr[i] > largest:
+```
 
 If the current element is greater than the current maximum, we update it.
 
 For example:
 
+```text
 largest = 8
 current = 12
+```
 
 Since:
 
+```text
 12 > 8
+```
 
 we update:
 
+```text
 largest = 12
-6. Update the Maximum
+```
+
+---
+
+## 6. Update the Maximum
+
+```python
 largest = arr[i]
+```
 
 This stores the newly discovered largest value.
 
-7. Print the Answer
+For example:
+
+```text
+Before:
+largest = 8
+
+Current element:
+12
+
+After:
+largest = 12
+```
+
+---
+
+## 7. Print the Answer
+
+```python
 print(largest)
+```
 
-After the complete traversal, largest contains the maximum element.
+After the complete traversal, `largest` contains the maximum element.
 
-📊 Dry Run
+---
+
+# 📊 Dry Run
 
 Consider:
 
+```text
 N = 5
 Array = [8, 3, 12, 1, 6]
-Step	Current Element	Largest Before	Comparison	Largest After
-Initial	8	—	—	8
-1	3	8	3 > 8 ❌	8
-2	12	8	12 > 8 ✅	12
-3	1	12	1 > 12 ❌	12
-4	6	12	6 > 12 ❌	12
-Final Answer
+```
+
+| Step    | Current Element | Largest Before | Comparison | Largest After |
+| ------- | --------------- | -------------- | ---------- | ------------- |
+| Initial | 8               | —              | —          | 8             |
+| 1       | 3               | 8              | `3 > 8` ❌  | 8             |
+| 2       | 12              | 8              | `12 > 8` ✅ | 12            |
+| 3       | 1               | 12             | `1 > 12` ❌ | 12            |
+| 4       | 6               | 12             | `6 > 12` ❌ | 12            |
+
+### Final Answer
+
+```text
 12
-⏱️ Complexity Analysis
-Time Complexity
+```
+
+---
+
+# ⏱️ Complexity Analysis
+
+## Time Complexity
+
+```text
 O(N)
+```
 
 We traverse the array once.
 
-If there are N elements, each element is checked at most once.
+If there are `N` elements, each element is checked at most once.
 
 Therefore:
 
+```text
 Time Complexity = O(N)
-Space Complexity
+```
+
+---
+
+## Space Complexity
+
+```text
 O(1)
+```
 
 Apart from the input array, the algorithm only uses one additional variable:
 
+```text
 largest
+```
 
-Therefore, the auxiliary space complexity is:
+Therefore, the **auxiliary space complexity** is:
 
+```text
 O(1)
+```
 
-Note: The input array itself requires O(N) memory. O(1) refers to the extra/auxiliary space used by the algorithm.
+> **Note:** The input array itself requires `O(N)` memory. `O(1)` refers to the extra/auxiliary space used by the algorithm.
 
-🧪 Test Cases
-Test Case 1 — Normal Case
-Input
+---
+
+# 🧪 Test Cases
+
+## Test Case 1 — Normal Case
+
+### Input
+
+```text
 5
 8 3 12 1 6
-Output
+```
+
+### Output
+
+```text
 12
-Test Case 2 — Negative Numbers
-Input
+```
+
+---
+
+## Test Case 2 — Negative Numbers
+
+### Input
+
+```text
 5
 -4 -10 -3 -2 -7
-Output
+```
+
+### Output
+
+```text
 -2
-Test Case 3 — All Elements Are Equal
-Input
+```
+
+---
+
+## Test Case 3 — All Elements Are Equal
+
+### Input
+
+```text
 4
 5 5 5 5
-Output
+```
+
+### Output
+
+```text
 5
-Test Case 4 — Largest Element at the Beginning
-Input
+```
+
+---
+
+## Test Case 4 — Largest Element at the Beginning
+
+### Input
+
+```text
 5
 20 8 12 6 9
-Output
+```
+
+### Output
+
+```text
 20
-Test Case 5 — Largest Element at the End
-Input
+```
+
+---
+
+## Test Case 5 — Largest Element at the End
+
+### Input
+
+```text
 5
 8 12 6 9 25
-Output
+```
+
+### Output
+
+```text
 25
-🚫 Why Not Use max()?
+```
 
-Python provides a built-in function:
+---
 
+# 🚫 Why Not Use `max()`?
+
+Python provides a built-in function for finding the largest element:
+
+```python
 print(max(arr))
+```
 
-This works and also has O(N) time complexity.
+This solution also has:
 
-However, for DSA preparation and coding assessments, implementing the traversal manually is better practice.
+```text
+Time Complexity = O(N)
+```
+
+However, the purpose of this problem is to practice the **underlying algorithm rather than relying on a built-in function**.
+
+Manually implementing the traversal helps strengthen your understanding of:
+
+* Array traversal
+* Comparisons
+* Running maximum
+* Loops
+* Time complexity
+* Space complexity
+
+This approach is particularly useful for **DSA preparation and coding assessments** where built-in functions may be restricted.
+
+---
+
+# 🎯 Key DSA Pattern
+
+This problem teaches the fundamental:
+
+## **Running Maximum Pattern**
+
+The general idea is:
+
+```text
+Initialize maximum
+       ↓
+Traverse the array
+       ↓
+Compare current element with maximum
+       ↓
+If current element is larger
+       ↓
+Update maximum
+       ↓
+Continue until the array ends
+```
+
+In code:
+
+```python
+largest = arr[0]
+
+for i in range(1, n):
+    if arr[i] > largest:
+        largest = arr[i]
+```
+
+This pattern is useful for many other problems involving:
+
+* Maximum element
+* Minimum element
+* Second largest element
+* Second smallest element
+* Maximum difference
+* Top `K` elements
+* Running maximum/minimum
+* Array optimization problems
+
+---
+
+# 📚 What You Learn From This Problem
+
+By solving this problem, you practice:
+
+* Array traversal
+* Python lists
+* `input()`
+* `.split()`
+* `map()`
+* Integer conversion
+* `for` loops
+* Conditional statements
+* Indexing
+* Running maximum
+* Handling negative numbers
+* Time complexity
+* Space complexity
+* Single-pass algorithms
+
+---
+
+# 🚀 TCS NQT Relevance
+
+Finding the largest element is one of the simplest array problems, but the underlying **running maximum pattern** appears in many more difficult problems.
+
+Understanding this pattern gives you a foundation for:
+
+* Second largest element
+* Second smallest element
+* Maximum difference
+* Kth largest element
+* Kth smallest element
+* Top two elements
+* Maximum subarray-related problems
+* Array optimization problems
+
+### Recommended Thought Process During an Exam
+
+When you see a problem asking for the maximum element:
+
+```text
+1. Do I need to sort the array?
+        ↓
+2. Can I solve it with one traversal?
+        ↓
+3. What should my initial maximum be?
+        ↓
+4. Can the array contain negative numbers?
+        ↓
+5. When should I update the maximum?
+        ↓
+6. What is the final complexity?
+```
+
+For this problem:
+
+```text
+Initial Maximum → arr[0]
+
+Traversal       → O(N)
+
+Auxiliary Space → O(1)
+
+Sorting         → Not Required
+```
+
+---
+
+# 📌 Summary
+
+| Property                  | Value                              |
+| ------------------------- | ---------------------------------- |
+| **Problem**               | Find Largest Element               |
+| **Technique**             | Linear Traversal                   |
+| **Pattern**               | Running Maximum                    |
+| **Time Complexity**       | `O(N)`                             |
+| **Auxiliary Space**       | `O(1)`                             |
+| **Sorting Used**          | ❌ No                               |
+| **Built-in `max()` Used** | ❌ No                               |
+| **Difficulty**            | Easy                               |
+| **Language**              | Python                             |
+| **Suitable For**          | DSA / Coding Assessments / TCS NQT |
+
+---
+
+## ⭐ Key Takeaway
+
+> **You do not need to sort an array to find its largest element. Initialize the first element as the current maximum and scan the remaining elements once. Whenever a larger value is found, update the maximum.**
+
+The core pattern is:
+
+```text
+Current Element
+      ↓
+Compare with largest
+      ↓
+Is it larger?
+   ↙       ↘
+ Yes        No
+ ↓           ↓
+Update     Continue
+largest    traversal
+```
+
+Therefore:
+
+```text
+Time Complexity  → O(N)
+Auxiliary Space  → O(1)
+```
+
+This simple **running maximum / single-pass technique** is one of the most important foundations for solving array-based DSA problems efficiently.
+
 
 # 3.🔢 Find the Second Largest and Second Smallest Element in an Array
 
-A fundamental **array traversal problem** commonly useful for coding assessments such as **TCS NQT**.
+A fundamental **array traversal problem** commonly used in coding assessments such as **TCS NQT**.
 
-The objective is to find the **second largest** and **second smallest distinct elements** present in a given array **without using Python's built-in sorting functions**.
+The objective is to find the **second largest** and **second smallest distinct elements** in an array **without using Python's built-in sorting functions**.
 
 The problem can be solved efficiently using a **single traversal** of the array.
 
@@ -895,7 +1304,7 @@ Print the second largest and second smallest distinct elements.
 
 ---
 
-# 🧪 Example
+## 🧪 Example
 
 ### Input
 
@@ -913,7 +1322,7 @@ Second Smallest: 5
 
 ### Explanation
 
-The given array is:
+Given array:
 
 ```text
 10 5 8 20 3 15
@@ -935,7 +1344,7 @@ Smallest = 3
 Second Smallest = 5
 ```
 
-So the final answer is:
+Final result:
 
 ```text
 Second Largest: 15
@@ -946,9 +1355,7 @@ Second Smallest: 5
 
 # 💡 Approach
 
-We can solve this problem using **linear traversal** without sorting the array.
-
-Instead of sorting, maintain four variables:
+Instead of sorting the array, maintain four variables while traversing it:
 
 ```text
 largest
@@ -957,15 +1364,18 @@ smallest
 second_smallest
 ```
 
-While traversing the array, update these values whenever a new larger or smaller element is found.
+During each iteration:
 
-This allows us to solve the problem in:
+* If a new **largest** value is found, the previous largest becomes the second largest.
+* If a new **smallest** value is found, the previous smallest becomes the second smallest.
+* Intermediate values are checked to determine whether they should become the second largest or second smallest.
+* Duplicate values are ignored so that the result contains **distinct elements**.
+
+This gives an optimal:
 
 ```text
-O(N)
+Time Complexity: O(N)
 ```
-
-time.
 
 ---
 
@@ -980,14 +1390,14 @@ time.
    * `smallest = +∞`
    * `second_smallest = +∞`
 4. Traverse every element of the array.
-5. For finding the largest values:
+5. For the largest values:
 
    * If the current element is greater than `largest`:
 
      * Move `largest` to `second_largest`.
      * Update `largest`.
    * Otherwise, if the current element is greater than `second_largest` and different from `largest`, update `second_largest`.
-6. For finding the smallest values:
+6. For the smallest values:
 
    * If the current element is smaller than `smallest`:
 
@@ -1043,9 +1453,7 @@ print("Second Smallest:", second_smallest)
 n = int(input())
 ```
 
-`input()` reads the value as a string.
-
-`int()` converts it into an integer.
+`input()` reads the value as a string, while `int()` converts it into an integer.
 
 For example:
 
@@ -1067,7 +1475,7 @@ n = 6
 arr = list(map(int, input().split()))
 ```
 
-This line performs three operations.
+This performs three operations.
 
 ### `input()`
 
@@ -1112,9 +1520,9 @@ largest = float('-inf')
 second_largest = float('-inf')
 ```
 
-`float('-inf')` represents negative infinity.
+`float('-inf')` represents **negative infinity**.
 
-This is useful because the array may contain negative numbers.
+This is important because the array may contain negative numbers.
 
 For example:
 
@@ -1128,7 +1536,7 @@ If we initialized:
 largest = 0
 ```
 
-the algorithm would fail because all values are smaller than `0`.
+the algorithm would fail because every value is smaller than `0`.
 
 Using:
 
@@ -1154,7 +1562,7 @@ For:
 [10, 5, 8, 20, 3, 15]
 ```
 
-the values of `num` will be:
+the values of `num` are:
 
 ```text
 10
@@ -1204,7 +1612,7 @@ second_largest = 10
 largest = 20
 ```
 
-This is an important part of the algorithm.
+This is a key step in the single-pass algorithm.
 
 ---
 
@@ -1215,7 +1623,7 @@ elif num > second_largest and num != largest:
     second_largest = num
 ```
 
-This condition checks whether the current element should become the second largest.
+This checks whether the current element should become the second largest.
 
 For example:
 
@@ -1254,7 +1662,7 @@ smallest = float('inf')
 second_smallest = float('inf')
 ```
 
-`float('inf')` represents positive infinity.
+`float('inf')` represents **positive infinity**.
 
 This allows the algorithm to correctly handle both negative and positive numbers.
 
@@ -1363,6 +1771,8 @@ Largest = 20
 Second Largest = 15
 ```
 
+---
+
 ## 🥇 Smallest / Second Smallest
 
 | Step | Number | Smallest | Second Smallest |
@@ -1392,7 +1802,7 @@ Second Smallest: 5
 
 # 🔁 Why Do We Check `num != largest`?
 
-Consider this array:
+Consider:
 
 ```text
 10 10 8 5
@@ -1405,7 +1815,7 @@ Largest = 10
 Second Largest = 10
 ```
 
-But we usually interpret **second largest** as the second **distinct** largest value.
+But the problem asks for **distinct** values.
 
 Therefore:
 
@@ -1426,21 +1836,21 @@ Similarly, for the second smallest:
 num != smallest
 ```
 
-ensures that duplicate values are not counted twice.
+prevents duplicate values from being counted twice.
 
 ---
 
 # 🚫 Why Not Sort the Array?
 
-A simple approach would be:
+A straightforward solution would be:
 
 ```python
 arr.sort()
 ```
 
-Then we could find the second smallest and second largest.
+Sorting could then be used to find the second smallest and second largest elements.
 
-However, sorting takes:
+However, sorting requires:
 
 ```text
 O(N log N)
@@ -1456,16 +1866,14 @@ O(N)
 
 time.
 
-Therefore, the linear traversal approach is more efficient.
-
 ### Comparison
 
-| Approach         | Time Complexity | Extra Space                       |
-| ---------------- | --------------- | --------------------------------- |
-| Sorting          | `O(N log N)`    | Depends on sorting implementation |
-| Linear Traversal | `O(N)`          | `O(1)`                            |
+| Approach         | Time Complexity | Auxiliary Space           |
+| ---------------- | --------------- | ------------------------- |
+| Sorting          | `O(N log N)`    | Depends on implementation |
+| Linear Traversal | `O(N)`          | `O(1)`                    |
 
-For coding interviews and TCS NQT-style problems, the **single-pass approach** is preferable.
+For coding assessments such as **TCS NQT**, the single-pass approach is preferable when an `O(N)` solution is possible.
 
 ---
 
@@ -1479,7 +1887,7 @@ O(N)
 
 The array is traversed exactly once.
 
-Each element is processed using a constant number of comparisons.
+Each element requires only a constant number of comparisons and assignments.
 
 Therefore:
 
@@ -1630,9 +2038,9 @@ Second Largest  → Does not exist
 Second Smallest → Does not exist
 ```
 
-A production-ready solution should handle this case explicitly.
+A production-ready implementation should handle this case explicitly.
 
-For TCS NQT, always read the problem statement carefully to determine what output is expected when no second distinct value exists.
+For coding assessments, always read the problem statement carefully to determine what output is expected when a second distinct value does not exist.
 
 ---
 
@@ -1642,17 +2050,17 @@ This problem teaches the:
 
 ## **Single Traversal / Running Maximum and Minimum Pattern**
 
-Instead of sorting the array, we maintain the best candidates while traversing.
+Instead of sorting the array, maintain the best candidates while traversing.
 
 ```text
-              Array
-                ↓
-       ┌────────┴────────┐
-       ↓                 ↓
- Largest Side      Smallest Side
-       ↓                 ↓
-  largest           smallest
-  second_largest    second_smallest
+                 Array
+                   ↓
+          ┌────────┴────────┐
+          ↓                 ↓
+   Largest Side      Smallest Side
+          ↓                 ↓
+      largest           smallest
+   second_largest    second_smallest
 ```
 
 The general idea is:
@@ -1698,7 +2106,7 @@ By solving this problem, you practice:
 
 # 🚀 TCS NQT Relevance
 
-This problem is more important than simply finding the largest or smallest element because it requires maintaining **multiple values simultaneously**.
+This problem is more useful than simply finding the largest or smallest element because it requires maintaining **multiple values simultaneously**.
 
 It builds the foundation for problems involving:
 
@@ -1736,30 +2144,30 @@ For this problem:
 Largest          → largest
 Second Largest   → second_largest
 
-Smallest         → smallest
-Second Smallest  → second_smallest
+Smallest        → smallest
+Second Smallest → second_smallest
 
-Traversal        → O(N)
-Auxiliary Space  → O(1)
+Traversal       → O(N)
+Auxiliary Space → O(1)
 ```
 
 ---
 
 # 📌 Summary
 
-| Property         | Value                              |
-| ---------------- | ---------------------------------- |
-| Problem          | Second Largest & Second Smallest   |
-| Technique        | Linear Traversal                   |
-| Pattern          | Running Maximum & Minimum          |
-| Time Complexity  | `O(N)`                             |
-| Auxiliary Space  | `O(1)`                             |
-| Sorting Used     | ❌ No                               |
-| Duplicate Values | Handled                            |
-| Distinct Values  | ✅ Yes                              |
-| Difficulty       | Easy–Medium                        |
-| Language         | Python                             |
-| Suitable For     | DSA / Coding Assessments / TCS NQT |
+| Property             | Value                              |
+| -------------------- | ---------------------------------- |
+| **Problem**          | Second Largest & Second Smallest   |
+| **Technique**        | Linear Traversal                   |
+| **Pattern**          | Running Maximum & Minimum          |
+| **Time Complexity**  | `O(N)`                             |
+| **Auxiliary Space**  | `O(1)`                             |
+| **Sorting Used**     | ❌ No                               |
+| **Duplicate Values** | Handled                            |
+| **Distinct Values**  | ✅ Yes                              |
+| **Difficulty**       | Easy–Medium                        |
+| **Language**         | Python                             |
+| **Suitable For**     | DSA / Coding Assessments / TCS NQT |
 
 ---
 
