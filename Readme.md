@@ -5084,3 +5084,812 @@ Final Answer
 ```
 
 This **sorting + partitioning technique** is a useful foundation for more advanced array rearrangement and ordering problems.
+
+
+# 7. ➕ Calculate Sum of the Elements of an Array
+
+A fundamental **array traversal and accumulation problem** commonly useful for coding assessments such as **TCS NQT**.
+
+The objective is to calculate the **sum of all elements** present in a given array without using Python's built-in **`sum()`** function.
+
+The problem can be solved efficiently using **linear traversal** and a **running sum**.
+
+---
+
+## 📌 Problem Statement
+
+Given an array of `N` integers, calculate and print the sum of all elements present in the array.
+
+### Input Format
+
+* The first line contains an integer `N`, representing the number of elements.
+* The second line contains `N` space-separated integers representing the array.
+
+### Output Format
+
+Print the sum of all elements in the array.
+
+---
+
+# 🧪 Example
+
+### Input
+
+```text
+5
+10 20 30 40 50
+```
+
+### Output
+
+```text
+150
+```
+
+### Explanation
+
+The given array is:
+
+```text
+10 20 30 40 50
+```
+
+We add each element to a running total:
+
+```text
+10 → total = 10
+20 → total = 30
+30 → total = 60
+40 → total = 100
+50 → total = 150
+```
+
+Therefore, the sum of all elements is:
+
+```text
+150
+```
+
+---
+
+# 💡 Approach
+
+We can solve this problem using **linear traversal** of the array.
+
+The main idea is to maintain a variable called `total` that stores the sum of all elements processed so far.
+
+### Step 1: Initialize the Sum
+
+Start with:
+
+```python
+total = 0
+```
+
+Initially, no elements have been added, so the total is `0`.
+
+### Step 2: Traverse the Array
+
+Visit every element of the array:
+
+```python
+for num in arr:
+```
+
+### Step 3: Add Each Element
+
+Add the current element to `total`:
+
+```python
+total += num
+```
+
+### Step 4: Print the Result
+
+After processing all elements:
+
+```python
+print(total)
+```
+
+The final value stored in `total` is the sum of all elements.
+
+---
+
+# 🧠 Algorithm
+
+1. Read the number of elements `N`.
+2. Read the array.
+3. Initialize `total = 0`.
+4. Traverse every element of the array.
+5. Add the current element to `total`.
+6. After the traversal is complete, print `total`.
+
+---
+
+# 💻 Python Code
+
+```python
+n = int(input())
+
+arr = list(map(int, input().split()))
+
+total = 0
+
+for num in arr:
+    total += num
+
+print(total)
+```
+
+---
+
+# 🔍 Code Explanation
+
+## 1. Read the Size of the Array
+
+```python
+n = int(input())
+```
+
+`input()` reads the value as a string.
+
+`int()` converts it into an integer.
+
+For example:
+
+```text
+5
+```
+
+becomes:
+
+```python
+n = 5
+```
+
+---
+
+## 2. Read the Array
+
+```python
+arr = list(map(int, input().split()))
+```
+
+This line performs three operations.
+
+### `input()`
+
+Reads the complete line:
+
+```text
+10 20 30 40 50
+```
+
+### `.split()`
+
+Splits the input into individual strings:
+
+```python
+["10", "20", "30", "40", "50"]
+```
+
+### `map(int, ...)`
+
+Converts each string into an integer:
+
+```python
+[10, 20, 30, 40, 50]
+```
+
+Finally, `list()` creates the Python list.
+
+So:
+
+```python
+arr = [10, 20, 30, 40, 50]
+```
+
+---
+
+# ➕ Calculating the Sum
+
+## 3. Initialize the Running Sum
+
+```python
+total = 0
+```
+
+We start the sum at `0`.
+
+At the beginning:
+
+```text
+total = 0
+```
+
+As we process each element, `total` will be updated.
+
+---
+
+## 4. Traverse the Array
+
+```python
+for num in arr:
+```
+
+This loop visits every element in the array.
+
+For:
+
+```text
+[10, 20, 30, 40, 50]
+```
+
+the value of `num` will be:
+
+```text
+10
+20
+30
+40
+50
+```
+
+---
+
+## 5. Add Each Element to the Total
+
+```python
+total += num
+```
+
+This is shorthand for:
+
+```python
+total = total + num
+```
+
+For example, when:
+
+```text
+total = 10
+num = 20
+```
+
+the operation becomes:
+
+```text
+total = 10 + 20
+```
+
+Therefore:
+
+```text
+total = 30
+```
+
+The process continues for every element.
+
+---
+
+## 6. Print the Final Sum
+
+```python
+print(total)
+```
+
+After all elements have been processed, `total` contains the sum of the entire array.
+
+For example:
+
+```text
+total = 150
+```
+
+Therefore:
+
+```text
+150
+```
+
+is printed.
+
+---
+
+# 📊 Dry Run
+
+Consider:
+
+```text
+N = 5
+Array = [10, 20, 30, 40, 50]
+```
+
+| Step    | Current Element | Total Before | Calculation | Total After |
+| ------- | --------------- | ------------ | ----------- | ----------- |
+| Initial | —               | 0            | —           | 0           |
+| 1       | 10              | 0            | 0 + 10      | 10          |
+| 2       | 20              | 10           | 10 + 20     | 30          |
+| 3       | 30              | 30           | 30 + 30     | 60          |
+| 4       | 40              | 60           | 60 + 40     | 100         |
+| 5       | 50              | 100          | 100 + 50    | 150         |
+
+### Final Answer
+
+```text
+150
+```
+
+---
+
+# 🔁 Visual Representation
+
+The complete process can be represented as:
+
+```text
+Array
+  ↓
+10 20 30 40 50
+  ↓
+Initialize total = 0
+  ↓
+Add 10 → total = 10
+  ↓
+Add 20 → total = 30
+  ↓
+Add 30 → total = 60
+  ↓
+Add 40 → total = 100
+  ↓
+Add 50 → total = 150
+  ↓
+Print total
+  ↓
+150
+```
+
+---
+
+# 🚫 Why Not Use `sum()`?
+
+Python provides a built-in function:
+
+```python
+print(sum(arr))
+```
+
+This is a perfectly valid Python solution.
+
+However, for **DSA preparation and coding assessments**, implementing the accumulation manually is better practice.
+
+The goal is to understand the **running sum / accumulation pattern**, which can be reused in many other problems.
+
+For example:
+
+* Calculate array sum
+* Calculate array average
+* Find prefix sums
+* Find subarray sums
+* Calculate cumulative totals
+* Find maximum subarray sum
+* Calculate sums based on conditions
+
+Therefore, instead of directly using:
+
+```python
+sum(arr)
+```
+
+we practice:
+
+```python
+total = 0
+
+for num in arr:
+    total += num
+```
+
+---
+
+# 🚫 Why Not Use Nested Loops?
+
+A nested-loop approach is unnecessary for calculating a simple array sum.
+
+For example, repeatedly processing the array using nested loops could result in:
+
+```text
+O(N²)
+```
+
+time complexity.
+
+A single traversal is sufficient.
+
+Therefore, the optimal approach is:
+
+```text
+O(N)
+```
+
+time complexity.
+
+---
+
+# ⏱️ Complexity Analysis
+
+## Time Complexity
+
+```text
+O(N)
+```
+
+We traverse the array exactly once.
+
+If there are `N` elements, each element is processed once.
+
+Therefore:
+
+```text
+Time Complexity = O(N)
+```
+
+---
+
+## Space Complexity
+
+```text
+O(1)
+```
+
+The algorithm uses only one additional variable:
+
+```text
+total
+```
+
+Therefore, the **auxiliary space complexity** is:
+
+```text
+O(1)
+```
+
+> **Note:** The input array itself requires `O(N)` memory. `O(1)` refers to the additional/auxiliary space used by the summation algorithm.
+
+---
+
+# 🧪 Test Cases
+
+## Test Case 1 — Normal Case
+
+### Input
+
+```text
+5
+10 20 30 40 50
+```
+
+### Output
+
+```text
+150
+```
+
+---
+
+## Test Case 2 — Positive and Negative Numbers
+
+### Input
+
+```text
+6
+10 -5 20 -10 15 -5
+```
+
+### Output
+
+```text
+25
+```
+
+---
+
+## Test Case 3 — All Elements Are Zero
+
+### Input
+
+```text
+5
+0 0 0 0 0
+```
+
+### Output
+
+```text
+0
+```
+
+---
+
+## Test Case 4 — All Elements Are Negative
+
+### Input
+
+```text
+5
+-10 -20 -30 -40 -50
+```
+
+### Output
+
+```text
+-150
+```
+
+---
+
+## Test Case 5 — Single Element
+
+### Input
+
+```text
+1
+25
+```
+
+### Output
+
+```text
+25
+```
+
+---
+
+## Test Case 6 — Duplicate Elements
+
+### Input
+
+```text
+6
+10 10 20 20 30 30
+```
+
+### Output
+
+```text
+120
+```
+
+---
+
+# ⚠️ Important Edge Cases
+
+## 1. Single Element
+
+For:
+
+```text
+1
+25
+```
+
+the sum is simply:
+
+```text
+25
+```
+
+---
+
+## 2. All Elements Are Zero
+
+For:
+
+```text
+5
+0 0 0 0 0
+```
+
+the result is:
+
+```text
+0
+```
+
+---
+
+## 3. Negative Numbers
+
+The algorithm works correctly with negative numbers.
+
+For:
+
+```text
+-10 -20 -30
+```
+
+the calculation is:
+
+```text
+0 + (-10) = -10
+-10 + (-20) = -30
+-30 + (-30) = -60
+```
+
+Therefore:
+
+```text
+-60
+```
+
+---
+
+## 4. Mixed Positive and Negative Numbers
+
+For:
+
+```text
+10 -5 20 -10 15 -5
+```
+
+the running total is:
+
+```text
+10
+5
+25
+15
+30
+25
+```
+
+Therefore:
+
+```text
+25
+```
+
+---
+
+# 🎯 Key DSA Pattern
+
+This problem teaches the:
+
+## **Linear Traversal / Running Sum Pattern**
+
+The general idea is:
+
+```text
+Initialize total
+      ↓
+Traverse the array
+      ↓
+Add current element
+      ↓
+Update total
+      ↓
+Process next element
+      ↓
+Print final total
+```
+
+The key operation is:
+
+```python
+total += num
+```
+
+This pattern is one of the most fundamental techniques in array problems.
+
+---
+
+# 📚 What You Learn From This Problem
+
+By solving this problem, you practice:
+
+* Array input handling
+* Python lists
+* `input()`
+* `.split()`
+* `map()`
+* Integer conversion
+* `for` loops
+* Running sum
+* Accumulation
+* Array traversal
+* Handling positive numbers
+* Handling negative numbers
+* Handling zero values
+* Time complexity analysis
+* Space complexity analysis
+
+---
+
+# 🚀 TCS NQT Relevance
+
+This is a **basic-level array problem** that helps build the foundation required for coding assessments such as **TCS NQT**.
+
+Although calculating a sum is simple, the underlying **accumulation pattern** appears in many more advanced problems.
+
+### Problems Based on Similar Concepts
+
+* Calculate average of array elements
+* Find sum of even elements
+* Find sum of odd elements
+* Find sum of positive elements
+* Find sum of negative elements
+* Find prefix sum
+* Find cumulative sum
+* Find maximum subarray sum
+* Find sum of elements at even indices
+* Find sum of elements at odd indices
+
+### Recommended Thought Process During an Exam
+
+When you see a problem asking for a sum:
+
+```text
+1. What values need to be added?
+        ↓
+2. Can I solve it with one traversal?
+        ↓
+3. What should the initial total be?
+        ↓
+4. What condition determines whether an element is added?
+        ↓
+5. Can I maintain a running sum?
+        ↓
+6. What is the final complexity?
+```
+
+For this problem:
+
+```text
+Initial Total → 0
+Traversal     → O(N)
+Update        → total += num
+Answer        → total
+```
+
+---
+
+# 📌 Summary
+
+| Property              | Value                              |
+| --------------------- | ---------------------------------- |
+| Problem               | Calculate Sum of Array Elements    |
+| Technique             | Linear Traversal                   |
+| Pattern               | Running Sum / Accumulation         |
+| Time Complexity       | `O(N)`                             |
+| Auxiliary Space       | `O(1)`                             |
+| Built-in `sum()` Used | ❌ No                               |
+| Nested Loop Used      | ❌ No                               |
+| Negative Values       | ✅ Handled                          |
+| Zero Values           | ✅ Handled                          |
+| Difficulty            | Easy                               |
+| Language              | Python                             |
+| Suitable For          | DSA / Coding Assessments / TCS NQT |
+
+---
+
+## ⭐ Key Takeaway
+
+> **Initialize a running total with `0`, traverse every element of the array, add each element to the total, and print the final value.**
+
+The key pattern to remember is:
+
+```text
+total = 0
+     ↓
+Read element
+     ↓
+total += element
+     ↓
+Read next element
+     ↓
+Repeat until the array ends
+     ↓
+Print total
+```
+
+This **running sum / accumulation pattern** is one of the most important foundations for solving array traversal and prefix-sum problems.
