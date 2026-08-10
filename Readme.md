@@ -4112,3 +4112,1002 @@ Count += 1      Count = 1
 ```
 
 This **frequency counting / hash map technique** is one of the most important patterns for solving array and string problems efficiently.
+
+
+# 6. 🔢 Count Frequency of Each Element in an Array
+
+A fundamental **array traversal and frequency counting problem** commonly useful for coding assessments such as **TCS NQT**.
+
+The objective is to find and print the **frequency of each distinct element** present in a given array.
+
+The problem can be solved efficiently using a **Python dictionary (hash map)** to store each element and its corresponding frequency.
+
+---
+
+# 📌 Problem Statement
+
+Given an array of `N` integers, count how many times each distinct element appears in the array.
+
+### Input Format
+
+* The first line contains an integer `N`, representing the number of elements.
+* The second line contains `N` space-separated integers representing the array.
+
+### Output Format
+
+Print each distinct element along with its frequency.
+
+The elements are printed in the order in which they first appear in the array.
+
+---
+
+# 🧪 Example
+
+### Input
+
+```text
+7
+10 20 10 30 20 10 40
+```
+
+### Output
+
+```text
+10 3
+20 2
+30 1
+40 1
+```
+
+### Explanation
+
+The given array is:
+
+```text
+10 20 10 30 20 10 40
+```
+
+We count how many times each element occurs:
+
+```text
+10 → 3 times
+20 → 2 times
+30 → 1 time
+40 → 1 time
+```
+
+Therefore, the frequency of each element is:
+
+```text
+10 3
+20 2
+30 1
+40 1
+```
+
+---
+
+# 💡 Approach
+
+We can solve this problem efficiently using a **dictionary/hash map**.
+
+A dictionary stores data in the form:
+
+```text
+element → frequency
+```
+
+For example:
+
+```text
+10 → 3
+20 → 2
+30 → 1
+40 → 1
+```
+
+We traverse the array once.
+
+For every element:
+
+* If the element already exists in the dictionary, increase its frequency by `1`.
+* Otherwise, add the element to the dictionary with frequency `1`.
+
+This allows us to count all frequencies in a **single traversal**.
+
+---
+
+# 🧠 Algorithm
+
+1. Read the number of elements `N`.
+2. Read the array.
+3. Create an empty dictionary called `frequency`.
+4. Traverse every element in the array.
+5. For each element:
+
+   * If the element already exists in `frequency`, increment its count.
+   * Otherwise, initialize its count to `1`.
+6. Traverse the dictionary.
+7. Print each element along with its frequency.
+
+---
+
+# 💻 Python Code
+
+```python
+n = int(input())
+
+arr = list(map(int, input().split()))
+
+frequency = {}
+
+for num in arr:
+    if num in frequency:
+        frequency[num] += 1
+    else:
+        frequency[num] = 1
+
+for num in frequency:
+    print(num, frequency[num])
+```
+
+---
+
+# 🔍 Code Explanation
+
+## 1. Read the Size of the Array
+
+```python
+n = int(input())
+```
+
+`input()` reads the value as a string.
+
+`int()` converts it into an integer.
+
+For example:
+
+```text
+7
+```
+
+becomes:
+
+```python
+n = 7
+```
+
+---
+
+## 2. Read the Array
+
+```python
+arr = list(map(int, input().split()))
+```
+
+This line performs three operations.
+
+### `input()`
+
+Reads the complete line:
+
+```text
+10 20 10 30 20 10 40
+```
+
+### `.split()`
+
+Splits the input into individual strings:
+
+```python
+["10", "20", "10", "30", "20", "10", "40"]
+```
+
+### `map(int, ...)`
+
+Converts each string into an integer:
+
+```python
+[10, 20, 10, 30, 20, 10, 40]
+```
+
+Finally, `list()` creates the Python list.
+
+So:
+
+```python
+arr = [10, 20, 10, 30, 20, 10, 40]
+```
+
+---
+
+# 📊 Frequency Counting Using a Dictionary
+
+## 3. Create an Empty Dictionary
+
+```python
+frequency = {}
+```
+
+This dictionary will store:
+
+```text
+element → frequency
+```
+
+Initially:
+
+```python
+{}
+```
+
+As we process the array, it will become:
+
+```python
+{10: 3, 20: 2, 30: 1, 40: 1}
+```
+
+---
+
+## 4. Traverse the Array
+
+```python
+for num in arr:
+```
+
+This loop visits every element in the array.
+
+For:
+
+```text
+[10, 20, 10, 30, 20, 10, 40]
+```
+
+the values of `num` will be:
+
+```text
+10
+20
+10
+30
+20
+10
+40
+```
+
+---
+
+## 5. Check Whether the Element Already Exists
+
+```python
+if num in frequency:
+```
+
+This checks whether the current element already exists as a key in the dictionary.
+
+For example, after processing:
+
+```text
+10
+20
+```
+
+the dictionary is:
+
+```python
+{10: 1, 20: 1}
+```
+
+When `10` appears again:
+
+```python
+if 10 in frequency:
+```
+
+the condition is `True`.
+
+---
+
+## 6. Increase the Frequency
+
+```python
+frequency[num] += 1
+```
+
+If the element already exists, increase its frequency by `1`.
+
+For example:
+
+```python
+frequency[10] = 1
+```
+
+After another `10`:
+
+```python
+frequency[10] = 2
+```
+
+After another `10`:
+
+```python
+frequency[10] = 3
+```
+
+---
+
+## 7. Add a New Element
+
+```python
+else:
+    frequency[num] = 1
+```
+
+If the element does not exist in the dictionary, add it with an initial frequency of `1`.
+
+For example, when `30` is encountered for the first time:
+
+```python
+frequency[30] = 1
+```
+
+The dictionary becomes:
+
+```python
+{10: 2, 20: 1, 30: 1}
+```
+
+---
+
+## 8. Traverse the Frequency Dictionary
+
+```python
+for num in frequency:
+```
+
+After the entire array has been processed, the dictionary contains every distinct element and its frequency.
+
+For example:
+
+```python
+{10: 3, 20: 2, 30: 1, 40: 1}
+```
+
+The loop visits:
+
+```text
+10
+20
+30
+40
+```
+
+Because Python dictionaries preserve insertion order, the elements are printed in the order in which they first appeared.
+
+---
+
+## 9. Print the Element and Frequency
+
+```python
+print(num, frequency[num])
+```
+
+This prints the element followed by its frequency.
+
+For example:
+
+```text
+10 3
+```
+
+means:
+
+```text
+Element = 10
+Frequency = 3
+```
+
+The final output is:
+
+```text
+10 3
+20 2
+30 1
+40 1
+```
+
+---
+
+# 📊 Dry Run
+
+Consider:
+
+```text
+N = 7
+Array = [10, 20, 10, 30, 20, 10, 40]
+```
+
+We process each element one by one.
+
+| Step | Current Element | Frequency Dictionary           |
+| ---- | --------------- | ------------------------------ |
+| 1    | 10              | `{10: 1}`                      |
+| 2    | 20              | `{10: 1, 20: 1}`               |
+| 3    | 10              | `{10: 2, 20: 1}`               |
+| 4    | 30              | `{10: 2, 20: 1, 30: 1}`        |
+| 5    | 20              | `{10: 2, 20: 2, 30: 1}`        |
+| 6    | 10              | `{10: 3, 20: 2, 30: 1}`        |
+| 7    | 40              | `{10: 3, 20: 2, 30: 1, 40: 1}` |
+
+### Final Frequency Table
+
+```text
+10 → 3
+20 → 2
+30 → 1
+40 → 1
+```
+
+Therefore:
+
+```text
+10 3
+20 2
+30 1
+40 1
+```
+
+---
+
+# 🔁 How the Dictionary Changes
+
+The frequency dictionary evolves as follows.
+
+### Initially
+
+```python
+{}
+```
+
+### After processing `10`
+
+```python
+{10: 1}
+```
+
+### After processing `20`
+
+```python
+{10: 1, 20: 1}
+```
+
+### After processing another `10`
+
+```python
+{10: 2, 20: 1}
+```
+
+### After processing `30`
+
+```python
+{10: 2, 20: 1, 30: 1}
+```
+
+### After processing another `20`
+
+```python
+{10: 2, 20: 2, 30: 1}
+```
+
+### After processing another `10`
+
+```python
+{10: 3, 20: 2, 30: 1}
+```
+
+### After processing `40`
+
+```python
+{10: 3, 20: 2, 30: 1, 40: 1}
+```
+
+---
+
+# 🚫 Why Not Use `count()`?
+
+Python provides a built-in `count()` method:
+
+```python
+arr.count(num)
+```
+
+We could write:
+
+```python
+for num in arr:
+    print(num, arr.count(num))
+```
+
+However, this approach has a major problem.
+
+`count()` traverses the array every time it is called.
+
+If the array contains `N` elements and we call `count()` for every element, the time complexity can become:
+
+```text
+O(N²)
+```
+
+For example:
+
+```text
+Array = [10, 20, 10, 30, 20, 10]
+```
+
+The array is repeatedly scanned to count each element.
+
+The dictionary approach is much more efficient because we count every element during a **single traversal**.
+
+---
+
+# 🚫 Why Not Use Nested Loops?
+
+Another possible approach is:
+
+```python
+for i in range(n):
+    count = 0
+
+    for j in range(n):
+        if arr[i] == arr[j]:
+            count += 1
+```
+
+This also requires:
+
+```text
+O(N²)
+```
+
+time complexity.
+
+The dictionary/hash map approach reduces the average time complexity to:
+
+```text
+O(N)
+```
+
+Therefore, it is the preferred approach for larger arrays.
+
+---
+
+# ⏱️ Complexity Analysis
+
+## Time Complexity
+
+```text
+O(N)
+```
+
+We traverse the array once to build the frequency dictionary.
+
+Dictionary lookup and update operations are **O(1) on average**.
+
+Therefore:
+
+```text
+Time Complexity = O(N)
+```
+
+> **Note:** Python dictionary operations such as membership checking, insertion, and updating are average-case `O(1)`.
+
+---
+
+## Space Complexity
+
+```text
+O(K)
+```
+
+where `K` is the number of **distinct elements** in the array.
+
+For example:
+
+```text
+[10, 10, 10, 10]
+```
+
+has:
+
+```text
+N = 4
+K = 1
+```
+
+while:
+
+```text
+[10, 20, 30, 40]
+```
+
+has:
+
+```text
+N = 4
+K = 4
+```
+
+Therefore, the frequency dictionary requires space proportional to the number of distinct elements.
+
+```text
+Auxiliary Space = O(K)
+```
+
+In the worst case, when every element is unique:
+
+```text
+K = N
+```
+
+so the space complexity becomes:
+
+```text
+O(N)
+```
+
+---
+
+# 🧪 Test Cases
+
+## Test Case 1 — Normal Case
+
+### Input
+
+```text
+7
+10 20 10 30 20 10 40
+```
+
+### Output
+
+```text
+10 3
+20 2
+30 1
+40 1
+```
+
+---
+
+## Test Case 2 — All Elements Are Unique
+
+### Input
+
+```text
+5
+10 20 30 40 50
+```
+
+### Output
+
+```text
+10 1
+20 1
+30 1
+40 1
+50 1
+```
+
+---
+
+## Test Case 3 — All Elements Are Same
+
+### Input
+
+```text
+5
+7 7 7 7 7
+```
+
+### Output
+
+```text
+7 5
+```
+
+---
+
+## Test Case 4 — Negative Numbers
+
+### Input
+
+```text
+7
+-5 -10 -5 -20 -10 -5 -20
+```
+
+### Output
+
+```text
+-5 3
+-10 2
+-20 2
+```
+
+---
+
+## Test Case 5 — Positive and Negative Numbers
+
+### Input
+
+```text
+8
+10 -5 10 -5 20 -5 30 10
+```
+
+### Output
+
+```text
+10 3
+-5 3
+20 1
+30 1
+```
+
+---
+
+## Test Case 6 — Duplicate Elements
+
+### Input
+
+```text
+8
+5 10 5 20 10 5 20 10
+```
+
+### Output
+
+```text
+5 3
+10 3
+20 2
+```
+
+---
+
+# ⚠️ Important Edge Cases
+
+## 1. Single Element
+
+For:
+
+```text
+1
+25
+```
+
+the frequency is:
+
+```text
+25 1
+```
+
+---
+
+## 2. All Elements Are Identical
+
+For:
+
+```text
+5
+10 10 10 10 10
+```
+
+there is only one distinct element:
+
+```text
+10 5
+```
+
+---
+
+## 3. All Elements Are Unique
+
+For:
+
+```text
+4
+10 20 30 40
+```
+
+every element has frequency `1`:
+
+```text
+10 1
+20 1
+30 1
+40 1
+```
+
+---
+
+## 4. Negative Numbers
+
+The dictionary approach works with negative integers without any special modification.
+
+For:
+
+```text
+-2 -5 -2 -10
+```
+
+the result is:
+
+```text
+-2 2
+-5 1
+-10 1
+```
+
+---
+
+# 🎯 Key DSA Pattern
+
+This problem teaches the:
+
+## **Frequency Counting / Hash Map Pattern**
+
+The general idea is:
+
+```text
+Read an element
+       ↓
+Check if it exists in the dictionary
+       ↓
+    ┌──┴──┐
+    ↓     ↓
+   Yes    No
+    ↓     ↓
+Increase  Set to 1
+frequency
+    ↓     ↓
+    └──┬──┘
+       ↓
+Process next element
+```
+
+The dictionary stores:
+
+```text
+Element → Number of Occurrences
+```
+
+For example:
+
+```text
+10 → 3
+20 → 2
+30 → 1
+40 → 1
+```
+
+This pattern is extremely useful in array and string problems.
+
+---
+
+# 📚 What You Learn From This Problem
+
+By solving this problem, you practice:
+
+* Array input handling
+* Python lists
+* `input()`
+* `.split()`
+* `map()`
+* Integer conversion
+* `for` loops
+* Conditional statements
+* Python dictionaries
+* Key-value pairs
+* Dictionary membership checking
+* Frequency counting
+* Hash map technique
+* Handling duplicate values
+* Handling negative values
+* Time complexity analysis
+* Space complexity analysis
+* Single-pass algorithms
+
+---
+
+# 🚀 TCS NQT Relevance
+
+Frequency counting is an important pattern for coding assessments such as **TCS NQT**.
+
+The same concept can be used in many problems involving arrays and strings.
+
+### Problems Based on the Same Pattern
+
+* Count frequency of each element
+* Find the most frequent element
+* Find the least frequent element
+* Find the first non-repeating element
+* Find duplicate elements
+* Count duplicate elements
+* Find unique elements
+* Find the frequency of a particular number
+* Check whether two arrays contain the same frequencies
+* Check whether two strings are anagrams
+* Count character frequency in a string
+
+### Recommended Thought Process During an Exam
+
+When you see a problem involving frequency:
+
+```text
+1. Do I need to count occurrences?
+        ↓
+2. Can I use a dictionary/hash map?
+        ↓
+3. What should be the key?
+        ↓
+4. What should be the value?
+        ↓
+5. Can I solve it in one traversal?
+        ↓
+6. What is the final complexity?
+```
+
+For this problem:
+
+```text
+Key       → Array Element
+Value     → Frequency
+Traversal → O(N)
+Space     → O(K)
+```
+
+where `K` is the number of distinct elements.
+
+---
+
+# 📌 Summary
+
+| Property                | Value                              |
+| ----------------------- | ---------------------------------- |
+| Problem                 | Count Frequency of Each Element    |
+| Technique               | Frequency Counting                 |
+| Pattern                 | Hash Map / Dictionary              |
+| Time Complexity         | `O(N)` Average                     |
+| Auxiliary Space         | `O(K)`                             |
+| Worst-Case Space        | `O(N)`                             |
+| Built-in `count()` Used | ❌ No                               |
+| Nested Loop Used        | ❌ No                               |
+| Duplicate Values        | ✅ Handled                          |
+| Negative Values         | ✅ Handled                          |
+| Difficulty              | Easy–Medium                        |
+| Language                | Python                             |
+| Suitable For            | DSA / Coding Assessments / TCS NQT |
+
+---
+
+## ⭐ Key Takeaway
+
+> **Use a dictionary to store each array element as a key and its frequency as the value. Traverse the array once and update the frequency whenever an element is encountered.**
+
+The key pattern to remember is:
+
+```text
+Element
+   ↓
+Exists in Dictionary?
+   ↓
+ ┌───────┴───────┐
+ ↓               ↓
+Yes              No
+ ↓                ↓
+Count += 1      Count = 1
+```
+
+This **frequency counting / hash map technique** is one of the most important patterns for solving array and string problems efficiently.
+
