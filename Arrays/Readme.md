@@ -7892,3 +7892,1128 @@ with:
 ```text
 O(N) Time + O(1) Auxiliary Space
 ```
+# 10. 📊 Find the Median of a Given Array
+
+A fundamental **array sorting and statistical calculation problem** commonly useful for coding assessments such as **TCS NQT**.
+
+The objective is to find the **median value** of a given array.
+
+The problem can be solved by first **sorting the array** and then selecting the middle element(s) based on whether the number of elements is odd or even.
+
+---
+
+## 📌 Problem Statement
+
+Given an array of `N` numbers, find and print the **median** of the array.
+
+The array may contain integers, decimal values, or a mixture of both.
+
+### Input Format
+
+- The first line contains an integer `N`, representing the number of elements.
+- The second line contains `N` space-separated numbers representing the array.
+
+### Output Format
+
+Print the median of the array.
+
+---
+
+# 🧪 Example
+
+### Input
+
+```text
+5
+7 2 9 4 1
+```
+
+### Output
+
+```text
+4.0
+```
+
+### Explanation
+
+The given array is:
+
+```text
+7 2 9 4 1
+```
+
+First, sort the array:
+
+```text
+1 2 4 7 9
+```
+
+There are `5` elements, which is an **odd number**.
+
+Therefore, the middle element is:
+
+```text
+4
+```
+
+So the median is:
+
+```text
+4.0
+```
+
+---
+
+# 💡 Approach
+
+To find the median, we first need to arrange the elements in **ascending order**.
+
+After sorting, there are two cases.
+
+### Case 1: Odd Number of Elements
+
+If `N` is odd, there is exactly one middle element.
+
+For example:
+
+```text
+1 2 4 7 9
+```
+
+Here:
+
+```text
+N = 5
+```
+
+The middle element is:
+
+```text
+4
+```
+
+Its index is:
+
+```python
+n // 2
+```
+
+Therefore:
+
+```python
+median = arr[n // 2]
+```
+
+---
+
+### Case 2: Even Number of Elements
+
+If `N` is even, there are two middle elements.
+
+For example:
+
+```text
+2 4 6 8 10 12
+```
+
+Here:
+
+```text
+N = 6
+```
+
+The two middle elements are:
+
+```text
+6 and 8
+```
+
+The median is their average:
+
+```text
+(6 + 8) / 2 = 7
+```
+
+Therefore:
+
+```python
+median = (arr[n // 2 - 1] + arr[n // 2]) / 2
+```
+
+---
+
+# 🧠 Algorithm
+
+1. Read the number of elements `N`.
+2. Read the array.
+3. Sort the array in ascending order.
+4. Check whether `N` is odd or even.
+5. If `N` is odd:
+   - Select the middle element.
+6. If `N` is even:
+   - Select the two middle elements.
+   - Calculate their average.
+7. Print the median.
+
+---
+
+# 💻 Python Code
+
+```python
+n = int(input())
+
+arr = list(map(float, input().split()))
+
+arr.sort()
+
+if n % 2 == 1:
+    median = arr[n // 2]
+else:
+    median = (arr[n // 2 - 1] + arr[n // 2]) / 2
+
+print(median)
+```
+
+---
+
+# 🔍 Code Explanation
+
+## 1. Read the Size of the Array
+
+```python
+n = int(input())
+```
+
+`input()` reads the value as a string.
+
+`int()` converts it into an integer.
+
+For example:
+
+```text
+5
+```
+
+becomes:
+
+```python
+n = 5
+```
+
+---
+
+## 2. Read the Array
+
+```python
+arr = list(map(float, input().split()))
+```
+
+This line performs three operations.
+
+### `input()`
+
+Reads the complete line:
+
+```text
+7 2 9 4 1
+```
+
+### `.split()`
+
+Splits the input into individual strings:
+
+```text
+["7", "2", "9", "4", "1"]
+```
+
+### `map(float, ...)`
+
+Converts each value into a floating-point number:
+
+```text
+[7.0, 2.0, 9.0, 4.0, 1.0]
+```
+
+Using `float()` allows the program to handle:
+
+```text
+3
+```
+
+as well as:
+
+```text
+9.8
+```
+
+and mixed values such as:
+
+```text
+3 9.8 2 4.5 10
+```
+
+---
+
+## 3. Sort the Array
+
+```python
+arr.sort()
+```
+
+This arranges the elements in ascending order.
+
+For example:
+
+```text
+7 2 9 4 1
+```
+
+becomes:
+
+```text
+1.0 2.0 4.0 7.0 9.0
+```
+
+Sorting is necessary because the median depends on the **ordered position** of the elements.
+
+---
+
+# 🔢 Odd Number of Elements
+
+## 4. Check if N is Odd
+
+```python
+if n % 2 == 1:
+```
+
+The `%` operator gives the remainder after division.
+
+For example:
+
+```text
+5 % 2 = 1
+```
+
+Therefore, `5` is odd.
+
+---
+
+## 5. Find the Middle Element
+
+```python
+median = arr[n // 2]
+```
+
+For:
+
+```text
+N = 5
+```
+
+we have:
+
+```text
+5 // 2 = 2
+```
+
+Python uses zero-based indexing:
+
+```text
+Index:    0   1   2   3   4
+Array:    1   2   4   7   9
+```
+
+Therefore:
+
+```text
+arr[2] = 4
+```
+
+So the median is:
+
+```text
+4.0
+```
+
+---
+
+# 🔢 Even Number of Elements
+
+## 6. Handle the Even Case
+
+```python
+else:
+```
+
+If `N` is even, there are two middle elements.
+
+For example:
+
+```text
+2 4 6 8 10 12
+```
+
+Here:
+
+```text
+N = 6
+```
+
+The indices are:
+
+```text
+Index:    0  1  2  3   4   5
+Array:    2  4  6  8  10  12
+```
+
+The two middle elements are:
+
+```text
+arr[2] = 6
+arr[3] = 8
+```
+
+---
+
+## 7. Calculate the Average of the Two Middle Elements
+
+```python
+median = (arr[n // 2 - 1] + arr[n // 2]) / 2
+```
+
+For:
+
+```text
+N = 6
+```
+
+we get:
+
+```text
+n // 2 = 3
+```
+
+Therefore:
+
+```text
+arr[3 - 1] = arr[2] = 6
+arr[3]     = arr[3] = 8
+```
+
+So:
+
+```text
+median = (6 + 8) / 2
+       = 7.0
+```
+
+---
+
+## 8. Print the Median
+
+```python
+print(median)
+```
+
+After calculating the median, the final result is printed.
+
+---
+
+# 📊 Dry Run — Odd Number of Elements
+
+Consider:
+
+```text
+N = 5
+Array = [7, 2, 9, 4, 1]
+```
+
+### Step 1 — Sort
+
+```text
+1 2 4 7 9
+```
+
+### Step 2 — Check N
+
+```text
+5 % 2 = 1
+```
+
+So `N` is odd.
+
+### Step 3 — Find Middle Index
+
+```text
+5 // 2 = 2
+```
+
+### Step 4 — Select Middle Element
+
+```text
+arr[2] = 4
+```
+
+### Final Answer
+
+```text
+4.0
+```
+
+---
+
+# 📊 Dry Run — Even Number of Elements
+
+Consider:
+
+```text
+N = 6
+Array = [10, 2, 8, 4, 6, 12]
+```
+
+### Step 1 — Sort
+
+```text
+2 4 6 8 10 12
+```
+
+### Step 2 — Check N
+
+```text
+6 % 2 = 0
+```
+
+So `N` is even.
+
+### Step 3 — Find the Two Middle Elements
+
+```text
+n // 2 = 3
+```
+
+Therefore:
+
+```text
+arr[2] = 6
+arr[3] = 8
+```
+
+### Step 4 — Calculate the Median
+
+```text
+(6 + 8) / 2 = 7
+```
+
+### Final Answer
+
+```text
+7.0
+```
+
+---
+
+# 🔁 Visual Representation
+
+For an odd number of elements:
+
+```text
+Original Array
+      ↓
+7 2 9 4 1
+      ↓
+Sort
+      ↓
+1 2 4 7 9
+      ↓
+Select middle element
+      ↓
+4
+      ↓
+Median = 4.0
+```
+
+For an even number of elements:
+
+```text
+Original Array
+      ↓
+10 2 8 4 6 12
+      ↓
+Sort
+      ↓
+2 4 6 8 10 12
+      ↓
+Select two middle elements
+      ↓
+6 and 8
+      ↓
+(6 + 8) / 2
+      ↓
+7.0
+```
+
+---
+
+# 🚫 Why Can't We Find the Median Without Sorting?
+
+The median depends on the **position of the elements after ordering them**.
+
+For example:
+
+```text
+7 2 9 4 1
+```
+
+The middle element of the original unsorted array is:
+
+```text
+9
+```
+
+But that is **not** the median.
+
+After sorting:
+
+```text
+1 2 4 7 9
+```
+
+the middle element is:
+
+```text
+4
+```
+
+Therefore, simply selecting the middle element from an unsorted array is incorrect.
+
+For this basic approach, sorting is necessary.
+
+---
+
+# 🚫 Common Mistake — Forgetting the Even Case
+
+A common incorrect solution is:
+
+```python
+arr.sort()
+median = arr[n // 2]
+```
+
+This works for odd `N`, but it is **wrong for even `N`**.
+
+For:
+
+```text
+2 4 6 8
+```
+
+this code gives:
+
+```text
+arr[4 // 2] = arr[2] = 6
+```
+
+But the correct median is:
+
+```text
+(4 + 6) / 2 = 5
+```
+
+Therefore, always handle both cases:
+
+```python
+if n % 2 == 1:
+    median = arr[n // 2]
+else:
+    median = (arr[n // 2 - 1] + arr[n // 2]) / 2
+```
+
+---
+
+# ⏱️ Complexity Analysis
+
+## Time Complexity
+
+The major operation is:
+
+```python
+arr.sort()
+```
+
+Python sorting takes:
+
+```text
+O(N log N)
+```
+
+Finding the middle element(s) takes:
+
+```text
+O(1)
+```
+
+Therefore, the overall time complexity is:
+
+```text
+Time Complexity = O(N log N)
+```
+
+---
+
+## Space Complexity
+
+The median calculation itself uses only a few variables.
+
+However, Python's built-in sorting algorithm may use additional memory internally.
+
+Therefore, it is better **not to claim the entire program has O(1) auxiliary space**.
+
+The important complexity for this solution is:
+
+```text
+Time Complexity = O(N log N)
+```
+
+with sorting being the dominant operation.
+
+---
+
+# 🧪 Test Cases
+
+## Test Case 1 — Odd Number of Elements
+
+### Input
+
+```text
+5
+7 2 9 4 1
+```
+
+### Output
+
+```text
+4.0
+```
+
+---
+
+## Test Case 2 — Even Number of Elements
+
+### Input
+
+```text
+6
+10 2 8 4 6 12
+```
+
+### Output
+
+```text
+7.0
+```
+
+---
+
+## Test Case 3 — Decimal Values
+
+### Input
+
+```text
+5
+3.5 1.2 9.8 4.1 2.6
+```
+
+### Output
+
+```text
+3.5
+```
+
+---
+
+## Test Case 4 — Mixed Integers and Decimals
+
+### Input
+
+```text
+5
+3 9.8 2 4.5 10
+```
+
+Sorted:
+
+```text
+2.0 3.0 4.5 9.8 10.0
+```
+
+### Output
+
+```text
+4.5
+```
+
+---
+
+## Test Case 5 — Negative Numbers
+
+### Input
+
+```text
+5
+-10 -20 -30 -40 -50
+```
+
+Sorted:
+
+```text
+-50 -40 -30 -20 -10
+```
+
+### Output
+
+```text
+-30.0
+```
+
+---
+
+## Test Case 6 — Duplicate Elements
+
+### Input
+
+```text
+6
+5 5 10 10 15 15
+```
+
+Sorted:
+
+```text
+5 5 10 10 15 15
+```
+
+The middle elements are:
+
+```text
+10 and 10
+```
+
+### Output
+
+```text
+10.0
+```
+
+---
+
+## Test Case 7 — Single Element
+
+### Input
+
+```text
+1
+9.8
+```
+
+### Output
+
+```text
+9.8
+```
+
+---
+
+# ⚠️ Important Edge Cases
+
+## 1. Single Element
+
+For:
+
+```text
+1
+25
+```
+
+the median is:
+
+```text
+25.0
+```
+
+---
+
+## 2. Two Elements
+
+For:
+
+```text
+2
+10 20
+```
+
+the median is:
+
+```text
+(10 + 20) / 2 = 15
+```
+
+Output:
+
+```text
+15.0
+```
+
+---
+
+## 3. Negative Numbers
+
+The algorithm works correctly with negative values.
+
+For:
+
+```text
+-10 -20 -30 -40 -50
+```
+
+after sorting:
+
+```text
+-50 -40 -30 -20 -10
+```
+
+The middle element is:
+
+```text
+-30
+```
+
+---
+
+## 4. Decimal Values
+
+Using:
+
+```python
+float
+```
+
+allows values such as:
+
+```text
+0.3 1.5 2.7 4.2
+```
+
+to be processed correctly.
+
+---
+
+## 5. Duplicate Values
+
+Duplicate values do not cause any problem.
+
+For:
+
+```text
+5 5 5 10 10
+```
+
+the median is:
+
+```text
+5.0
+```
+
+---
+
+# 🎯 Key DSA Pattern
+
+This problem teaches the:
+
+## **Sorting + Middle Element Pattern**
+
+The general idea is:
+
+```text
+Read Array
+     ↓
+Sort Array
+     ↓
+Check N
+     ↓
+ ┌───────────────┐
+ │               │
+Odd             Even
+ │               │
+ ↓               ↓
+One middle     Two middle
+element         elements
+ │               │
+ ↓               ↓
+Median          Average
+ │               │
+ └───────┬───────┘
+         ↓
+      Print Answer
+```
+
+The two formulas are:
+
+### Odd N
+
+```text
+Median = arr[N // 2]
+```
+
+### Even N
+
+```text
+Median = (arr[N // 2 - 1] + arr[N // 2]) / 2
+```
+
+---
+
+# 📚 What You Learn From This Problem
+
+By solving this problem, you practice:
+
+- Array input handling
+- Python lists
+- `input()`
+- `.split()`
+- `map()`
+- `float()` conversion
+- Array sorting
+- Zero-based indexing
+- Odd/even conditions
+- Finding middle elements
+- Arithmetic mean
+- Handling decimal values
+- Handling negative values
+- Handling duplicate values
+- Time complexity analysis
+- Space complexity analysis
+
+---
+
+# 🚀 TCS NQT Relevance
+
+This is a useful **array and sorting problem** for coding assessments such as **TCS NQT**.
+
+Although the basic median calculation is simple, it tests whether you understand:
+
+- Sorting
+- Array indexing
+- Odd/even cases
+- Conditional logic
+- Arithmetic operations
+- Edge cases
+- Complexity analysis
+
+### Problems Based on Similar Concepts
+
+- Find minimum and maximum
+- Find second largest element
+- Find second smallest element
+- Find mode of an array
+- Find frequency of elements
+- Find kth smallest element
+- Find kth largest element
+- Find percentile
+- Find middle element after sorting
+- Find statistics of an array
+
+### Recommended Thought Process During an Exam
+
+When you see a problem asking for a median:
+
+```text
+1. Does the median require the array to be ordered?
+        ↓
+2. Sort the array
+        ↓
+3. Is N odd or even?
+        ↓
+4. If odd, select one middle element
+        ↓
+5. If even, select two middle elements
+        ↓
+6. Calculate their average
+        ↓
+7. Check the required output format
+        ↓
+8. Analyze the complexity
+```
+
+For this problem:
+
+```text
+Sorting       → O(N log N)
+Odd N         → arr[N // 2]
+Even N        → Average of two middle elements
+Final Search  → O(1)
+Overall       → O(N log N)
+```
+
+---
+
+# 📌 Summary
+
+| Property | Value |
+|----------|-------|
+| Problem | Find Median of an Array |
+| Technique | Sorting + Middle Element |
+| Pattern | Odd/Even Middle Element |
+| Time Complexity | `O(N log N)` |
+| Median for Odd N | One middle element |
+| Median for Even N | Average of two middle elements |
+| Decimal Values | ✅ Supported |
+| Negative Values | ✅ Supported |
+| Duplicate Values | ✅ Supported |
+| Built-in `median()` Used | ❌ No |
+| Difficulty | Easy–Medium |
+| Language | Python |
+| Suitable For | DSA / Coding Assessments / TCS NQT |
+
+---
+
+## ⭐ Key Takeaway
+
+> **Sort the array first. If the number of elements is odd, the median is the middle element. If the number of elements is even, the median is the average of the two middle elements.**
+
+Remember:
+
+```text
+Sort
+  ↓
+Check N % 2
+  ↓
+Odd → One middle element
+  ↓
+Even → Average of two middle elements
+  ↓
+Print Median
+```
+
+The most important formulas are:
+
+```text
+Odd:
+Median = arr[N // 2]
+```
+
+```text
+Even:
+Median = (arr[N // 2 - 1] + arr[N // 2]) / 2
+```
+
+The core technique is:
+
+```text
+Sorting + Correct Indexing + Odd/Even Handling
+```
+
+with an overall time complexity of:
+
+```text
+O(N log N)
+```
