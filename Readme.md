@@ -1,1086 +1,484 @@
-# 1.🔢 Find the Smallest Element in an Array
+# 🧑‍💻 TCS NQT vs LeetCode — Python Input Handling Guide
 
-A simple and fundamental **array traversal problem** commonly used in coding assessments such as **TCS NQT**.
+When solving coding problems, one of the most important things to understand is **who is responsible for handling the input and output**.
 
-The objective is to find the **minimum/smallest element** present in a given array **without using Python's built-in `min()` function**.
+The same algorithm can require different Python code depending on whether the platform expects:
 
----
+* A **complete program**
+* A **function-based solution**
+* A **predefined class/method**
 
-## 📌 Problem Statement
-
-Given an array of `N` integers, find and print the **smallest element** in the array.
-
-### Input Format
-
-* The first line contains an integer `N`, representing the number of elements.
-* The second line contains `N` space-separated integers representing the array.
-
-### Output Format
-
-Print the smallest element present in the array.
+This guide explains the difference between **TCS NQT-style coding** and **LeetCode-style coding**.
 
 ---
 
-## 🧪 Example
+# 📌 Why Input Handling Matters
 
-### Input
+Consider a simple problem:
 
-```text
-5
-8 3 12 1 6
+> Given an array of integers, calculate the sum of all elements.
+
+The algorithm is:
+
+```python
+total = 0
+
+for num in arr:
+    total += num
 ```
 
-### Output
+However, the way we obtain `arr` and produce the answer depends on the coding platform.
+
+---
+
+# 🟢 1. Complete Program Format
+
+In a complete-program coding question, the problem provides an **Input Format** and **Output Format**.
+
+For example:
 
 ```text
-1
+Input:
+5
+10 20 30 40 50
+
+Output:
+150
+```
+
+Here, your program is responsible for reading the input and printing the output.
+
+### Python Code
+
+```python
+n = int(input())
+
+arr = list(map(int, input().split()))
+
+total = 0
+
+for num in arr:
+    total += num
+
+print(total)
 ```
 
 ### Explanation
 
-The given array is:
+The first line:
 
-```text
-8 3 12 1 6
+```python
+n = int(input())
 ```
 
-We compare each element with the current smallest value:
+reads the number of elements.
 
-```text
-8 → smallest = 8
-3 → smallest = 3
-12 → no change
-1 → smallest = 1
-6 → no change
+The second line:
+
+```python
+arr = list(map(int, input().split()))
 ```
 
-Therefore, the smallest element is:
+reads the array.
 
-```text
-1
+Then:
+
+```python
+total = 0
+
+for num in arr:
+    total += num
 ```
+
+calculates the sum.
+
+Finally:
+
+```python
+print(total)
+```
+
+prints the answer.
 
 ---
 
-# 💡 Approach
+# 🚀 2. TCS NQT-Style Coding
 
-We can solve this problem using **linear traversal** of the array.
+For a **TCS NQT programming question**, always follow the exact **Input Format** and **Output Format** given by that particular problem.
 
-### Step 1: Initialize the Minimum
+If the question expects a complete program and provides:
 
-Assume that the first element of the array is the smallest:
-
-```python
-smallest = arr[0]
+```text
+N
+Array Elements
 ```
 
-### Step 2: Traverse the Remaining Elements
-
-Start from the second element and compare every element with `smallest`.
-
-```python
-for i in range(1, n):
-```
-
-### Step 3: Update the Minimum
-
-If the current element is smaller than `smallest`, update the value:
-
-```python
-if arr[i] < smallest:
-    smallest = arr[i]
-```
-
-### Step 4: Print the Result
-
-After checking all elements:
-
-```python
-print(smallest)
-```
-
-The final value stored in `smallest` is the minimum element of the array.
-
----
-
-# 🧠 Algorithm
-
-1. Read the number of elements `N`.
-2. Read the array.
-3. Set `smallest = arr[0]`.
-4. Traverse the array from index `1` to `N - 1`.
-5. For every element:
-
-   * Compare the current element with `smallest`.
-   * If it is smaller, update `smallest`.
-6. Print `smallest`.
-
----
-
-# 💻 Python Code
+then you can use:
 
 ```python
 n = int(input())
 
 arr = list(map(int, input().split()))
 
-smallest = arr[0]
+total = 0
 
-for i in range(1, n):
-    if arr[i] < smallest:
-        smallest = arr[i]
+for num in arr:
+    total += num
 
-print(smallest)
+print(total)
 ```
 
----
+### Example
 
-# 🔍 Code Explanation
-
-## 1. Read the Size of the Array
-
-```python
-n = int(input())
-```
-
-`input()` reads the value as a string.
-
-`int()` converts it into an integer.
-
-For example:
+**Input:**
 
 ```text
 5
+10 20 30 40 50
 ```
 
-becomes:
+**Output:**
 
-```python
-n = 5
+```text
+150
 ```
 
 ---
 
-## 2. Read the Array
+# ⚠️ Important TCS NQT Rule
+
+Do **not** assume that every TCS NQT problem has exactly the same input format.
+
+The problem may instead provide different formats.
+
+## Format A — `N` Followed by Array
+
+```text
+5
+10 20 30 40 50
+```
+
+Use:
+
+```python
+n = int(input())
+arr = list(map(int, input().split()))
+```
+
+---
+
+## Format B — Array Only
+
+```text
+10 20 30 40 50
+```
+
+If the problem does not provide `N`, don't try to read it.
+
+Use:
 
 ```python
 arr = list(map(int, input().split()))
 ```
 
-This line performs three operations.
-
-### `input()`
-
-Reads the complete line:
-
-```text
-8 3 12 1 6
-```
-
-### `.split()`
-
-Splits the input into individual strings:
-
-```python
-["8", "3", "12", "1", "6"]
-```
-
-### `map(int, ...)`
-
-Converts each string into an integer:
-
-```python
-[8, 3, 12, 1, 6]
-```
-
-Finally, `list()` creates the Python list.
-
-So:
-
-```python
-arr = [8, 3, 12, 1, 6]
-```
-
 ---
 
-## 3. Assume the First Element Is the Smallest
+## Format C — Multiple Test Cases
 
-```python
-smallest = arr[0]
-```
-
-Initially:
-
-```text
-smallest = 8
-```
-
-We don't initialize `smallest` with `0` or another fixed value because the array may contain negative numbers.
-
-For example:
-
-```text
--10 -5 -20
-```
-
-The correct minimum is:
-
-```text
--20
-```
-
----
-
-## 4. Traverse the Array
-
-```python
-for i in range(1, n):
-```
-
-The loop starts from index `1` because the element at index `0` has already been stored in `smallest`.
-
-For:
-
-```python
-arr = [8, 3, 12, 1, 6]
-```
-
-the loop checks:
+If the problem provides the number of test cases:
 
 ```text
 3
-12
-1
-6
-```
-
----
-
-## 5. Compare the Current Element
-
-```python
-if arr[i] < smallest:
-```
-
-If the current element is smaller than the current minimum, we update it.
-
-For example:
-
-```text
-smallest = 8
-current = 3
-```
-
-Since:
-
-```text
-3 < 8
-```
-
-we update:
-
-```text
-smallest = 3
-```
-
----
-
-## 6. Update the Minimum
-
-```python
-smallest = arr[i]
-```
-
-This stores the newly discovered minimum value.
-
----
-
-## 7. Print the Answer
-
-```python
-print(smallest)
-```
-
-After the complete traversal, `smallest` contains the minimum element.
-
----
-
-# 📊 Dry Run
-
-Consider:
-
-```text
-N = 5
-Array = [8, 3, 12, 1, 6]
-```
-
-| Step    | Current Element | Smallest Before | Comparison | Smallest After |
-| ------- | --------------- | --------------- | ---------- | -------------- |
-| Initial | 8               | —               | —          | 8              |
-| 1       | 3               | 8               | 3 < 8 ✅    | 3              |
-| 2       | 12              | 3               | 12 < 3 ❌   | 3              |
-| 3       | 1               | 3               | 1 < 3 ✅    | 1              |
-| 4       | 6               | 1               | 6 < 1 ❌    | 1              |
-
-### Final Answer
-
-```text
-1
-```
-
----
-
-# ⏱️ Complexity Analysis
-
-## Time Complexity
-
-```text
-O(N)
-```
-
-We traverse the array once.
-
-If there are `N` elements, each element is checked at most once.
-
-Therefore:
-
-```text
-Time Complexity = O(N)
-```
-
-## Space Complexity
-
-```text
-O(1)
-```
-
-Apart from the input array, the algorithm only uses one additional variable:
-
-```python
-smallest
-```
-
-Therefore, the **auxiliary space complexity** is:
-
-```text
-O(1)
-```
-
-> **Note:** The input array itself requires `O(N)` memory. `O(1)` refers to the extra/auxiliary space used by the algorithm.
-
----
-
-# 🧪 Test Cases
-
-## Test Case 1 — Normal Case
-
-### Input
-
-```text
 5
-8 3 12 1 6
-```
-
-### Output
-
-```text
-1
-```
-
----
-
-## Test Case 2 — Negative Numbers
-
-### Input
-
-```text
-5
--4 -10 3 -2 7
-```
-
-### Output
-
-```text
--10
-```
-
----
-
-## Test Case 3 — All Elements Are Equal
-
-### Input
-
-```text
+1 2 3 4 5
 4
-5 5 5 5
-```
-
-### Output
-
-```text
-5
-```
-
----
-
-## Test Case 4 — Smallest Element at the Beginning
-
-### Input
-
-```text
-5
-1 8 12 6 9
-```
-
-### Output
-
-```text
-1
-```
-
----
-
-## Test Case 5 — Smallest Element at the End
-
-### Input
-
-```text
-5
-8 12 6 9 2
-```
-
-### Output
-
-```text
-2
-```
-
----
-
-# 🚫 Why Not Use `min()`?
-
-Python provides a built-in function:
-
-```python
-print(min(arr))
-```
-
-This works and also has `O(N)` time complexity.
-
-However, for **DSA preparation and coding assessments**, implementing the traversal manually is better practice.
-
-The same technique can be extended to problems such as:
-
-* Finding the largest element
-* Finding the second largest element
-* Finding the second smallest element
-* Counting elements
-* Calculating the sum
-* Finding element frequency
-* Searching for an element
-* Finding maximum/minimum values under conditions
-* Other array traversal problems
-
-The objective is not simply to obtain the answer, but to understand the **underlying algorithmic pattern**.
-
----
-
-# 🎯 Key DSA Pattern
-
-This problem teaches the:
-
-## **Linear Traversal / Running Minimum Pattern**
-
-The general idea is:
-
-```text
-Initialize an answer
-       ↓
-Traverse the array
-       ↓
-Compare current element with answer
-       ↓
-Update answer if necessary
-       ↓
-Return final answer
-```
-
-This pattern is one of the most important basic techniques for array-based coding problems.
-
----
-
-# 📚 What You Learn From This Problem
-
-By solving this problem, you practice:
-
-* Array input handling
-* Python lists
-* `input()`
-* `split()`
-* `map()`
-* Integer conversion
-* `for` loops
-* Conditional statements
-* Array indexing
-* Running minimum technique
-* Linear traversal
-* Time complexity analysis
-* Space complexity analysis
-
----
-
-# 🚀 TCS NQT Relevance
-
-This is a **basic-level array problem** and is useful for building the fundamentals required for coding assessments such as **TCS NQT**.
-
-Although the problem itself is simple, the underlying pattern is important because more difficult problems often use the same **single-pass traversal + running value** technique.
-
-### Recommended thought process during an exam
-
-When you see a problem asking for a minimum:
-
-```text
-1. What is the initial minimum?
-        ↓
-2. Can I scan the array once?
-        ↓
-3. What condition updates the minimum?
-        ↓
-4. What is the final complexity?
-```
-
-For this problem:
-
-```text
-Initial minimum → arr[0]
-Traversal       → O(N)
-Update          → if arr[i] < smallest
-Answer          → smallest
-```
-
----
-
-# 📌 Summary
-
-| Property              | Value                              |
-| --------------------- | ---------------------------------- |
-| Problem               | Find Smallest Element              |
-| Technique             | Linear Traversal                   |
-| Pattern               | Running Minimum                    |
-| Time Complexity       | `O(N)`                             |
-| Auxiliary Space       | `O(1)`                             |
-| Built-in `min()` Used | ❌ No                               |
-| Difficulty            | Easy                               |
-| Language              | Python                             |
-| Suitable For          | DSA / Coding Assessments / TCS NQT |
-
----
-
-## ⭐ Key Takeaway
-
-> **Initialize the answer with the first element, traverse the remaining elements, and update the answer whenever a smaller value is found.**
-
-This simple pattern is a foundation for solving many array problems efficiently.
-
-# 2. 🔢 Find the Largest Element in an Array
-
-A simple and fundamental **array traversal problem** commonly used in coding assessments such as **TCS NQT**.
-
-The objective is to find the **maximum/largest element** present in a given array **without using Python's built-in `max()` function**.
-
----
-
-## 📌 Problem Statement
-
-Given an array of `N` integers, find and print the **largest element** in the array.
-
-### Input Format
-
-* The first line contains an integer `N`, representing the number of elements.
-* The second line contains `N` space-separated integers representing the array.
-
-### Output Format
-
-Print the largest element present in the array.
-
----
-
-## 🧪 Example
-
-### Input
-
-```text
-5
-8 3 12 1 6
-```
-
-### Output
-
-```text
-12
-```
-
-### Explanation
-
-The given array is:
-
-```text
-8 3 12 1 6
-```
-
-We compare each element with the current largest value:
-
-```text
-8  → largest = 8
-3  → no change
-12 → largest = 12
-1  → no change
-6  → no change
-```
-
-Therefore, the largest element is:
-
-```text
-12
-```
-
----
-
-# 💡 Approach
-
-We can solve this problem using **linear traversal** of the array.
-
-The idea is simple:
-
-1. Assume the first element is the largest.
-2. Traverse the remaining elements.
-3. Compare each element with the current largest value.
-4. If a larger element is found, update `largest`.
-5. After traversing the entire array, `largest` contains the answer.
-
----
-
-## Step 1: Initialize the Maximum
-
-Assume that the first element of the array is the largest:
-
-```python
-largest = arr[0]
-```
-
----
-
-## Step 2: Traverse the Remaining Elements
-
-Start from the second element and compare every element with `largest`.
-
-```python
-for i in range(1, n):
-```
-
----
-
-## Step 3: Update the Maximum
-
-If the current element is greater than `largest`, update the value:
-
-```python
-if arr[i] > largest:
-    largest = arr[i]
-```
-
----
-
-## Step 4: Print the Result
-
-After checking all elements:
-
-```python
-print(largest)
-```
-
-The final value stored in `largest` is the maximum element of the array.
-
----
-
-# 🧠 Algorithm
-
-1. Read the number of elements `N`.
-2. Read the array.
-3. Set `largest = arr[0]`.
-4. Traverse the array from index `1` to `N - 1`.
-5. For every element:
-
-   * Compare the current element with `largest`.
-   * If it is greater, update `largest`.
-6. Print `largest`.
-
----
-
-# 💻 Python Code
-
-```python
-n = int(input())
-
-arr = list(map(int, input().split()))
-
-largest = arr[0]
-
-for i in range(1, n):
-    if arr[i] > largest:
-        largest = arr[i]
-
-print(largest)
-```
-
----
-
-# 🔍 Code Explanation
-
-## 1. Read the Size of the Array
-
-```python
-n = int(input())
-```
-
-`input()` reads the value as a string.
-
-`int()` converts it into an integer.
-
-For example:
-
-```text
-5
-```
-
-becomes:
-
-```python
-n = 5
-```
-
----
-
-## 2. Read the Array
-
-```python
-arr = list(map(int, input().split()))
-```
-
-This line performs three operations.
-
-### `input()`
-
-Reads the complete line:
-
-```text
-8 3 12 1 6
-```
-
-### `.split()`
-
-Splits the input into individual strings:
-
-```python
-["8", "3", "12", "1", "6"]
-```
-
-### `map(int, ...)`
-
-Converts each string into an integer:
-
-```python
-[8, 3, 12, 1, 6]
-```
-
-Finally, `list()` creates the Python list.
-
-So:
-
-```python
-arr = [8, 3, 12, 1, 6]
-```
-
----
-
-## 3. Assume the First Element Is the Largest
-
-```python
-largest = arr[0]
-```
-
-Initially:
-
-```text
-largest = 8
-```
-
-We don't initialize `largest` with `0` or another fixed value because the array may contain negative numbers.
-
-For example:
-
-```text
--10 -5 -20
-```
-
-The correct largest value is:
-
-```text
--5
-```
-
-If we initialized:
-
-```python
-largest = 0
-```
-
-the answer would incorrectly remain `0`.
-
-Therefore, using:
-
-```python
-largest = arr[0]
-```
-
-is the correct approach.
-
----
-
-## 4. Traverse the Array
-
-```python
-for i in range(1, n):
-```
-
-The loop starts from index `1` because the element at index `0` has already been stored in `largest`.
-
-For:
-
-```python
-arr = [8, 3, 12, 1, 6]
-```
-
-the loop checks:
-
-```text
+10 20 30 40
 3
-12
-1
+7 8 9
+```
+
+then the program needs to process each test case.
+
+Example:
+
+```python
+t = int(input())
+
+for _ in range(t):
+    n = int(input())
+    arr = list(map(int, input().split()))
+
+    # Solve the problem here
+```
+
+> **Important:** The exact structure of each test case must still be taken from the problem's Input Format. Don't assume every multi-test-case problem uses exactly these two lines.
+
+---
+
+# 🔵 3. LeetCode-Style Format
+
+LeetCode works differently.
+
+Instead of writing a complete program, the platform usually provides a **function or class**.
+
+For example:
+
+```python
+class Solution:
+    def arraySum(self, arr):
+```
+
+You should **not** write:
+
+```python
+n = int(input())
+arr = list(map(int, input().split()))
+```
+
+because LeetCode already provides the input through the function parameter.
+
+### Correct LeetCode Solution
+
+```python
+class Solution:
+    def arraySum(self, arr):
+
+        total = 0
+
+        for num in arr:
+            total += num
+
+        return total
+```
+
+Here:
+
+```python
+arr
+```
+
+is already provided by the platform.
+
+You only need to implement the algorithm.
+
+---
+
+# 🔄 `print()` vs `return`
+
+This is one of the most important differences.
+
+## Complete Program
+
+Use:
+
+```python
+print(total)
+```
+
+because your program is responsible for producing the output.
+
+---
+
+## Function-Based Platform
+
+Use:
+
+```python
+return total
+```
+
+because the platform's driver code generally handles the result.
+
+For example:
+
+```python
+def solve(arr):
+    total = 0
+
+    for num in arr:
+        total += num
+
+    return total
+```
+
+> The exact requirement depends on the platform. Follow the function's specified return contract.
+
+---
+
+# 🟡 4. Function-Based Questions
+
+Some platforms provide something like:
+
+```python
+def solve(arr):
+    # write your code here
+```
+
+In this case, don't create another input system.
+
+Use the provided parameter:
+
+```python
+def solve(arr):
+
+    total = 0
+
+    for num in arr:
+        total += num
+
+    return total
+```
+
+The important rule is:
+
+> **Do not change the provided function signature unless the platform explicitly allows it.**
+
+---
+
+# 🧠 Complete Program vs Function-Based Solution
+
+The same algorithm can look different depending on the platform.
+
+## Complete Program
+
+```python
+n = int(input())
+
+arr = list(map(int, input().split()))
+
+total = 0
+
+for num in arr:
+    total += num
+
+print(total)
+```
+
+---
+
+## Function-Based
+
+```python
+def solve(arr):
+
+    total = 0
+
+    for num in arr:
+        total += num
+
+    return total
+```
+
+---
+
+## LeetCode Class-Based
+
+```python
+class Solution:
+
+    def arraySum(self, arr):
+
+        total = 0
+
+        for num in arr:
+            total += num
+
+        return total
+```
+
+The **algorithm is the same**.
+
+Only the **input/output interface** changes.
+
+---
+
+# 📊 Quick Comparison
+
+| Feature                     | Complete Program                       | LeetCode / Function-Based     |
+| --------------------------- | -------------------------------------- | ----------------------------- |
+| Input handling              | You handle it                          | Platform handles it           |
+| `input()`                   | Usually required                       | Usually not required          |
+| `print()`                   | Usually required                       | Usually not required          |
+| `return`                    | Usually not the final output mechanism | Usually required              |
+| Function provided           | Not necessarily                        | Usually                       |
+| Class provided              | Usually no                             | Sometimes                     |
+| Follow problem's I/O format | ✅ Yes                                  | Function signature is primary |
+
+---
+
+# 💻 VS Code Practice
+
+When practicing a TCS NQT-style problem in VS Code, you can create:
+
+```text
+solution.py
+```
+
+For example:
+
+```python
+n = int(input())
+
+arr = list(map(int, input().split()))
+
+total = 0
+
+for num in arr:
+    total += num
+
+print(total)
+```
+
+Run it using:
+
+```bash
+python solution.py
+```
+
+Then enter custom input:
+
+```text
+5
+10 20 30 40 50
+```
+
+Output:
+
+```text
+150
+```
+
+---
+
+# 🧪 Testing With Custom Input
+
+## Test Case 1
+
+**Input:**
+
+```text
+5
+10 20 30 40 50
+```
+
+**Output:**
+
+```text
+150
+```
+
+---
+
+## Test Case 2
+
+**Input:**
+
+```text
 6
+10 -5 20 -10 15 -5
 ```
 
----
-
-## 5. Compare the Current Element
-
-```python
-if arr[i] > largest:
-```
-
-If the current element is greater than the current maximum, we update it.
-
-For example:
-
-```text
-largest = 8
-current = 12
-```
-
-Since:
-
-```text
-12 > 8
-```
-
-we update:
-
-```text
-largest = 12
-```
-
----
-
-## 6. Update the Maximum
-
-```python
-largest = arr[i]
-```
-
-This stores the newly discovered largest value.
-
-For example:
-
-```text
-Before:
-largest = 8
-
-Current element:
-12
-
-After:
-largest = 12
-```
-
----
-
-## 7. Print the Answer
-
-```python
-print(largest)
-```
-
-After the complete traversal, `largest` contains the maximum element.
-
----
-
-# 📊 Dry Run
-
-Consider:
-
-```text
-N = 5
-Array = [8, 3, 12, 1, 6]
-```
-
-| Step    | Current Element | Largest Before | Comparison | Largest After |
-| ------- | --------------- | -------------- | ---------- | ------------- |
-| Initial | 8               | —              | —          | 8             |
-| 1       | 3               | 8              | `3 > 8` ❌  | 8             |
-| 2       | 12              | 8              | `12 > 8` ✅ | 12            |
-| 3       | 1               | 12             | `1 > 12` ❌ | 12            |
-| 4       | 6               | 12             | `6 > 12` ❌ | 12            |
-
-### Final Answer
-
-```text
-12
-```
-
----
-
-# ⏱️ Complexity Analysis
-
-## Time Complexity
-
-```text
-O(N)
-```
-
-We traverse the array once.
-
-If there are `N` elements, each element is checked at most once.
-
-Therefore:
-
-```text
-Time Complexity = O(N)
-```
-
----
-
-## Space Complexity
-
-```text
-O(1)
-```
-
-Apart from the input array, the algorithm only uses one additional variable:
-
-```text
-largest
-```
-
-Therefore, the **auxiliary space complexity** is:
-
-```text
-O(1)
-```
-
-> **Note:** The input array itself requires `O(N)` memory. `O(1)` refers to the extra/auxiliary space used by the algorithm.
-
----
-
-# 🧪 Test Cases
-
-## Test Case 1 — Normal Case
-
-### Input
-
-```text
-5
-8 3 12 1 6
-```
-
-### Output
-
-```text
-12
-```
-
----
-
-## Test Case 2 — Negative Numbers
-
-### Input
-
-```text
-5
--4 -10 -3 -2 -7
-```
-
-### Output
-
-```text
--2
-```
-
----
-
-## Test Case 3 — All Elements Are Equal
-
-### Input
-
-```text
-4
-5 5 5 5
-```
-
-### Output
-
-```text
-5
-```
-
----
-
-## Test Case 4 — Largest Element at the Beginning
-
-### Input
-
-```text
-5
-20 8 12 6 9
-```
-
-### Output
-
-```text
-20
-```
-
----
-
-## Test Case 5 — Largest Element at the End
-
-### Input
-
-```text
-5
-8 12 6 9 25
-```
-
-### Output
+**Output:**
 
 ```text
 25
@@ -1088,4130 +486,209 @@ O(1)
 
 ---
 
-# 🚫 Why Not Use `max()`?
+## Test Case 3
 
-Python provides a built-in function for finding the largest element:
+**Input:**
+
+```text
+5
+0 0 0 0 0
+```
+
+**Output:**
+
+```text
+0
+```
+
+---
+
+# ⚠️ Common Mistakes
+
+## ❌ Mistake 1 — Using `input()` in LeetCode
+
+Incorrect:
 
 ```python
-print(max(arr))
+class Solution:
+    def arraySum(self, arr):
+
+        n = int(input())
+        arr = list(map(int, input().split()))
+
+        return sum(arr)
 ```
 
-This solution also has:
+The function already receives `arr`.
 
-```text
-Time Complexity = O(N)
-```
-
-However, the purpose of this problem is to practice the **underlying algorithm rather than relying on a built-in function**.
-
-Manually implementing the traversal helps strengthen your understanding of:
-
-* Array traversal
-* Comparisons
-* Running maximum
-* Loops
-* Time complexity
-* Space complexity
-
-This approach is particularly useful for **DSA preparation and coding assessments** where built-in functions may be restricted.
-
----
-
-# 🎯 Key DSA Pattern
-
-This problem teaches the fundamental:
-
-## **Running Maximum Pattern**
-
-The general idea is:
-
-```text
-Initialize maximum
-       ↓
-Traverse the array
-       ↓
-Compare current element with maximum
-       ↓
-If current element is larger
-       ↓
-Update maximum
-       ↓
-Continue until the array ends
-```
-
-In code:
+Correct:
 
 ```python
-largest = arr[0]
+class Solution:
+    def arraySum(self, arr):
 
-for i in range(1, n):
-    if arr[i] > largest:
-        largest = arr[i]
-```
+        total = 0
 
-This pattern is useful for many other problems involving:
+        for num in arr:
+            total += num
 
-* Maximum element
-* Minimum element
-* Second largest element
-* Second smallest element
-* Maximum difference
-* Top `K` elements
-* Running maximum/minimum
-* Array optimization problems
-
----
-
-# 📚 What You Learn From This Problem
-
-By solving this problem, you practice:
-
-* Array traversal
-* Python lists
-* `input()`
-* `.split()`
-* `map()`
-* Integer conversion
-* `for` loops
-* Conditional statements
-* Indexing
-* Running maximum
-* Handling negative numbers
-* Time complexity
-* Space complexity
-* Single-pass algorithms
-
----
-
-# 🚀 TCS NQT Relevance
-
-Finding the largest element is one of the simplest array problems, but the underlying **running maximum pattern** appears in many more difficult problems.
-
-Understanding this pattern gives you a foundation for:
-
-* Second largest element
-* Second smallest element
-* Maximum difference
-* Kth largest element
-* Kth smallest element
-* Top two elements
-* Maximum subarray-related problems
-* Array optimization problems
-
-### Recommended Thought Process During an Exam
-
-When you see a problem asking for the maximum element:
-
-```text
-1. Do I need to sort the array?
-        ↓
-2. Can I solve it with one traversal?
-        ↓
-3. What should my initial maximum be?
-        ↓
-4. Can the array contain negative numbers?
-        ↓
-5. When should I update the maximum?
-        ↓
-6. What is the final complexity?
-```
-
-For this problem:
-
-```text
-Initial Maximum → arr[0]
-
-Traversal       → O(N)
-
-Auxiliary Space → O(1)
-
-Sorting         → Not Required
+        return total
 ```
 
 ---
 
-# 📌 Summary
+## ❌ Mistake 2 — Using `return` Instead of `print()` in a Complete Program
 
-| Property                  | Value                              |
-| ------------------------- | ---------------------------------- |
-| **Problem**               | Find Largest Element               |
-| **Technique**             | Linear Traversal                   |
-| **Pattern**               | Running Maximum                    |
-| **Time Complexity**       | `O(N)`                             |
-| **Auxiliary Space**       | `O(1)`                             |
-| **Sorting Used**          | ❌ No                               |
-| **Built-in `max()` Used** | ❌ No                               |
-| **Difficulty**            | Easy                               |
-| **Language**              | Python                             |
-| **Suitable For**          | DSA / Coding Assessments / TCS NQT |
-
----
-
-## ⭐ Key Takeaway
-
-> **You do not need to sort an array to find its largest element. Initialize the first element as the current maximum and scan the remaining elements once. Whenever a larger value is found, update the maximum.**
-
-The core pattern is:
-
-```text
-Current Element
-      ↓
-Compare with largest
-      ↓
-Is it larger?
-   ↙       ↘
- Yes        No
- ↓           ↓
-Update     Continue
-largest    traversal
-```
-
-Therefore:
-
-```text
-Time Complexity  → O(N)
-Auxiliary Space  → O(1)
-```
-
-This simple **running maximum / single-pass technique** is one of the most important foundations for solving array-based DSA problems efficiently.
-
-
-# 3.🔢 Find the Second Largest and Second Smallest Element in an Array
-
-A fundamental **array traversal problem** commonly used in coding assessments such as **TCS NQT**.
-
-The objective is to find the **second largest** and **second smallest distinct elements** in an array **without using Python's built-in sorting functions**.
-
-The problem can be solved efficiently using a **single traversal** of the array.
-
----
-
-## 📌 Problem Statement
-
-Given an array of `N` integers, find and print:
-
-* The **second largest distinct element**
-* The **second smallest distinct element**
-
-### Input Format
-
-* The first line contains an integer `N`, representing the number of elements.
-* The second line contains `N` space-separated integers representing the array.
-
-### Output Format
-
-Print the second largest and second smallest distinct elements.
-
----
-
-## 🧪 Example
-
-### Input
-
-```text
-6
-10 5 8 20 3 15
-```
-
-### Output
-
-```text
-Second Largest: 15
-Second Smallest: 5
-```
-
-### Explanation
-
-Given array:
-
-```text
-10 5 8 20 3 15
-```
-
-If the elements were sorted:
-
-```text
-3 5 8 10 15 20
-```
-
-Therefore:
-
-```text
-Largest = 20
-Second Largest = 15
-
-Smallest = 3
-Second Smallest = 5
-```
-
-Final result:
-
-```text
-Second Largest: 15
-Second Smallest: 5
-```
-
----
-
-# 💡 Approach
-
-Instead of sorting the array, maintain four variables while traversing it:
-
-```text
-largest
-second_largest
-smallest
-second_smallest
-```
-
-During each iteration:
-
-* If a new **largest** value is found, the previous largest becomes the second largest.
-* If a new **smallest** value is found, the previous smallest becomes the second smallest.
-* Intermediate values are checked to determine whether they should become the second largest or second smallest.
-* Duplicate values are ignored so that the result contains **distinct elements**.
-
-This gives an optimal:
-
-```text
-Time Complexity: O(N)
-```
-
----
-
-# 🧠 Algorithm
-
-1. Read the number of elements `N`.
-2. Read the array.
-3. Initialize:
-
-   * `largest = -∞`
-   * `second_largest = -∞`
-   * `smallest = +∞`
-   * `second_smallest = +∞`
-4. Traverse every element of the array.
-5. For the largest values:
-
-   * If the current element is greater than `largest`:
-
-     * Move `largest` to `second_largest`.
-     * Update `largest`.
-   * Otherwise, if the current element is greater than `second_largest` and different from `largest`, update `second_largest`.
-6. For the smallest values:
-
-   * If the current element is smaller than `smallest`:
-
-     * Move `smallest` to `second_smallest`.
-     * Update `smallest`.
-   * Otherwise, if the current element is smaller than `second_smallest` and different from `smallest`, update `second_smallest`.
-7. Print the second largest and second smallest values.
-
----
-
-# 💻 Python Code
+If the question expects a complete program:
 
 ```python
 n = int(input())
-
 arr = list(map(int, input().split()))
 
-largest = float('-inf')
-second_largest = float('-inf')
-
-smallest = float('inf')
-second_smallest = float('inf')
+total = 0
 
 for num in arr:
+    total += num
 
-    # Find largest and second largest
-    if num > largest:
-        second_largest = largest
-        largest = num
+return total
+```
 
-    elif num > second_largest and num != largest:
-        second_largest = num
+This is incorrect because `return` cannot be used outside a function.
 
-    # Find smallest and second smallest
-    if num < smallest:
-        second_smallest = smallest
-        smallest = num
+Use:
 
-    elif num < second_smallest and num != smallest:
-        second_smallest = num
-
-print("Second Largest:", second_largest)
-print("Second Smallest:", second_smallest)
+```python
+print(total)
 ```
 
 ---
 
-# 🔍 Code Explanation
+## ❌ Mistake 3 — Assuming Every TCS Question Has `N`
 
-## 1. Read the Size of the Array
+Don't automatically write:
 
 ```python
 n = int(input())
 ```
 
-`input()` reads the value as a string, while `int()` converts it into an integer.
+Read the problem statement first.
 
-For example:
-
-```text
-6
-```
-
-becomes:
-
-```python
-n = 6
-```
-
----
-
-## 2. Read the Array
-
-```python
-arr = list(map(int, input().split()))
-```
-
-This performs three operations.
-
-### `input()`
-
-Reads the complete line:
-
-```text
-10 5 8 20 3 15
-```
-
-### `.split()`
-
-Splits the input into individual strings:
-
-```python
-["10", "5", "8", "20", "3", "15"]
-```
-
-### `map(int, ...)`
-
-Converts each string into an integer:
-
-```python
-[10, 5, 8, 20, 3, 15]
-```
-
-Finally, `list()` creates the Python list.
-
-So:
-
-```python
-arr = [10, 5, 8, 20, 3, 15]
-```
-
----
-
-# 🏆 Finding the Largest and Second Largest
-
-## 3. Initialize the Variables
-
-```python
-largest = float('-inf')
-second_largest = float('-inf')
-```
-
-`float('-inf')` represents **negative infinity**.
-
-This is important because the array may contain negative numbers.
-
-For example:
-
-```text
--10 -5 -20 -3
-```
-
-If we initialized:
-
-```python
-largest = 0
-```
-
-the algorithm would fail because every value is smaller than `0`.
-
-Using:
-
-```python
-largest = float('-inf')
-```
-
-allows the algorithm to work correctly with both positive and negative numbers.
-
----
-
-## 4. Traverse the Array
-
-```python
-for num in arr:
-```
-
-This loop visits every element of the array.
-
-For:
-
-```python
-[10, 5, 8, 20, 3, 15]
-```
-
-the values of `num` are:
-
-```text
-10
-5
-8
-20
-3
-15
-```
-
----
-
-## 5. Find the Largest Element
-
-```python
-if num > largest:
-```
-
-If the current number is greater than the current largest value, we have found a new largest element.
-
----
-
-## 6. Move the Previous Largest to Second Largest
-
-```python
-second_largest = largest
-largest = num
-```
-
-Suppose:
-
-```text
-largest = 10
-num = 20
-```
-
-Since:
-
-```text
-20 > 10
-```
-
-the previous largest becomes the second largest:
-
-```text
-second_largest = 10
-largest = 20
-```
-
-This is a key step in the single-pass algorithm.
-
----
-
-## 7. Update the Second Largest
-
-```python
-elif num > second_largest and num != largest:
-    second_largest = num
-```
-
-This checks whether the current element should become the second largest.
-
-For example:
-
-```text
-largest = 20
-second_largest = 10
-num = 15
-```
-
-Since:
-
-```text
-15 > 10
-```
-
-and:
-
-```text
-15 != 20
-```
-
-we update:
-
-```text
-second_largest = 15
-```
-
----
-
-# 🥇 Finding the Smallest and Second Smallest
-
-## 8. Initialize the Variables
-
-```python
-smallest = float('inf')
-second_smallest = float('inf')
-```
-
-`float('inf')` represents **positive infinity**.
-
-This allows the algorithm to correctly handle both negative and positive numbers.
-
----
-
-## 9. Find the Smallest Element
-
-```python
-if num < smallest:
-```
-
-If the current element is smaller than the current smallest value, we have found a new smallest element.
-
----
-
-## 10. Move the Previous Smallest to Second Smallest
-
-```python
-second_smallest = smallest
-smallest = num
-```
-
-For example:
-
-```text
-smallest = 10
-num = 3
-```
-
-Since:
-
-```text
-3 < 10
-```
-
-we update:
-
-```text
-second_smallest = 10
-smallest = 3
-```
-
----
-
-## 11. Update the Second Smallest
-
-```python
-elif num < second_smallest and num != smallest:
-    second_smallest = num
-```
-
-This checks whether the current number should become the second smallest distinct value.
-
-For example:
-
-```text
-smallest = 3
-second_smallest = 10
-num = 5
-```
-
-Since:
-
-```text
-5 < 10
-```
-
-and:
-
-```text
-5 != 3
-```
-
-we update:
-
-```text
-second_smallest = 5
-```
-
----
-
-# 📊 Dry Run
-
-Consider:
-
-```text
-N = 6
-Array = [10, 5, 8, 20, 3, 15]
-```
-
-## 🏆 Largest / Second Largest
-
-| Step | Number | Largest | Second Largest |
-| ---- | ------ | ------- | -------------- |
-| 1    | 10     | 10      | -∞             |
-| 2    | 5      | 10      | 5              |
-| 3    | 8      | 10      | 8              |
-| 4    | 20     | 20      | 10             |
-| 5    | 3      | 20      | 10             |
-| 6    | 15     | 20      | 15             |
-
-Final values:
-
-```text
-Largest = 20
-Second Largest = 15
-```
-
----
-
-## 🥇 Smallest / Second Smallest
-
-| Step | Number | Smallest | Second Smallest |
-| ---- | ------ | -------- | --------------- |
-| 1    | 10     | 10       | +∞              |
-| 2    | 5      | 5        | 10              |
-| 3    | 8      | 5        | 8               |
-| 4    | 20     | 5        | 8               |
-| 5    | 3      | 3        | 5               |
-| 6    | 15     | 3        | 5               |
-
-Final values:
-
-```text
-Smallest = 3
-Second Smallest = 5
-```
-
-Therefore:
-
-```text
-Second Largest: 15
-Second Smallest: 5
-```
-
----
-
-# 🔁 Why Do We Check `num != largest`?
-
-Consider:
-
-```text
-10 10 8 5
-```
-
-If duplicate values were allowed to become the second largest:
-
-```text
-Largest = 10
-Second Largest = 10
-```
-
-But the problem asks for **distinct** values.
-
-Therefore:
-
-```text
-Largest = 10
-Second Largest = 8
-```
-
-That's why we use:
-
-```python
-num != largest
-```
-
-Similarly, for the second smallest:
-
-```python
-num != smallest
-```
-
-prevents duplicate values from being counted twice.
-
----
-
-# 🚫 Why Not Sort the Array?
-
-A straightforward solution would be:
-
-```python
-arr.sort()
-```
-
-Sorting could then be used to find the second smallest and second largest elements.
-
-However, sorting requires:
-
-```text
-O(N log N)
-```
-
-time.
-
-Our approach only requires:
-
-```text
-O(N)
-```
-
-time.
-
-### Comparison
-
-| Approach         | Time Complexity | Auxiliary Space           |
-| ---------------- | --------------- | ------------------------- |
-| Sorting          | `O(N log N)`    | Depends on implementation |
-| Linear Traversal | `O(N)`          | `O(1)`                    |
-
-For coding assessments such as **TCS NQT**, the single-pass approach is preferable when an `O(N)` solution is possible.
-
----
-
-# ⏱️ Complexity Analysis
-
-## Time Complexity
-
-```text
-O(N)
-```
-
-The array is traversed exactly once.
-
-Each element requires only a constant number of comparisons and assignments.
-
-Therefore:
-
-```text
-Time Complexity = O(N)
-```
-
----
-
-## Space Complexity
-
-```text
-O(1)
-```
-
-The algorithm uses only four additional variables:
-
-```text
-largest
-second_largest
-smallest
-second_smallest
-```
-
-Therefore, the **auxiliary space complexity** is:
-
-```text
-O(1)
-```
-
-> **Note:** The input array itself requires `O(N)` memory. `O(1)` refers to the additional/auxiliary space used by the algorithm.
-
----
-
-# 🧪 Test Cases
-
-## Test Case 1 — Normal Case
-
-### Input
-
-```text
-6
-10 5 8 20 3 15
-```
-
-### Output
-
-```text
-Second Largest: 15
-Second Smallest: 5
-```
-
----
-
-## Test Case 2 — Negative Numbers
-
-### Input
-
-```text
-6
--10 -5 -20 -3 -15 -8
-```
-
-### Output
-
-```text
-Second Largest: -5
-Second Smallest: -15
-```
-
----
-
-## Test Case 3 — Duplicate Elements
-
-### Input
-
-```text
-7
-10 10 8 8 5 5 3
-```
-
-### Output
-
-```text
-Second Largest: 8
-Second Smallest: 5
-```
-
----
-
-## Test Case 4 — Unsorted Array
-
-### Input
-
-```text
-6
-50 10 30 70 20 60
-```
-
-### Output
-
-```text
-Second Largest: 60
-Second Smallest: 20
-```
-
----
-
-## Test Case 5 — Positive and Negative Numbers
-
-### Input
-
-```text
-7
--10 25 -5 40 15 -20 30
-```
-
-### Output
-
-```text
-Second Largest: 30
-Second Smallest: -10
-```
-
----
-
-# ⚠️ Important Edge Case
-
-If the array does not contain at least **two distinct values**, a second largest or second smallest element does not exist.
-
-For example:
-
-```text
-4
-5 5 5 5
-```
-
-There is only one distinct value:
-
-```text
-5
-```
-
-Therefore:
-
-```text
-Second Largest  → Does not exist
-Second Smallest → Does not exist
-```
-
-A production-ready implementation should handle this case explicitly.
-
-For coding assessments, always read the problem statement carefully to determine what output is expected when a second distinct value does not exist.
-
----
-
-# 🎯 Key DSA Pattern
-
-This problem teaches the:
-
-## **Single Traversal / Running Maximum and Minimum Pattern**
-
-Instead of sorting the array, maintain the best candidates while traversing.
-
-```text
-                 Array
-                   ↓
-          ┌────────┴────────┐
-          ↓                 ↓
-   Largest Side      Smallest Side
-          ↓                 ↓
-      largest           smallest
-   second_largest    second_smallest
-```
-
-The general idea is:
-
-```text
-Read an element
-      ↓
-Check if it is a new largest
-      ↓
-Update largest / second largest
-      ↓
-Check if it is a new smallest
-      ↓
-Update smallest / second smallest
-```
-
----
-
-# 📚 What You Learn From This Problem
-
-By solving this problem, you practice:
-
-* Array traversal
-* Python lists
-* `input()`
-* `.split()`
-* `map()`
-* Integer conversion
-* `for` loops
-* Conditional statements
-* Multiple variable tracking
-* `float('inf')`
-* `float('-inf')`
-* Handling duplicate values
-* Finding distinct values
-* Running maximum
-* Running minimum
-* Time complexity analysis
-* Space complexity analysis
-* Single-pass algorithms
-
----
-
-# 🚀 TCS NQT Relevance
-
-This problem is more useful than simply finding the largest or smallest element because it requires maintaining **multiple values simultaneously**.
-
-It builds the foundation for problems involving:
-
-* Second largest element
-* Second smallest element
-* Third largest element
-* Kth largest element
-* Kth smallest element
-* Maximum and minimum differences
-* Finding top two values
-* Finding bottom two values
-* Array optimization problems
-
-### Recommended Thought Process During an Exam
-
-When you see a problem asking for the second largest or second smallest:
-
-```text
-1. Do I need distinct values?
-        ↓
-2. Can I solve it without sorting?
-        ↓
-3. What variables do I need to maintain?
-        ↓
-4. What happens when a new maximum/minimum is found?
-        ↓
-5. How should duplicates be handled?
-        ↓
-6. What is the final complexity?
-```
-
-For this problem:
-
-```text
-Largest          → largest
-Second Largest   → second_largest
-
-Smallest        → smallest
-Second Smallest → second_smallest
-
-Traversal       → O(N)
-Auxiliary Space → O(1)
-```
-
----
-
-# 📌 Summary
-
-| Property             | Value                              |
-| -------------------- | ---------------------------------- |
-| **Problem**          | Second Largest & Second Smallest   |
-| **Technique**        | Linear Traversal                   |
-| **Pattern**          | Running Maximum & Minimum          |
-| **Time Complexity**  | `O(N)`                             |
-| **Auxiliary Space**  | `O(1)`                             |
-| **Sorting Used**     | ❌ No                               |
-| **Duplicate Values** | Handled                            |
-| **Distinct Values**  | ✅ Yes                              |
-| **Difficulty**       | Easy–Medium                        |
-| **Language**         | Python                             |
-| **Suitable For**     | DSA / Coding Assessments / TCS NQT |
-
----
-
-## ⭐ Key Takeaway
-
-> **Maintain the largest, second largest, smallest, and second smallest values while traversing the array once. This avoids sorting and reduces the time complexity to `O(N)`.**
-
-The key pattern to remember is:
-
-```text
-New largest found
-       ↓
-Old largest → second largest
-New value   → largest
-```
-
-and:
-
-```text
-New smallest found
-       ↓
-Old smallest → second smallest
-New value    → smallest
-```
-
-This **single-pass technique** is an important foundation for more advanced array and optimization problems.
-
-# 4.🔄 Reverse the Given Array
-
-A fundamental **array manipulation problem** commonly useful for coding assessments such as **TCS NQT**.
-
-The objective is to reverse the elements of a given array **in-place** without using Python's built-in `reverse()` function or array slicing.
-
-The problem can be solved efficiently using the **two-pointer approach**.
-
----
-
-## 📌 Problem Statement
-
-Given an array of `N` integers, reverse the elements of the array and print the reversed array.
-
-### Input Format
-
-* The first line contains an integer `N`, representing the number of elements.
-* The second line contains `N` space-separated integers representing the array.
-
-### Output Format
-
-Print the elements of the array in reverse order.
-
----
-
-# 🧪 Example
-
-### Input
-
-```text
-5
-10 20 30 40 50
-```
-
-### Output
-
-```text
-50 40 30 20 10
-```
-
-### Explanation
-
-The given array is:
+If the input is only:
 
 ```text
 10 20 30 40 50
-```
-
-We reverse the array by swapping elements from both ends:
-
-```text
-10 20 30 40 50
-↑           ↑
-L           R
-```
-
-Swap `10` and `50`:
-
-```text
-50 20 30 40 10
-```
-
-Move the pointers towards the center:
-
-```text
-50 20 30 40 10
-   ↑       ↑
-   L       R
-```
-
-Swap `20` and `40`:
-
-```text
-50 40 30 20 10
-```
-
-The pointers meet at the middle, so the reversal is complete.
-
-Therefore, the reversed array is:
-
-```text
-50 40 30 20 10
-```
-
----
-
-# 💡 Approach
-
-We can solve this problem using the **two-pointer approach**.
-
-Instead of creating another array, we use two pointers:
-
-```text
-left
-right
-```
-
-The `left` pointer starts at the beginning of the array, while the `right` pointer starts at the end.
-
-We repeatedly swap the elements at these two positions and move both pointers towards the center.
-
-This allows us to reverse the array **in-place**.
-
----
-
-# 🧠 Algorithm
-
-1. Read the number of elements `N`.
-2. Read the array.
-3. Initialize:
-
-   * `left = 0`
-   * `right = N - 1`
-4. Repeat while `left < right`:
-
-   * Swap `arr[left]` and `arr[right]`.
-   * Increment `left`.
-   * Decrement `right`.
-5. Print the reversed array.
-
----
-
-# 💻 Python Code
-
-```python
-n = int(input())
-
-arr = list(map(int, input().split()))
-
-left = 0
-right = n - 1
-
-while left < right:
-    arr[left], arr[right] = arr[right], arr[left]
-
-    left += 1
-    right -= 1
-
-print(*arr)
-```
-
----
-
-# 🔍 Code Explanation
-
-## 1. Read the Size of the Array
-
-```python
-n = int(input())
-```
-
-`input()` reads the value as a string.
-
-`int()` converts it into an integer.
-
-For example:
-
-```text
-5
-```
-
-becomes:
-
-```python
-n = 5
-```
-
----
-
-## 2. Read the Array
-
-```python
-arr = list(map(int, input().split()))
-```
-
-This line performs three operations.
-
-### `input()`
-
-Reads the complete line:
-
-```text
-10 20 30 40 50
-```
-
-### `.split()`
-
-Splits the input into individual strings:
-
-```python
-["10", "20", "30", "40", "50"]
-```
-
-### `map(int, ...)`
-
-Converts each string into an integer:
-
-```python
-[10, 20, 30, 40, 50]
-```
-
-Finally, `list()` creates the Python list.
-
-So:
-
-```python
-arr = [10, 20, 30, 40, 50]
-```
-
----
-
-# 🔄 Two-Pointer Approach
-
-## 3. Initialize the Left Pointer
-
-```python
-left = 0
-```
-
-The `left` pointer starts at the first index of the array.
-
-For:
-
-```text
-[10, 20, 30, 40, 50]
-```
-
-we have:
-
-```text
-left = 0
-```
-
-which points to:
-
-```text
-10
-```
-
----
-
-## 4. Initialize the Right Pointer
-
-```python
-right = n - 1
-```
-
-The `right` pointer starts at the last index.
-
-If:
-
-```text
-n = 5
 ```
 
 then:
 
-```text
-right = 4
-```
-
-So the pointer points to:
-
-```text
-50
-```
-
-The initial state is:
-
-```text
-10 20 30 40 50
-↑           ↑
-L           R
-```
-
----
-
-## 5. Continue While the Pointers Have Not Crossed
-
-```python
-while left < right:
-```
-
-The loop continues as long as the `left` pointer is before the `right` pointer.
-
-Once:
-
-```text
-left >= right
-```
-
-all required swaps have been completed.
-
----
-
-## 6. Swap the Elements
-
-```python
-arr[left], arr[right] = arr[right], arr[left]
-```
-
-This swaps the elements at the two pointer positions.
-
-For example:
-
-```text
-10 20 30 40 50
-↑           ↑
-L           R
-```
-
-After the swap:
-
-```text
-50 20 30 40 10
-```
-
-Python allows both values to be swapped in a single statement without using a temporary variable.
-
----
-
-## 7. Move the Left Pointer
-
-```python
-left += 1
-```
-
-After the first swap, move the `left` pointer one position towards the center.
-
-For example:
-
-```text
-50 20 30 40 10
-   ↑
-   L
-```
-
----
-
-## 8. Move the Right Pointer
-
-```python
-right -= 1
-```
-
-Similarly, move the `right` pointer one position towards the center.
-
-The pointers now become:
-
-```text
-50 20 30 40 10
-   ↑       ↑
-   L       R
-```
-
----
-
-## 9. Print the Reversed Array
-
-```python
-print(*arr)
-```
-
-The `*` operator unpacks the list elements.
-
-Instead of printing:
-
-```text
-[50, 40, 30, 20, 10]
-```
-
-it prints:
-
-```text
-50 40 30 20 10
-```
-
-which matches the required output format.
-
----
-
-# 📊 Dry Run
-
-Consider:
-
-```text
-N = 5
-Array = [10, 20, 30, 40, 50]
-```
-
-## Initial State
-
-```text
-10 20 30 40 50
-↑           ↑
-L           R
-```
-
-```text
-left = 0
-right = 4
-```
-
----
-
-## Step 1
-
-Swap:
-
-```text
-10 ↔ 50
-```
-
-Array becomes:
-
-```text
-50 20 30 40 10
-```
-
-Move pointers:
-
-```text
-left = 1
-right = 3
-```
-
----
-
-## Step 2
-
-Current array:
-
-```text
-50 20 30 40 10
-   ↑       ↑
-   L       R
-```
-
-Swap:
-
-```text
-20 ↔ 40
-```
-
-Array becomes:
-
-```text
-50 40 30 20 10
-```
-
-Move pointers:
-
-```text
-left = 2
-right = 2
-```
-
----
-
-## Step 3
-
-Now:
-
-```text
-left = 2
-right = 2
-```
-
-The condition:
-
-```text
-left < right
-```
-
-is false.
-
-The loop terminates.
-
-### Final Array
-
-```text
-50 40 30 20 10
-```
-
----
-
-# 🔁 Visual Representation
-
-The two-pointer process can be represented as:
-
-```text
-Initial:
-
-10  20  30  40  50
-↑                   ↑
-L                   R
-
-
-After Swap 1:
-
-50  20  30  40  10
-    ↑           ↑
-    L           R
-
-
-After Swap 2:
-
-50  40  30  20  10
-        ↑   ↑
-        L   R
-
-
-Pointers meet:
-
-50  40  30  20  10
-        ↑
-      L = R
-```
-
-The array is now completely reversed.
-
----
-
-# 🚫 Why Not Use `reverse()`?
-
-Python provides a built-in method:
-
-```python
-arr.reverse()
-```
-
-We could also use slicing:
-
-```python
-arr = arr[::-1]
-```
-
-Both approaches are valid Python.
-
-However, for **DSA preparation and coding assessments**, implementing the reversal manually is better practice because it teaches the **two-pointer technique**.
-
-The two-pointer pattern can be reused in many problems involving:
-
-* Array reversal
-* String reversal
-* Palindrome checking
-* Pair-sum problems
-* Two-pointer searching
-* In-place array manipulation
-* Partitioning problems
-
-The objective is to understand the underlying algorithm rather than simply use a built-in function.
-
----
-
-# 🎯 Key DSA Pattern
-
-This problem teaches the:
-
-## **Two-Pointer Technique**
-
-The general idea is:
-
-```text
-Initialize two pointers
-       ↓
-Left → beginning
-Right → end
-       ↓
-Compare / Swap / Process
-       ↓
-Move Left forward
-Move Right backward
-       ↓
-Repeat until pointers meet
-```
-
-For this problem:
-
-```text
-left  → 0
-right → N - 1
-```
-
-Then:
-
-```text
-arr[left] ↔ arr[right]
-```
-
-followed by:
-
-```text
-left += 1
-right -= 1
-```
-
-This continues until:
-
-```text
-left >= right
-```
-
----
-
-# ⏱️ Complexity Analysis
-
-## Time Complexity
-
-```text
-O(N)
-```
-
-Each element is processed at most once.
-
-Although the loop performs approximately `N / 2` swaps, constants are ignored in Big-O notation.
-
-Therefore:
-
-```text
-Time Complexity = O(N)
-```
-
----
-
-## Space Complexity
-
-```text
-O(1)
-```
-
-The array is reversed **in-place**.
-
-We only use two pointer variables:
-
-```text
-left
-right
-```
-
-No additional array is created.
-
-Therefore, the **auxiliary space complexity** is:
-
-```text
-O(1)
-```
-
-> **Note:** The input array itself requires `O(N)` memory. `O(1)` refers to the additional/auxiliary space used by the reversal algorithm.
-
----
-
-# 🧪 Test Cases
-
-## Test Case 1 — Normal Case
-
-### Input
-
-```text
-5
-10 20 30 40 50
-```
-
-### Output
-
-```text
-50 40 30 20 10
-```
-
----
-
-## Test Case 2 — Even Number of Elements
-
-### Input
-
-```text
-6
-1 2 3 4 5 6
-```
-
-### Output
-
-```text
-6 5 4 3 2 1
-```
-
----
-
-## Test Case 3 — Odd Number of Elements
-
-### Input
-
-```text
-5
-1 2 3 4 5
-```
-
-### Output
-
-```text
-5 4 3 2 1
-```
-
----
-
-## Test Case 4 — Negative Numbers
-
-### Input
-
-```text
-5
--10 -20 -30 -40 -50
-```
-
-### Output
-
-```text
--50 -40 -30 -20 -10
-```
-
----
-
-## Test Case 5 — Duplicate Elements
-
-### Input
-
-```text
-6
-10 20 10 30 20 10
-```
-
-### Output
-
-```text
-10 20 30 10 20 10
-```
-
----
-
-## Test Case 6 — Single Element
-
-### Input
-
-```text
-1
-25
-```
-
-### Output
-
-```text
-25
-```
-
-A single-element array is already reversed.
-
----
-
-# ⚠️ Important Edge Cases
-
-## 1. Single Element
-
-```text
-[10]
-```
-
-The array remains:
-
-```text
-[10]
-```
-
-No swap is required.
-
----
-
-## 2. Two Elements
-
-```text
-[10, 20]
-```
-
-After one swap:
-
-```text
-[20, 10]
-```
-
----
-
-## 3. Duplicate Elements
-
-For:
-
-```text
-[5, 10, 5, 20, 10]
-```
-
-the reversal is performed normally.
-
-Duplicates do not require any special handling.
-
----
-
-## 4. Negative Numbers
-
-The algorithm works exactly the same way for negative values.
-
-For:
-
-```text
-[-5, -10, -15]
-```
-
-the result is:
-
-```text
-[-15, -10, -5]
-```
-
----
-
-# 📚 What You Learn From This Problem
-
-By solving this problem, you practice:
-
-* Array input handling
-* Python lists
-* `input()`
-* `.split()`
-* `map()`
-* Integer conversion
-* Array indexing
-* `while` loops
-* Multiple pointer variables
-* Two-pointer technique
-* Swapping elements
-* In-place array manipulation
-* `print(*arr)`
-* Time complexity analysis
-* Space complexity analysis
-
----
-
-# 🚀 TCS NQT Relevance
-
-This is an important **basic array manipulation problem** because it introduces the **two-pointer technique**.
-
-The technique is useful for solving more advanced coding problems efficiently.
-
-### Recommended Thought Process During an Exam
-
-When you see a problem asking you to reverse an array:
-
-```text
-1. Can I reverse it in-place?
-        ↓
-2. Can I use two pointers?
-        ↓
-3. One pointer starts from the beginning.
-        ↓
-4. One pointer starts from the end.
-        ↓
-5. Swap the two elements.
-        ↓
-6. Move both pointers toward the center.
-        ↓
-7. Stop when the pointers meet.
-```
-
-For this problem:
-
-```text
-Left Pointer   → 0
-Right Pointer  → N - 1
-
-Swap           → arr[left], arr[right]
-Move Left      → left += 1
-Move Right     → right -= 1
-
-Time           → O(N)
-Auxiliary Space → O(1)
-```
-
----
-
-# 📌 Summary
-
-| Property                  | Value                              |
-| ------------------------- | ---------------------------------- |
-| Problem                   | Reverse an Array                   |
-| Technique                 | Two-Pointer                        |
-| Pattern                   | In-Place Array Manipulation        |
-| Time Complexity           | `O(N)`                             |
-| Auxiliary Space           | `O(1)`                             |
-| Built-in `reverse()` Used | ❌ No                               |
-| Array Slicing Used        | ❌ No                               |
-| In-Place                  | ✅ Yes                              |
-| Difficulty                | Easy                               |
-| Language                  | Python                             |
-| Suitable For              | DSA / Coding Assessments / TCS NQT |
-
----
-
-## ⭐ Key Takeaway
-
-> **Use two pointers—one at the beginning and one at the end—swap their elements, and move both pointers toward the center until the array is completely reversed.**
-
-The key pattern to remember is:
-
-```text
-Left →→→       ←←← Right
-       Swap
-        ↓
-Left moves right
-Right moves left
-```
-
-This **two-pointer technique** is one of the most important patterns to learn for array and string problems.
-
-
-# 5. 🔢 Count Frequency of Each Element in an Array
-
-A fundamental **array traversal and frequency counting problem** commonly useful for coding assessments such as **TCS NQT**.
-
-The objective is to find and print the **frequency of each distinct element** present in a given array.
-
-The problem can be solved efficiently using a **Python dictionary (hash map)** to store each element and its corresponding frequency.
-
----
-
-# 📌 Problem Statement
-
-Given an array of `N` integers, count how many times each distinct element appears in the array.
-
-### Input Format
-
-* The first line contains an integer `N`, representing the number of elements.
-* The second line contains `N` space-separated integers representing the array.
-
-### Output Format
-
-Print each distinct element along with its frequency.
-
-The elements are printed in the order in which they first appear in the array.
-
----
-
-# 🧪 Example
-
-### Input
-
-```text
-7
-10 20 10 30 20 10 40
-```
-
-### Output
-
-```text
-10 3
-20 2
-30 1
-40 1
-```
-
-### Explanation
-
-The given array is:
-
-```text
-10 20 10 30 20 10 40
-```
-
-We count how many times each element occurs:
-
-```text
-10 → 3 times
-20 → 2 times
-30 → 1 time
-40 → 1 time
-```
-
-Therefore, the frequency of each element is:
-
-```text
-10 3
-20 2
-30 1
-40 1
-```
-
----
-
-# 💡 Approach
-
-We can solve this problem efficiently using a **dictionary/hash map**.
-
-A dictionary stores data in the form:
-
-```text
-element → frequency
-```
-
-For example:
-
-```text
-10 → 3
-20 → 2
-30 → 1
-40 → 1
-```
-
-We traverse the array once.
-
-For every element:
-
-* If the element already exists in the dictionary, increase its frequency by `1`.
-* Otherwise, add the element to the dictionary with frequency `1`.
-
-This allows us to count all frequencies in a **single traversal**.
-
----
-
-# 🧠 Algorithm
-
-1. Read the number of elements `N`.
-2. Read the array.
-3. Create an empty dictionary called `frequency`.
-4. Traverse every element in the array.
-5. For each element:
-
-   * If the element already exists in `frequency`, increment its count.
-   * Otherwise, initialize its count to `1`.
-6. Traverse the dictionary.
-7. Print each element along with its frequency.
-
----
-
-# 💻 Python Code
-
-```python
-n = int(input())
-
-arr = list(map(int, input().split()))
-
-frequency = {}
-
-for num in arr:
-    if num in frequency:
-        frequency[num] += 1
-    else:
-        frequency[num] = 1
-
-for num in frequency:
-    print(num, frequency[num])
-```
-
----
-
-# 🔍 Code Explanation
-
-## 1. Read the Size of the Array
-
-```python
-n = int(input())
-```
-
-`input()` reads the value as a string.
-
-`int()` converts it into an integer.
-
-For example:
-
-```text
-7
-```
-
-becomes:
-
-```python
-n = 7
-```
-
----
-
-## 2. Read the Array
-
 ```python
 arr = list(map(int, input().split()))
 ```
 
-This line performs three operations.
-
-### `input()`
-
-Reads the complete line:
-
-```text
-10 20 10 30 20 10 40
-```
-
-### `.split()`
-
-Splits the input into individual strings:
-
-```python
-["10", "20", "10", "30", "20", "10", "40"]
-```
-
-### `map(int, ...)`
-
-Converts each string into an integer:
-
-```python
-[10, 20, 10, 30, 20, 10, 40]
-```
-
-Finally, `list()` creates the Python list.
-
-So:
-
-```python
-arr = [10, 20, 10, 30, 20, 10, 40]
-```
+is sufficient.
 
 ---
 
-# 📊 Frequency Counting Using a Dictionary
+## ❌ Mistake 4 — Changing the Provided Function Signature
 
-## 3. Create an Empty Dictionary
-
-```python
-frequency = {}
-```
-
-This dictionary will store:
-
-```text
-element → frequency
-```
-
-Initially:
+If the platform gives:
 
 ```python
-{}
+def solve(arr):
 ```
 
-As we process the array, it will become:
+don't change it to:
 
 ```python
-{10: 3, 20: 2, 30: 1, 40: 1}
+def solve():
 ```
+
+unless the platform explicitly requires that change.
+
+The judge may call the original function signature automatically.
 
 ---
 
-## 4. Traverse the Array
+# 🎯 Exam Strategy
 
-```python
-for num in arr:
-```
+When you open a coding question, **don't immediately start writing code**.
 
-This loop visits every element in the array.
-
-For:
+First identify:
 
 ```text
-[10, 20, 10, 30, 20, 10, 40]
+1. What is the Input Format?
+        ↓
+2. What is the Output Format?
+        ↓
+3. Is a function already provided?
+        ↓
+4. Is a class already provided?
+        ↓
+5. Who handles input?
+        ↓
+6. Who handles output?
+        ↓
+7. Then write the algorithm
 ```
 
-the values of `num` will be:
-
-```text
-10
-20
-10
-30
-20
-10
-40
-```
+This prevents one of the most common competitive-programming mistakes: writing correct logic with the wrong input/output interface.
 
 ---
 
-## 5. Check Whether the Element Already Exists
+# 🔥 The Rule to Remember
 
-```python
-if num in frequency:
-```
-
-This checks whether the current element already exists as a key in the dictionary.
-
-For example, after processing:
+## Complete Program
 
 ```text
-10
-20
-```
-
-the dictionary is:
-
-```python
-{10: 1, 20: 1}
-```
-
-When `10` appears again:
-
-```python
-if 10 in frequency:
-```
-
-the condition is `True`.
-
----
-
-## 6. Increase the Frequency
-
-```python
-frequency[num] += 1
-```
-
-If the element already exists, increase its frequency by `1`.
-
-For example:
-
-```python
-frequency[10] = 1
-```
-
-After another `10`:
-
-```python
-frequency[10] = 2
-```
-
-After another `10`:
-
-```python
-frequency[10] = 3
-```
-
----
-
-## 7. Add a New Element
-
-```python
-else:
-    frequency[num] = 1
-```
-
-If the element does not exist in the dictionary, add it with an initial frequency of `1`.
-
-For example, when `30` is encountered for the first time:
-
-```python
-frequency[30] = 1
-```
-
-The dictionary becomes:
-
-```python
-{10: 2, 20: 1, 30: 1}
-```
-
----
-
-## 8. Traverse the Frequency Dictionary
-
-```python
-for num in frequency:
-```
-
-After the entire array has been processed, the dictionary contains every distinct element and its frequency.
-
-For example:
-
-```python
-{10: 3, 20: 2, 30: 1, 40: 1}
-```
-
-The loop visits:
-
-```text
-10
-20
-30
-40
-```
-
-Because Python dictionaries preserve insertion order, the elements are printed in the order in which they first appeared.
-
----
-
-## 9. Print the Element and Frequency
-
-```python
-print(num, frequency[num])
-```
-
-This prints the element followed by its frequency.
-
-For example:
-
-```text
-10 3
-```
-
-means:
-
-```text
-Element = 10
-Frequency = 3
-```
-
-The final output is:
-
-```text
-10 3
-20 2
-30 1
-40 1
-```
-
----
-
-# 📊 Dry Run
-
-Consider:
-
-```text
-N = 7
-Array = [10, 20, 10, 30, 20, 10, 40]
-```
-
-We process each element one by one.
-
-| Step | Current Element | Frequency Dictionary           |
-| ---- | --------------- | ------------------------------ |
-| 1    | 10              | `{10: 1}`                      |
-| 2    | 20              | `{10: 1, 20: 1}`               |
-| 3    | 10              | `{10: 2, 20: 1}`               |
-| 4    | 30              | `{10: 2, 20: 1, 30: 1}`        |
-| 5    | 20              | `{10: 2, 20: 2, 30: 1}`        |
-| 6    | 10              | `{10: 3, 20: 2, 30: 1}`        |
-| 7    | 40              | `{10: 3, 20: 2, 30: 1, 40: 1}` |
-
-### Final Frequency Table
-
-```text
-10 → 3
-20 → 2
-30 → 1
-40 → 1
+Input → Your Code → Output
 ```
 
 Therefore:
 
 ```text
-10 3
-20 2
-30 1
-40 1
-```
-
----
-
-# 🔁 How the Dictionary Changes
-
-The frequency dictionary evolves as follows.
-
-### Initially
-
-```python
-{}
-```
-
-### After processing `10`
-
-```python
-{10: 1}
-```
-
-### After processing `20`
-
-```python
-{10: 1, 20: 1}
-```
-
-### After processing another `10`
-
-```python
-{10: 2, 20: 1}
-```
-
-### After processing `30`
-
-```python
-{10: 2, 20: 1, 30: 1}
-```
-
-### After processing another `20`
-
-```python
-{10: 2, 20: 2, 30: 1}
-```
-
-### After processing another `10`
-
-```python
-{10: 3, 20: 2, 30: 1}
-```
-
-### After processing `40`
-
-```python
-{10: 3, 20: 2, 30: 1, 40: 1}
-```
-
----
-
-# 🚫 Why Not Use `count()`?
-
-Python provides a built-in `count()` method:
-
-```python
-arr.count(num)
-```
-
-We could write:
-
-```python
-for num in arr:
-    print(num, arr.count(num))
-```
-
-However, this approach has a major problem.
-
-`count()` traverses the array every time it is called.
-
-If the array contains `N` elements and we call `count()` for every element, the time complexity can become:
-
-```text
-O(N²)
-```
-
-For example:
-
-```text
-Array = [10, 20, 10, 30, 20, 10]
-```
-
-The array is repeatedly scanned to count each element.
-
-The dictionary approach is much more efficient because we count every element during a **single traversal**.
-
----
-
-# 🚫 Why Not Use Nested Loops?
-
-Another possible approach is:
-
-```python
-for i in range(n):
-    count = 0
-
-    for j in range(n):
-        if arr[i] == arr[j]:
-            count += 1
-```
-
-This also requires:
-
-```text
-O(N²)
-```
-
-time complexity.
-
-The dictionary/hash map approach reduces the average time complexity to:
-
-```text
-O(N)
-```
-
-Therefore, it is the preferred approach for larger arrays.
-
----
-
-# ⏱️ Complexity Analysis
-
-## Time Complexity
-
-```text
-O(N)
-```
-
-We traverse the array once to build the frequency dictionary.
-
-Dictionary lookup and update operations are **O(1) on average**.
-
-Therefore:
-
-```text
-Time Complexity = O(N)
-```
-
-> **Note:** Python dictionary operations such as membership checking, insertion, and updating are average-case `O(1)`.
-
----
-
-## Space Complexity
-
-```text
-O(K)
-```
-
-where `K` is the number of **distinct elements** in the array.
-
-For example:
-
-```text
-[10, 10, 10, 10]
-```
-
-has:
-
-```text
-N = 4
-K = 1
-```
-
-while:
-
-```text
-[10, 20, 30, 40]
-```
-
-has:
-
-```text
-N = 4
-K = 4
-```
-
-Therefore, the frequency dictionary requires space proportional to the number of distinct elements.
-
-```text
-Auxiliary Space = O(K)
-```
-
-In the worst case, when every element is unique:
-
-```text
-K = N
-```
-
-so the space complexity becomes:
-
-```text
-O(N)
-```
-
----
-
-# 🧪 Test Cases
-
-## Test Case 1 — Normal Case
-
-### Input
-
-```text
-7
-10 20 10 30 20 10 40
-```
-
-### Output
-
-```text
-10 3
-20 2
-30 1
-40 1
-```
-
----
-
-## Test Case 2 — All Elements Are Unique
-
-### Input
-
-```text
-5
-10 20 30 40 50
-```
-
-### Output
-
-```text
-10 1
-20 1
-30 1
-40 1
-50 1
-```
-
----
-
-## Test Case 3 — All Elements Are Same
-
-### Input
-
-```text
-5
-7 7 7 7 7
-```
-
-### Output
-
-```text
-7 5
-```
-
----
-
-## Test Case 4 — Negative Numbers
-
-### Input
-
-```text
-7
--5 -10 -5 -20 -10 -5 -20
-```
-
-### Output
-
-```text
--5 3
--10 2
--20 2
-```
-
----
-
-## Test Case 5 — Positive and Negative Numbers
-
-### Input
-
-```text
-8
-10 -5 10 -5 20 -5 30 10
-```
-
-### Output
-
-```text
-10 3
--5 3
-20 1
-30 1
-```
-
----
-
-## Test Case 6 — Duplicate Elements
-
-### Input
-
-```text
-8
-5 10 5 20 10 5 20 10
-```
-
-### Output
-
-```text
-5 3
-10 3
-20 2
-```
-
----
-
-# ⚠️ Important Edge Cases
-
-## 1. Single Element
-
-For:
-
-```text
-1
-25
-```
-
-the frequency is:
-
-```text
-25 1
-```
-
----
-
-## 2. All Elements Are Identical
-
-For:
-
-```text
-5
-10 10 10 10 10
-```
-
-there is only one distinct element:
-
-```text
-10 5
-```
-
----
-
-## 3. All Elements Are Unique
-
-For:
-
-```text
-4
-10 20 30 40
-```
-
-every element has frequency `1`:
-
-```text
-10 1
-20 1
-30 1
-40 1
-```
-
----
-
-## 4. Negative Numbers
-
-The dictionary approach works with negative integers without any special modification.
-
-For:
-
-```text
--2 -5 -2 -10
-```
-
-the result is:
-
-```text
--2 2
--5 1
--10 1
-```
-
----
-
-# 🎯 Key DSA Pattern
-
-This problem teaches the:
-
-## **Frequency Counting / Hash Map Pattern**
-
-The general idea is:
-
-```text
-Read an element
-       ↓
-Check if it exists in the dictionary
-       ↓
-    ┌──┴──┐
-    ↓     ↓
-   Yes    No
-    ↓     ↓
-Increase  Set to 1
-frequency
-    ↓     ↓
-    └──┬──┘
-       ↓
-Process next element
-```
-
-The dictionary stores:
-
-```text
-Element → Number of Occurrences
-```
-
-For example:
-
-```text
-10 → 3
-20 → 2
-30 → 1
-40 → 1
-```
-
-This pattern is extremely useful in array and string problems.
-
----
-
-# 📚 What You Learn From This Problem
-
-By solving this problem, you practice:
-
-* Array input handling
-* Python lists
-* `input()`
-* `.split()`
-* `map()`
-* Integer conversion
-* `for` loops
-* Conditional statements
-* Python dictionaries
-* Key-value pairs
-* Dictionary membership checking
-* Frequency counting
-* Hash map technique
-* Handling duplicate values
-* Handling negative values
-* Time complexity analysis
-* Space complexity analysis
-* Single-pass algorithms
-
----
-
-# 🚀 TCS NQT Relevance
-
-Frequency counting is an important pattern for coding assessments such as **TCS NQT**.
-
-The same concept can be used in many problems involving arrays and strings.
-
-### Problems Based on the Same Pattern
-
-* Count frequency of each element
-* Find the most frequent element
-* Find the least frequent element
-* Find the first non-repeating element
-* Find duplicate elements
-* Count duplicate elements
-* Find unique elements
-* Find the frequency of a particular number
-* Check whether two arrays contain the same frequencies
-* Check whether two strings are anagrams
-* Count character frequency in a string
-
-### Recommended Thought Process During an Exam
-
-When you see a problem involving frequency:
-
-```text
-1. Do I need to count occurrences?
-        ↓
-2. Can I use a dictionary/hash map?
-        ↓
-3. What should be the key?
-        ↓
-4. What should be the value?
-        ↓
-5. Can I solve it in one traversal?
-        ↓
-6. What is the final complexity?
-```
-
-For this problem:
-
-```text
-Key       → Array Element
-Value     → Frequency
-Traversal → O(N)
-Space     → O(K)
-```
-
-where `K` is the number of distinct elements.
-
----
-
-# 📌 Summary
-
-| Property                | Value                              |
-| ----------------------- | ---------------------------------- |
-| Problem                 | Count Frequency of Each Element    |
-| Technique               | Frequency Counting                 |
-| Pattern                 | Hash Map / Dictionary              |
-| Time Complexity         | `O(N)` Average                     |
-| Auxiliary Space         | `O(K)`                             |
-| Worst-Case Space        | `O(N)`                             |
-| Built-in `count()` Used | ❌ No                               |
-| Nested Loop Used        | ❌ No                               |
-| Duplicate Values        | ✅ Handled                          |
-| Negative Values         | ✅ Handled                          |
-| Difficulty              | Easy–Medium                        |
-| Language                | Python                             |
-| Suitable For            | DSA / Coding Assessments / TCS NQT |
-
----
-
-## ⭐ Key Takeaway
-
-> **Use a dictionary to store each array element as a key and its frequency as the value. Traverse the array once and update the frequency whenever an element is encountered.**
-
-The key pattern to remember is:
-
-```text
-Element
+input()
    ↓
-Exists in Dictionary?
+algorithm
    ↓
- ┌───────┴───────┐
- ↓               ↓
-Yes              No
- ↓                ↓
-Count += 1      Count = 1
-```
-
-This **frequency counting / hash map technique** is one of the most important patterns for solving array and string problems efficiently.
-
-
-# 6.🔢 Rearrange Array in Increasing and Decreasing Order
-
-A fundamental **array sorting and rearrangement problem** commonly useful for coding assessments such as **TCS NQT**.
-
-The objective is to rearrange the elements of a given array such that the **first half is in increasing order** and the **second half is in decreasing order**.
-
-The problem can be solved by first sorting the array and then rearranging its two halves.
-
----
-
-# 📌 Problem Statement
-
-Given an array of `N` integers, rearrange the elements such that:
-
-* The first half of the array is arranged in **increasing order**.
-* The second half of the array is arranged in **decreasing order**.
-
-### Input Format
-
-* The first line contains an integer `N`, representing the number of elements.
-* The second line contains `N` space-separated integers representing the array.
-
-### Output Format
-
-Print the rearranged array where:
-
-* The first half is in increasing order.
-* The second half is in decreasing order.
-
----
-
-# 🧪 Example
-
-### Input
-
-```text
-8
-10 5 20 8 15 3 12 7
-```
-
-### Output
-
-```text
-3 5 7 8 20 15 12 10
-```
-
-### Explanation
-
-The given array is:
-
-```text
-10 5 20 8 15 3 12 7
-```
-
-First, sort the array in increasing order:
-
-```text
-3 5 7 8 10 12 15 20
-```
-
-Now divide the sorted array into two halves:
-
-### Increasing Half
-
-```text
-3 5 7 8
-```
-
-### Second Half
-
-```text
-10 12 15 20
-```
-
-Reverse the second half:
-
-```text
-20 15 12 10
-```
-
-Therefore, the final rearranged array is:
-
-```text
-3 5 7 8 20 15 12 10
+print()
 ```
 
 ---
 
-# 💡 Approach
-
-We can solve this problem using **sorting and array rearrangement**.
-
-The approach consists of three main steps:
-
-### Step 1: Sort the Array
-
-Sort the complete array in increasing order.
-
-```python
-arr.sort()
-```
-
-For example:
+## Function-Based Platform
 
 ```text
-10 5 20 8 15 3 12 7
+Platform Input
+      ↓
+Function Parameter
+      ↓
+Your Algorithm
+      ↓
+return
+      ↓
+Platform Output
 ```
-
-becomes:
-
-```text
-3 5 7 8 10 12 15 20
-```
-
-### Step 2: Divide the Array
-
-Find the middle position:
-
-```python
-mid = n // 2
-```
-
-Then divide the sorted array into two parts:
-
-```text
-First Half:
-3 5 7 8
-
-Second Half:
-10 12 15 20
-```
-
-### Step 3: Reverse the Second Half
-
-The first half remains in increasing order.
-
-The second half is reversed to make it decreasing:
-
-```text
-20 15 12 10
-```
-
-Finally, combine both parts:
-
-```text
-3 5 7 8 20 15 12 10
-```
-
----
-
-# 🧠 Algorithm
-
-1. Read the number of elements `N`.
-2. Read the array.
-3. Sort the array in increasing order.
-4. Calculate the middle index using `N // 2`.
-5. Store the first half in `increasing`.
-6. Store the second half in `decreasing`.
-7. Reverse the `decreasing` part.
-8. Combine the two parts.
-9. Print the resulting array.
-
----
-
-# 💻 Python Code
-
-```python
-n = int(input())
-
-arr = list(map(int, input().split()))
-
-arr.sort()
-
-mid = n // 2
-
-increasing = arr[:mid]
-decreasing = arr[mid:]
-
-decreasing.reverse()
-
-result = increasing + decreasing
-
-print(*result)
-```
-
----
-
-# 🔍 Code Explanation
-
-## 1. Read the Size of the Array
-
-```python
-n = int(input())
-```
-
-`input()` reads the value as a string.
-
-`int()` converts it into an integer.
-
-For example:
-
-```text
-8
-```
-
-becomes:
-
-```python
-n = 8
-```
-
----
-
-## 2. Read the Array
-
-```python
-arr = list(map(int, input().split()))
-```
-
-This line performs three operations.
-
-### `input()`
-
-Reads the complete line:
-
-```text
-10 5 20 8 15 3 12 7
-```
-
-### `.split()`
-
-Splits the input into individual strings:
-
-```python
-["10", "5", "20", "8", "15", "3", "12", "7"]
-```
-
-### `map(int, ...)`
-
-Converts each string into an integer:
-
-```python
-[10, 5, 20, 8, 15, 3, 12, 7]
-```
-
-Finally, `list()` creates the Python list.
-
-So:
-
-```python
-arr = [10, 5, 20, 8, 15, 3, 12, 7]
-```
-
----
-
-# 📊 Sorting and Rearranging the Array
-
-## 3. Sort the Array
-
-```python
-arr.sort()
-```
-
-This sorts the array in increasing order.
-
-Before sorting:
-
-```text
-10 5 20 8 15 3 12 7
-```
-
-After sorting:
-
-```text
-3 5 7 8 10 12 15 20
-```
-
----
-
-## 4. Find the Middle Position
-
-```python
-mid = n // 2
-```
-
-The `//` operator performs integer division.
-
-For:
-
-```text
-n = 8
-```
-
-we get:
-
-```text
-mid = 8 // 2
-mid = 4
-```
-
-Therefore, the array is divided at index `4`.
-
----
-
-## 5. Store the Increasing Half
-
-```python
-increasing = arr[:mid]
-```
-
-This takes all elements from the beginning of the array up to, but not including, `mid`.
-
-For:
-
-```python
-arr = [3, 5, 7, 8, 10, 12, 15, 20]
-```
-
-we get:
-
-```python
-increasing = [3, 5, 7, 8]
-```
-
-This part is already in increasing order because the complete array was sorted first.
-
----
-
-## 6. Store the Second Half
-
-```python
-decreasing = arr[mid:]
-```
-
-This takes all elements from `mid` to the end.
 
 Therefore:
 
 ```python
-decreasing = [10, 12, 15, 20]
-```
-
-At this point, this part is still in increasing order.
-
----
-
-## 7. Reverse the Second Half
-
-```python
-decreasing.reverse()
-```
-
-The second half becomes:
-
-```text
-[20, 15, 12, 10]
-```
-
-Now it is in decreasing order.
-
----
-
-## 8. Combine Both Parts
-
-```python
-result = increasing + decreasing
-```
-
-The two lists are joined together.
-
-### Increasing
-
-```text
-3 5 7 8
-```
-
-### Decreasing
-
-```text
-20 15 12 10
-```
-
-### Result
-
-```text
-3 5 7 8 20 15 12 10
+def solve(arr):
+    # algorithm
+    return answer
 ```
 
 ---
 
-## 9. Print the Result
+# 🧩 Example — Same Problem, Different Platforms
 
-```python
-print(*result)
-```
+### Problem
 
-The `*` operator unpacks the list elements.
+> Calculate the sum of all elements in an array.
 
-Instead of printing:
-
-```text
-[3, 5, 7, 8, 20, 15, 12, 10]
-```
-
-it prints:
-
-```text
-3 5 7 8 20 15 12 10
-```
-
-which matches the required output format.
-
----
-
-# 📊 Dry Run
-
-Consider:
-
-```text
-N = 8
-Array = [10, 5, 20, 8, 15, 3, 12, 7]
-```
-
-## Step 1 — Sort the Array
-
-### Original
-
-```text
-10 5 20 8 15 3 12 7
-```
-
-### Sorted
-
-```text
-3 5 7 8 10 12 15 20
-```
-
----
-
-## Step 2 — Find the Middle
-
-```text
-N = 8
-
-mid = 8 // 2
-mid = 4
-```
-
----
-
-## Step 3 — Divide the Array
-
-### First Half
-
-```text
-3 5 7 8
-```
-
-### Second Half
-
-```text
-10 12 15 20
-```
-
----
-
-## Step 4 — Reverse the Second Half
-
-### Before
-
-```text
-10 12 15 20
-```
-
-### After
-
-```text
-20 15 12 10
-```
-
----
-
-## Step 5 — Combine Both Parts
-
-```text
-3 5 7 8 + 20 15 12 10
-```
-
-### Final Result
-
-```text
-3 5 7 8 20 15 12 10
-```
-
----
-
-# 🔁 Visual Representation
-
-The complete process can be represented as:
-
-```text
-Original Array
-      ↓
-    Sort
-      ↓
-3  5  7  8  10  12  15  20
-      ↓
-  Split at middle
-      ↓
-3  5  7  8 | 10  12  15  20
-      ↓
-First Half  |  Reverse Second Half
-      ↓
-3  5  7  8 | 20  15  12  10
-      ↓
-     Combine
-        ↓
-3  5  7  8  20  15  12  10
-```
-
----
-
-# 🚫 Why Not Use Only `sort()`?
-
-Simply sorting the array:
-
-```python
-arr.sort()
-```
-
-produces:
-
-```text
-3 5 7 8 10 12 15 20
-```
-
-But this does **not** satisfy the required arrangement because the second half is still increasing.
-
-We need:
-
-```text
-3 5 7 8 20 15 12 10
-```
-
-Therefore, after sorting, the second half must be reversed.
-
----
-
-# 🚫 Why Not Use Nested Loops?
-
-We could manually compare and rearrange elements using nested loops.
-
-However, that would make the solution unnecessarily complicated and could result in:
-
-```text
-O(N²)
-```
-
-time complexity.
-
-Python's sorting algorithm provides an efficient way to arrange the elements.
-
-The important part is understanding how to manipulate the sorted array into the required increasing/decreasing structure.
-
----
-
-# ⏱️ Complexity Analysis
-
-## Time Complexity
-
-```text
-O(N log N)
-```
-
-The dominant operation is:
-
-```python
-arr.sort()
-```
-
-Python's sorting algorithm takes:
-
-```text
-O(N log N)
-```
-
-time in the general case.
-
-The remaining operations such as slicing, reversing, and combining the two halves are linear:
-
-```text
-O(N)
-```
-
-Therefore, the overall complexity is:
-
-```text
-Time Complexity = O(N log N)
-```
-
----
-
-## Space Complexity
-
-The solution creates additional lists:
-
-```text
-increasing
-decreasing
-result
-```
-
-Therefore, the additional space used is proportional to the number of elements.
-
-```text
-Auxiliary Space = O(N)
-```
-
-> **Note:** Python's sorting implementation also uses additional memory internally. The exact implementation details are handled by Python.
-
----
-
-# 🧪 Test Cases
-
-## Test Case 1 — Normal Case
-
-### Input
-
-```text
-8
-10 5 20 8 15 3 12 7
-```
-
-### Output
-
-```text
-3 5 7 8 20 15 12 10
-```
-
----
-
-## Test Case 2 — Even Number of Elements
-
-### Input
-
-```text
-6
-1 6 3 5 2 4
-```
-
-### Output
-
-```text
-1 2 3 6 5 4
-```
-
----
-
-## Test Case 3 — Odd Number of Elements
-
-### Input
-
-```text
-5
-10 2 8 4 6
-```
-
-### Output
-
-```text
-2 4 8 10 6
-```
-
----
-
-## Test Case 4 — Negative Numbers
-
-### Input
-
-```text
-6
--10 -5 -20 -2 -15 -8
-```
-
-### Output
-
-```text
--20 -15 -10 -2 -5 -8
-```
-
----
-
-## Test Case 5 — Duplicate Elements
-
-### Input
-
-```text
-8
-10 5 10 20 5 15 20 10
-```
-
-### Output
-
-```text
-5 5 10 10 20 20 15 10
-```
-
----
-
-## Test Case 6 — Already Sorted Array
-
-### Input
-
-```text
-6
-1 2 3 4 5 6
-```
-
-### Output
-
-```text
-1 2 3 6 5 4
-```
-
----
-
-# ⚠️ Important Edge Cases
-
-## 1. Single Element
-
-For:
-
-```text
-1
-25
-```
-
-the result remains:
-
-```text
-25
-```
-
-There is only one element, so no rearrangement is required.
-
----
-
-## 2. Two Elements
-
-For:
-
-```text
-2
-20 10
-```
-
-after sorting:
-
-```text
-10 20
-```
-
-The first half contains `10` and the second half contains `20`.
-
-Final result:
-
-```text
-10 20
-```
-
----
-
-## 3. Duplicate Elements
-
-For:
-
-```text
-8
-10 5 10 20 5 15 20 10
-```
-
-duplicates are retained.
-
-The algorithm does not remove or modify duplicate values.
-
----
-
-## 4. Negative Numbers
-
-The sorting approach works with negative values as well.
-
-For:
-
-```text
--10 -5 -20 -2 -15 -8
-```
-
-the sorted array is:
-
-```text
--20 -15 -10 -8 -5 -2
-```
-
-The required arrangement becomes:
-
-```text
--20 -15 -10 -2 -5 -8
-```
-
----
-
-# 🎯 Key DSA Pattern
-
-This problem teaches the:
-
-## **Sorting + Array Partitioning Pattern**
-
-The general idea is:
-
-```text
-Sort the array
-      ↓
-Find the middle
-      ↓
-Separate into two halves
-      ↓
-First half → Increasing
-      ↓
-Second half → Reverse
-      ↓
-Combine both halves
-```
-
-The important operations are:
-
-```text
-arr.sort()
-     ↓
-mid = n // 2
-     ↓
-arr[:mid]
-     ↓
-arr[mid:]
-     ↓
-reverse()
-```
-
-This pattern is useful for problems where an array must be rearranged according to different ordering rules.
-
----
-
-# 📚 What You Learn From This Problem
-
-By solving this problem, you practice:
-
-* Array input handling
-* Python lists
-* `input()`
-* `.split()`
-* `map()`
-* Integer conversion
-* Python sorting
-* `.sort()`
-* Integer division
-* Array slicing
-* List reversal
-* List concatenation
-* Array partitioning
-* Increasing order
-* Decreasing order
-* Time complexity analysis
-* Space complexity analysis
-
----
-
-# 🚀 TCS NQT Relevance
-
-This is a useful **array sorting and manipulation problem** for coding assessments such as **TCS NQT**.
-
-It combines multiple basic concepts instead of testing only one operation.
-
-### Problems Based on Similar Concepts
-
-* Sort an array in increasing order
-* Sort an array in decreasing order
-* Rearrange positive and negative elements
-* Rearrange even and odd elements
-* Move zeros to the end
-* Move negative elements to one side
-* Separate elements based on a condition
-* Find the median of an array
-* Find the Kth largest element
-* Find the Kth smallest element
-
-### Recommended Thought Process During an Exam
-
-When you see a problem involving increasing and decreasing arrangement:
-
-```text
-1. What exact ordering is required?
-        ↓
-2. Can sorting simplify the problem?
-        ↓
-3. Where should the array be divided?
-        ↓
-4. Which part should be increasing?
-        ↓
-5. Which part should be decreasing?
-        ↓
-6. Can I rearrange the parts without nested loops?
-        ↓
-7. What is the final complexity?
-```
-
-For this problem:
-
-```text
-Sorting          → O(N log N)
-Middle           → N // 2
-First Half       → Increasing
-Second Half      → Decreasing
-Final Complexity → O(N log N)
-```
-
----
-
-# 📌 Summary
-
-| Property           | Value                                            |
-| ------------------ | ------------------------------------------------ |
-| Problem            | Rearrange Array in Increasing & Decreasing Order |
-| Technique          | Sorting + Partitioning                           |
-| Pattern            | Array Rearrangement                              |
-| Time Complexity    | `O(N log N)`                                     |
-| Auxiliary Space    | `O(N)`                                           |
-| Sorting Used       | ✅ Yes                                            |
-| Array Slicing Used | ✅ Yes                                            |
-| Duplicate Values   | ✅ Handled                                        |
-| Negative Values    | ✅ Handled                                        |
-| Difficulty         | Easy–Medium                                      |
-| Language           | Python                                           |
-| Suitable For       | DSA / Coding Assessments / TCS NQT               |
-
----
-
-## ⭐ Key Takeaway
-
-> **Sort the array first, keep the first half in increasing order, reverse the second half to make it decreasing, and combine both parts.**
-
-The key pattern to remember is:
-
-```text
-Original Array
-      ↓
-    Sort
-      ↓
-3  5  7  8  10  12  15  20
-      ↓
-  Split at middle
-      ↓
-3  5  7  8 | 10  12  15  20
-      ↓
-Reverse second half
-      ↓
-3  5  7  8 | 20  15  12  10
-      ↓
-Final Answer
-```
-
-This **sorting + partitioning technique** is a useful foundation for more advanced array rearrangement and ordering problems.
-
-
-# 7. ➕ Calculate Sum of the Elements of an Array
-
-A fundamental **array traversal and accumulation problem** commonly useful for coding assessments such as **TCS NQT**.
-
-The objective is to calculate the **sum of all elements** present in a given array without using Python's built-in **`sum()`** function.
-
-The problem can be solved efficiently using **linear traversal** and a **running sum**.
-
----
-
-## 📌 Problem Statement
-
-Given an array of `N` integers, calculate and print the sum of all elements present in the array.
-
-### Input Format
-
-* The first line contains an integer `N`, representing the number of elements.
-* The second line contains `N` space-separated integers representing the array.
-
-### Output Format
-
-Print the sum of all elements in the array.
-
----
-
-# 🧪 Example
-
-### Input
-
-```text
-5
-10 20 30 40 50
-```
-
-### Output
-
-```text
-150
-```
-
-### Explanation
-
-The given array is:
-
-```text
-10 20 30 40 50
-```
-
-We add each element to a running total:
-
-```text
-10 → total = 10
-20 → total = 30
-30 → total = 60
-40 → total = 100
-50 → total = 150
-```
-
-Therefore, the sum of all elements is:
-
-```text
-150
-```
-
----
-
-# 💡 Approach
-
-We can solve this problem using **linear traversal** of the array.
-
-The main idea is to maintain a variable called `total` that stores the sum of all elements processed so far.
-
-### Step 1: Initialize the Sum
-
-Start with:
-
-```python
-total = 0
-```
-
-Initially, no elements have been added, so the total is `0`.
-
-### Step 2: Traverse the Array
-
-Visit every element of the array:
-
-```python
-for num in arr:
-```
-
-### Step 3: Add Each Element
-
-Add the current element to `total`:
-
-```python
-total += num
-```
-
-### Step 4: Print the Result
-
-After processing all elements:
-
-```python
-print(total)
-```
-
-The final value stored in `total` is the sum of all elements.
-
----
-
-# 🧠 Algorithm
-
-1. Read the number of elements `N`.
-2. Read the array.
-3. Initialize `total = 0`.
-4. Traverse every element of the array.
-5. Add the current element to `total`.
-6. After the traversal is complete, print `total`.
-
----
-
-# 💻 Python Code
+## TCS / Complete Program
 
 ```python
 n = int(input())
-
 arr = list(map(int, input().split()))
 
 total = 0
@@ -5224,672 +701,151 @@ print(total)
 
 ---
 
-# 🔍 Code Explanation
-
-## 1. Read the Size of the Array
+## LeetCode / Function-Based
 
 ```python
-n = int(input())
-```
+class Solution:
+    def arraySum(self, arr):
 
-`input()` reads the value as a string.
+        total = 0
 
-`int()` converts it into an integer.
+        for num in arr:
+            total += num
 
-For example:
-
-```text
-5
-```
-
-becomes:
-
-```python
-n = 5
+        return total
 ```
 
 ---
 
-## 2. Read the Array
+## Function Format
 
 ```python
-arr = list(map(int, input().split()))
+def solve(arr):
+
+    total = 0
+
+    for num in arr:
+        total += num
+
+    return total
 ```
 
-This line performs three operations.
-
-### `input()`
-
-Reads the complete line:
+The algorithm remains:
 
 ```text
-10 20 30 40 50
-```
-
-### `.split()`
-
-Splits the input into individual strings:
-
-```python
-["10", "20", "30", "40", "50"]
-```
-
-### `map(int, ...)`
-
-Converts each string into an integer:
-
-```python
-[10, 20, 30, 40, 50]
-```
-
-Finally, `list()` creates the Python list.
-
-So:
-
-```python
-arr = [10, 20, 30, 40, 50]
-```
-
----
-
-# ➕ Calculating the Sum
-
-## 3. Initialize the Running Sum
-
-```python
-total = 0
-```
-
-We start the sum at `0`.
-
-At the beginning:
-
-```text
-total = 0
-```
-
-As we process each element, `total` will be updated.
-
----
-
-## 4. Traverse the Array
-
-```python
-for num in arr:
-```
-
-This loop visits every element in the array.
-
-For:
-
-```text
-[10, 20, 30, 40, 50]
-```
-
-the value of `num` will be:
-
-```text
-10
-20
-30
-40
-50
-```
-
----
-
-## 5. Add Each Element to the Total
-
-```python
-total += num
-```
-
-This is shorthand for:
-
-```python
-total = total + num
-```
-
-For example, when:
-
-```text
-total = 10
-num = 20
-```
-
-the operation becomes:
-
-```text
-total = 10 + 20
-```
-
-Therefore:
-
-```text
-total = 30
-```
-
-The process continues for every element.
-
----
-
-## 6. Print the Final Sum
-
-```python
-print(total)
-```
-
-After all elements have been processed, `total` contains the sum of the entire array.
-
-For example:
-
-```text
-total = 150
-```
-
-Therefore:
-
-```text
-150
-```
-
-is printed.
-
----
-
-# 📊 Dry Run
-
-Consider:
-
-```text
-N = 5
-Array = [10, 20, 30, 40, 50]
-```
-
-| Step    | Current Element | Total Before | Calculation | Total After |
-| ------- | --------------- | ------------ | ----------- | ----------- |
-| Initial | —               | 0            | —           | 0           |
-| 1       | 10              | 0            | 0 + 10      | 10          |
-| 2       | 20              | 10           | 10 + 20     | 30          |
-| 3       | 30              | 30           | 30 + 30     | 60          |
-| 4       | 40              | 60           | 60 + 40     | 100         |
-| 5       | 50              | 100          | 100 + 50    | 150         |
-
-### Final Answer
-
-```text
-150
-```
-
----
-
-# 🔁 Visual Representation
-
-The complete process can be represented as:
-
-```text
-Array
-  ↓
-10 20 30 40 50
-  ↓
 Initialize total = 0
-  ↓
-Add 10 → total = 10
-  ↓
-Add 20 → total = 30
-  ↓
-Add 30 → total = 60
-  ↓
-Add 40 → total = 100
-  ↓
-Add 50 → total = 150
-  ↓
-Print total
-  ↓
-150
+        ↓
+Traverse array
+        ↓
+Add each element
+        ↓
+Return / print result
 ```
+
+Only the **interface** changes.
 
 ---
 
-# 🚫 Why Not Use `sum()`?
+# 📚 What You Learn From This Guide
 
-Python provides a built-in function:
+By understanding input handling, you learn:
+
+* How competitive programming platforms handle input
+* How to read TCS-style input
+* How to handle custom input in VS Code
+* How LeetCode function parameters work
+* The difference between `print()` and `return`
+* How to identify the input format
+* How to handle multiple test cases
+* How to avoid unnecessary input code
+* How to preserve provided function signatures
+* How to adapt the same algorithm to different platforms
+
+---
+
+# 🚀 TCS NQT Preparation Rule
+
+For every TCS NQT coding problem:
+
+> **Read the Input Format and Output Format before writing your code.**
+
+Don't assume that every problem uses:
 
 ```python
-print(sum(arr))
+n = int(input())
+arr = list(map(int, input().split()))
 ```
 
-This is a perfectly valid Python solution.
+Use that template **only when the problem actually provides `N` followed by the array**.
 
-However, for **DSA preparation and coding assessments**, implementing the accumulation manually is better practice.
+Similarly, don't assume that every coding platform requires `input()`.
 
-The goal is to understand the **running sum / accumulation pattern**, which can be reused in many other problems.
-
-For example:
-
-* Calculate array sum
-* Calculate array average
-* Find prefix sums
-* Find subarray sums
-* Calculate cumulative totals
-* Find maximum subarray sum
-* Calculate sums based on conditions
-
-Therefore, instead of directly using:
+If the platform gives you:
 
 ```python
-sum(arr)
+def solve(arr):
 ```
 
-we practice:
+or:
 
 ```python
-total = 0
-
-for num in arr:
-    total += num
+class Solution:
 ```
 
----
-
-# 🚫 Why Not Use Nested Loops?
-
-A nested-loop approach is unnecessary for calculating a simple array sum.
-
-For example, repeatedly processing the array using nested loops could result in:
-
-```text
-O(N²)
-```
-
-time complexity.
-
-A single traversal is sufficient.
-
-Therefore, the optimal approach is:
-
-```text
-O(N)
-```
-
-time complexity.
-
----
-
-# ⏱️ Complexity Analysis
-
-## Time Complexity
-
-```text
-O(N)
-```
-
-We traverse the array exactly once.
-
-If there are `N` elements, each element is processed once.
-
-Therefore:
-
-```text
-Time Complexity = O(N)
-```
-
----
-
-## Space Complexity
-
-```text
-O(1)
-```
-
-The algorithm uses only one additional variable:
-
-```text
-total
-```
-
-Therefore, the **auxiliary space complexity** is:
-
-```text
-O(1)
-```
-
-> **Note:** The input array itself requires `O(N)` memory. `O(1)` refers to the additional/auxiliary space used by the summation algorithm.
-
----
-
-# 🧪 Test Cases
-
-## Test Case 1 — Normal Case
-
-### Input
-
-```text
-5
-10 20 30 40 50
-```
-
-### Output
-
-```text
-150
-```
-
----
-
-## Test Case 2 — Positive and Negative Numbers
-
-### Input
-
-```text
-6
-10 -5 20 -10 15 -5
-```
-
-### Output
-
-```text
-25
-```
-
----
-
-## Test Case 3 — All Elements Are Zero
-
-### Input
-
-```text
-5
-0 0 0 0 0
-```
-
-### Output
-
-```text
-0
-```
-
----
-
-## Test Case 4 — All Elements Are Negative
-
-### Input
-
-```text
-5
--10 -20 -30 -40 -50
-```
-
-### Output
-
-```text
--150
-```
-
----
-
-## Test Case 5 — Single Element
-
-### Input
-
-```text
-1
-25
-```
-
-### Output
-
-```text
-25
-```
-
----
-
-## Test Case 6 — Duplicate Elements
-
-### Input
-
-```text
-6
-10 10 20 20 30 30
-```
-
-### Output
-
-```text
-120
-```
-
----
-
-# ⚠️ Important Edge Cases
-
-## 1. Single Element
-
-For:
-
-```text
-1
-25
-```
-
-the sum is simply:
-
-```text
-25
-```
-
----
-
-## 2. All Elements Are Zero
-
-For:
-
-```text
-5
-0 0 0 0 0
-```
-
-the result is:
-
-```text
-0
-```
-
----
-
-## 3. Negative Numbers
-
-The algorithm works correctly with negative numbers.
-
-For:
-
-```text
--10 -20 -30
-```
-
-the calculation is:
-
-```text
-0 + (-10) = -10
--10 + (-20) = -30
--30 + (-30) = -60
-```
-
-Therefore:
-
-```text
--60
-```
-
----
-
-## 4. Mixed Positive and Negative Numbers
-
-For:
-
-```text
-10 -5 20 -10 15 -5
-```
-
-the running total is:
-
-```text
-10
-5
-25
-15
-30
-25
-```
-
-Therefore:
-
-```text
-25
-```
-
----
-
-# 🎯 Key DSA Pattern
-
-This problem teaches the:
-
-## **Linear Traversal / Running Sum Pattern**
-
-The general idea is:
-
-```text
-Initialize total
-      ↓
-Traverse the array
-      ↓
-Add current element
-      ↓
-Update total
-      ↓
-Process next element
-      ↓
-Print final total
-```
-
-The key operation is:
-
-```python
-total += num
-```
-
-This pattern is one of the most fundamental techniques in array problems.
-
----
-
-# 📚 What You Learn From This Problem
-
-By solving this problem, you practice:
-
-* Array input handling
-* Python lists
-* `input()`
-* `.split()`
-* `map()`
-* Integer conversion
-* `for` loops
-* Running sum
-* Accumulation
-* Array traversal
-* Handling positive numbers
-* Handling negative numbers
-* Handling zero values
-* Time complexity analysis
-* Space complexity analysis
-
----
-
-# 🚀 TCS NQT Relevance
-
-This is a **basic-level array problem** that helps build the foundation required for coding assessments such as **TCS NQT**.
-
-Although calculating a sum is simple, the underlying **accumulation pattern** appears in many more advanced problems.
-
-### Problems Based on Similar Concepts
-
-* Calculate average of array elements
-* Find sum of even elements
-* Find sum of odd elements
-* Find sum of positive elements
-* Find sum of negative elements
-* Find prefix sum
-* Find cumulative sum
-* Find maximum subarray sum
-* Find sum of elements at even indices
-* Find sum of elements at odd indices
-
-### Recommended Thought Process During an Exam
-
-When you see a problem asking for a sum:
-
-```text
-1. What values need to be added?
-        ↓
-2. Can I solve it with one traversal?
-        ↓
-3. What should the initial total be?
-        ↓
-4. What condition determines whether an element is added?
-        ↓
-5. Can I maintain a running sum?
-        ↓
-6. What is the final complexity?
-```
-
-For this problem:
-
-```text
-Initial Total → 0
-Traversal     → O(N)
-Update        → total += num
-Answer        → total
-```
+then the platform is generally responsible for providing the input to your function.
 
 ---
 
 # 📌 Summary
 
-| Property              | Value                              |
-| --------------------- | ---------------------------------- |
-| Problem               | Calculate Sum of Array Elements    |
-| Technique             | Linear Traversal                   |
-| Pattern               | Running Sum / Accumulation         |
-| Time Complexity       | `O(N)`                             |
-| Auxiliary Space       | `O(1)`                             |
-| Built-in `sum()` Used | ❌ No                               |
-| Nested Loop Used      | ❌ No                               |
-| Negative Values       | ✅ Handled                          |
-| Zero Values           | ✅ Handled                          |
-| Difficulty            | Easy                               |
-| Language              | Python                             |
-| Suitable For          | DSA / Coding Assessments / TCS NQT |
+| Situation                     | Correct Approach                                 |
+| ----------------------------- | ------------------------------------------------ |
+| VS Code + TCS-style problem   | `input()` + `print()`                            |
+| TCS complete-program question | Follow given Input/Output Format                 |
+| LeetCode function             | Use provided parameters + `return`               |
+| Function-based platform       | Don't manually read input                        |
+| Multiple test cases           | Read `T` and loop according to the stated format |
+| `N` not provided              | Don't read `N`                                   |
+| Function signature provided   | Preserve it                                      |
 
 ---
 
 ## ⭐ Key Takeaway
 
-> **Initialize a running total with `0`, traverse every element of the array, add each element to the total, and print the final value.**
+> **Don't memorize one input template. Understand who is responsible for input and output.**
 
-The key pattern to remember is:
+### Complete Program
 
-```text
-total = 0
-     ↓
-Read element
-     ↓
-total += element
-     ↓
-Read next element
-     ↓
-Repeat until the array ends
-     ↓
-Print total
+```python
+n = int(input())
+arr = list(map(int, input().split()))
+
+# Algorithm
+
+print(answer)
 ```
 
-This **running sum / accumulation pattern** is one of the most important foundations for solving array traversal and prefix-sum problems.
+### Function-Based
+
+```python
+def solve(arr):
+
+    # Algorithm
+
+    return answer
+```
+
+### LeetCode
+
+```python
+class Solution:
+    def problemName(self, arr):
+
+        # Algorithm
+
+        return answer
+```
+
+The **algorithm doesn't change**.
+
+The **input/output interface changes according to the platform**.
