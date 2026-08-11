@@ -7088,3 +7088,807 @@ O(N) Time + O(1) Auxiliary Space
 ```
 
 This reversal technique is one of the most useful array-manipulation patterns to remember for DSA and coding assessments.
+
+
+# 9. 📊 Calculate the Average of All Elements in an Array
+
+A fundamental **array traversal and accumulation problem** commonly useful for coding assessments such as **TCS NQT**.
+
+The objective is to calculate the **average of all elements** present in a given array. The array can contain **integers, decimal values, or a mixture of both**.
+
+The problem can be solved efficiently using **linear traversal**, a **running sum**, and the arithmetic mean formula.
+
+---
+
+## 📌 Problem Statement
+
+Given an array of `N` numbers, calculate and print the average of all elements present in the array.
+
+### Input Format
+
+- The first line contains an integer `N`, representing the number of elements.
+- The second line contains `N` space-separated numbers representing the array.
+
+### Output Format
+
+Print the average of all elements in the array.
+
+> If the problem specifies a particular number of decimal places, format the answer according to the required output format.
+
+---
+
+# 🧪 Example
+
+### Input
+
+```text
+5
+3 9.8 2 4.5 10
+```
+
+### Output
+
+```text
+5.86
+```
+
+### Explanation
+
+The given array is:
+
+```text
+3 9.8 2 4.5 10
+```
+
+First calculate the sum:
+
+```text
+3 + 9.8 + 2 + 4.5 + 10 = 29.3
+```
+
+Then calculate the average:
+
+```text
+Average = Sum / Number of Elements
+        = 29.3 / 5
+        = 5.86
+```
+
+Therefore, the average is:
+
+```text
+5.86
+```
+
+---
+
+# 💡 Approach
+
+We can solve this problem using **linear traversal** of the array.
+
+The main idea is to maintain a variable called `total` that stores the sum of all elements processed so far. After calculating the total, divide it by `N` to obtain the average.
+
+### Step 1: Initialize the Sum
+
+```python
+total = 0.0
+```
+
+### Step 2: Traverse the Array
+
+```python
+for num in arr:
+```
+
+### Step 3: Add Each Element
+
+```python
+total += num
+```
+
+### Step 4: Calculate the Average
+
+```python
+average = total / n
+```
+
+### Step 5: Print the Result
+
+```python
+print(average)
+```
+
+If exactly two decimal places are required:
+
+```python
+print(f"{average:.2f}")
+```
+
+---
+
+# 🧠 Algorithm
+
+1. Read the number of elements `N`.
+2. Read the array.
+3. Initialize `total = 0.0`.
+4. Traverse every element of the array.
+5. Add the current element to `total`.
+6. Calculate `average = total / N`.
+7. Print the average according to the required output format.
+
+---
+
+# 💻 Python Code
+
+```python
+n = int(input())
+
+arr = list(map(float, input().split()))
+
+total = 0.0
+
+for num in arr:
+    total += num
+
+average = total / n
+
+print(average)
+```
+
+---
+
+# 🔍 Code Explanation
+
+## 1. Read the Size of the Array
+
+```python
+n = int(input())
+```
+
+`input()` reads the value as a string and `int()` converts it into an integer.
+
+For example:
+
+```text
+5
+```
+
+becomes:
+
+```python
+n = 5
+```
+
+---
+
+## 2. Read the Array
+
+```python
+arr = list(map(float, input().split()))
+```
+
+This performs three operations.
+
+### `input()`
+
+Reads:
+
+```text
+3 9.8 2 4.5 10
+```
+
+### `.split()`
+
+Creates:
+
+```text
+["3", "9.8", "2", "4.5", "10"]
+```
+
+### `map(float, ...)`
+
+Converts the values into:
+
+```text
+[3.0, 9.8, 2.0, 4.5, 10.0]
+```
+
+Using `float()` means the program accepts both integers such as `3` and decimal values such as `9.8`, including mixed input.
+
+---
+
+## 3. Initialize the Running Sum
+
+```python
+total = 0.0
+```
+
+Initially:
+
+```text
+total = 0.0
+```
+
+The value is updated as every element is processed.
+
+---
+
+## 4. Traverse the Array
+
+```python
+for num in arr:
+```
+
+The loop visits every element exactly once.
+
+---
+
+## 5. Add Each Element to the Total
+
+```python
+total += num
+```
+
+This is shorthand for:
+
+```python
+total = total + num
+```
+
+For example:
+
+```text
+total = 3.0
+num = 9.8
+```
+
+becomes:
+
+```text
+total = 12.8
+```
+
+---
+
+## 6. Calculate the Average
+
+```python
+average = total / n
+```
+
+The formula is:
+
+```text
+Average = Sum of Elements / Number of Elements
+```
+
+For the example:
+
+```text
+total = 29.3
+n = 5
+
+average = 29.3 / 5
+        = 5.86
+```
+
+---
+
+## 7. Print the Average
+
+```python
+print(average)
+```
+
+If the question requires exactly two decimal places:
+
+```python
+print(f"{average:.2f}")
+```
+
+Do not add rounding or formatting unless the problem's output specification requires it.
+
+---
+
+# 📊 Dry Run
+
+Consider:
+
+```text
+N = 5
+Array = [3, 9.8, 2, 4.5, 10]
+```
+
+| Step | Current Element | Total Before | Calculation | Total After |
+|------|-----------------|--------------|-------------|-------------|
+| Initial | — | 0.0 | — | 0.0 |
+| 1 | 3.0 | 0.0 | 0.0 + 3.0 | 3.0 |
+| 2 | 9.8 | 3.0 | 3.0 + 9.8 | 12.8 |
+| 3 | 2.0 | 12.8 | 12.8 + 2.0 | 14.8 |
+| 4 | 4.5 | 14.8 | 14.8 + 4.5 | 19.3 |
+| 5 | 10.0 | 19.3 | 19.3 + 10.0 | 29.3 |
+
+Then:
+
+```text
+Average = 29.3 / 5
+        = 5.86
+```
+
+### Final Answer
+
+```text
+5.86
+```
+
+---
+
+# 🔁 Visual Representation
+
+```text
+Array
+  ↓
+3 9.8 2 4.5 10
+  ↓
+Initialize total = 0.0
+  ↓
+Add each element
+  ↓
+Total = 29.3
+  ↓
+Average = total / N
+  ↓
+29.3 / 5
+  ↓
+5.86
+```
+
+---
+
+# 🚫 Why Not Use `sum()`?
+
+Python provides:
+
+```python
+print(sum(arr) / n)
+```
+
+This is valid Python, but for **DSA preparation and coding assessments**, manually implementing the running sum is better practice because it teaches the accumulation pattern.
+
+Instead of:
+
+```python
+sum(arr)
+```
+
+we practice:
+
+```python
+total = 0.0
+
+for num in arr:
+    total += num
+```
+
+Then:
+
+```python
+average = total / n
+```
+
+---
+
+# 🚫 Why Not Use Nested Loops?
+
+A nested-loop approach is unnecessary. A single traversal is enough to calculate the total.
+
+A nested-loop approach could lead to:
+
+```text
+O(N²)
+```
+
+while the optimal approach is:
+
+```text
+O(N)
+```
+
+---
+
+# ⏱️ Complexity Analysis
+
+## Time Complexity
+
+```text
+O(N)
+```
+
+Every element is processed exactly once.
+
+## Auxiliary Space Complexity
+
+```text
+O(1)
+```
+
+Apart from the input array, the calculation uses only a few variables such as `total` and `average`.
+
+> **Note:** The input array itself requires `O(N)` memory. `O(1)` refers to the additional/auxiliary space used by the algorithm.
+
+---
+
+# 🧪 Test Cases
+
+## Test Case 1 — Normal Integer Values
+
+### Input
+
+```text
+5
+10 20 30 40 50
+```
+
+### Output
+
+```text
+30.0
+```
+
+---
+
+## Test Case 2 — Decimal Values
+
+### Input
+
+```text
+5
+0.3 1.5 2.7 4.2 1.3
+```
+
+### Output
+
+```text
+2.0
+```
+
+---
+
+## Test Case 3 — Mixed Integers and Decimals
+
+### Input
+
+```text
+5
+3 9.8 2 4.5 10
+```
+
+### Output
+
+```text
+5.86
+```
+
+---
+
+## Test Case 4 — Negative Numbers
+
+### Input
+
+```text
+5
+-10 -20 -30 -40 -50
+```
+
+### Output
+
+```text
+-30.0
+```
+
+---
+
+## Test Case 5 — Positive and Negative Values
+
+### Input
+
+```text
+6
+10 -5 20 -10 15 -5
+```
+
+### Output
+
+```text
+4.166666666666667
+```
+
+If two decimal places are required:
+
+```text
+4.17
+```
+
+---
+
+## Test Case 6 — All Elements Are Equal
+
+### Input
+
+```text
+4
+5 5 5 5
+```
+
+### Output
+
+```text
+5.0
+```
+
+---
+
+## Test Case 7 — Single Element
+
+### Input
+
+```text
+1
+9.8
+```
+
+### Output
+
+```text
+9.8
+```
+
+---
+
+# ⚠️ Important Edge Cases
+
+## 1. Single Element
+
+For:
+
+```text
+1
+9.8
+```
+
+the average is:
+
+```text
+9.8
+```
+
+## 2. All Elements Are Zero
+
+For:
+
+```text
+5
+0 0 0 0 0
+```
+
+the average is:
+
+```text
+0.0
+```
+
+## 3. Negative Numbers
+
+For:
+
+```text
+-10 -20 -30
+```
+
+the sum is `-60` and the average is:
+
+```text
+-60 / 3 = -20.0
+```
+
+## 4. Mixed Integers and Decimals
+
+This is valid:
+
+```text
+3 9.8 2 4.5 10
+```
+
+because the program uses:
+
+```python
+map(float, ...)
+```
+
+## 5. Decimal Output Formatting
+
+If the problem requires exactly two decimal places:
+
+```python
+print(f"{average:.2f}")
+```
+
+Otherwise, follow the exact output format given in the problem.
+
+---
+
+# 🎯 Key DSA Pattern
+
+This problem teaches the:
+
+## **Linear Traversal / Running Sum + Average Pattern**
+
+```text
+Initialize total
+      ↓
+Traverse the array
+      ↓
+Add current element
+      ↓
+Update total
+      ↓
+Calculate total / N
+      ↓
+Print average
+```
+
+The key operations are:
+
+```python
+total += num
+```
+
+and:
+
+```python
+average = total / n
+```
+
+This is a direct extension of the **running sum / accumulation technique**.
+
+---
+
+# 📚 What You Learn From This Problem
+
+By solving this problem, you practice:
+
+- Array input handling
+- Python lists
+- `input()`
+- `.split()`
+- `map()`
+- `float()` conversion
+- Integer and decimal input
+- `for` loops
+- Running sum
+- Accumulation
+- Arithmetic mean
+- Array traversal
+- Floating-point calculations
+- Output formatting
+- Time complexity analysis
+- Space complexity analysis
+
+---
+
+# 🚀 TCS NQT Relevance
+
+This is a **basic-level array problem** that helps build the foundation required for coding assessments such as **TCS NQT**.
+
+Although calculating an average is simple, the underlying **accumulation pattern** appears in many other problems.
+
+### Problems Based on Similar Concepts
+
+- Calculate sum of array elements
+- Calculate average of array elements
+- Find sum of even elements
+- Find sum of odd elements
+- Find sum of positive elements
+- Find sum of negative elements
+- Find prefix sum
+- Find cumulative average
+- Find maximum and minimum
+- Calculate average under a condition
+- Calculate average of a subarray
+
+### Recommended Thought Process During an Exam
+
+```text
+1. What values need to be included?
+        ↓
+2. Can I solve it with one traversal?
+        ↓
+3. What should the initial total be?
+        ↓
+4. Are the elements integers or decimals?
+        ↓
+5. What is the number of elements?
+        ↓
+6. Calculate total / N
+        ↓
+7. Does the output require decimal formatting?
+        ↓
+8. What is the final complexity?
+```
+
+For this problem:
+
+```text
+Input Type     → Integer / Decimal
+Initial Total  → 0.0
+Traversal      → O(N)
+Update         → total += num
+Average        → total / N
+Answer         → average
+```
+
+---
+
+# 📌 Summary
+
+| Property | Value |
+|----------|-------|
+| Problem | Calculate Average of Array Elements |
+| Technique | Linear Traversal |
+| Pattern | Running Sum / Accumulation |
+| Time Complexity | `O(N)` |
+| Auxiliary Space | `O(1)` |
+| Built-in `sum()` Used | ❌ No |
+| Nested Loop Used | ❌ No |
+| Decimal Values | ✅ Supported |
+| Negative Values | ✅ Supported |
+| Zero Values | ✅ Supported |
+| Difficulty | Easy |
+| Language | Python |
+| Suitable For | DSA / Coding Assessments / TCS NQT |
+
+---
+
+## ⭐ Key Takeaway
+
+> **Traverse the array once, maintain a running sum, and divide the final sum by the number of elements to calculate the average.**
+
+The key pattern is:
+
+```text
+total = 0.0
+     ↓
+Read each element
+     ↓
+total += element
+     ↓
+Repeat until the array ends
+     ↓
+average = total / N
+     ↓
+Print average
+```
+
+For flexible numeric input, remember:
+
+```python
+arr = list(map(float, input().split()))
+```
+
+This accepts integers, decimals, and mixed values such as:
+
+```text
+3 9.8 2 4.5 10
+```
+
+The core algorithm remains:
+
+```text
+Running Sum + Arithmetic Mean
+```
+
+with:
+
+```text
+O(N) Time + O(1) Auxiliary Space
+```
