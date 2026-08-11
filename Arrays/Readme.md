@@ -5893,3 +5893,1198 @@ Print total
 ```
 
 This **running sum / accumulation pattern** is one of the most important foundations for solving array traversal and prefix-sum problems.
+
+# 8.🔄 Left Rotate an Array by K Positions
+
+A fundamental **array manipulation and reversal algorithm problem** commonly useful for coding assessments such as **TCS NQT**.
+
+The objective is to rotate the elements of a given array by `K` positions.
+
+This problem can be solved efficiently using the **reversal algorithm**, which performs the rotation in:
+
+- **O(N) time**
+- **O(1) auxiliary space**
+
+The reversal algorithm is an important **in-place array manipulation technique** used in DSA and coding interviews.
+
+---
+
+## 📌 Problem Statement
+
+Given an array of `N` integers and an integer `K`, rotate the array to the **left by `K` positions**.
+
+### Input Format
+
+- The first line contains an integer `N`, representing the number of elements.
+- The second line contains `N` space-separated integers representing the array.
+- The third line contains an integer `K`, representing the number of positions by which the array should be rotated.
+
+### Output Format
+
+Print the array after rotating it to the left by `K` positions.
+
+---
+
+# 🧪 Example
+
+### Input
+
+```text
+5
+1 2 3 4 5
+2
+```
+
+### Output
+
+```text
+3 4 5 1 2
+```
+
+### Explanation
+
+The given array is:
+
+```text
+1 2 3 4 5
+```
+
+We need to perform a left rotation by `2` positions.
+
+After the first rotation:
+
+```text
+2 3 4 5 1
+```
+
+After the second rotation:
+
+```text
+3 4 5 1 2
+```
+
+Therefore, the final rotated array is:
+
+```text
+3 4 5 1 2
+```
+
+---
+
+# 💡 Approach
+
+We can solve this problem using the **Reversal Algorithm**.
+
+Instead of shifting each element one position at a time, we reverse different sections of the array.
+
+For a left rotation by `K` positions:
+
+### Step 1: Reverse the First `K` Elements
+
+For:
+
+```text
+1 2 3 4 5
+```
+
+and:
+
+```text
+K = 2
+```
+
+reverse the first `2` elements:
+
+```text
+2 1 3 4 5
+```
+
+### Step 2: Reverse the Remaining Elements
+
+Reverse the remaining elements:
+
+```text
+2 1 5 4 3
+```
+
+### Step 3: Reverse the Entire Array
+
+Reverse the complete array:
+
+```text
+3 4 5 1 2
+```
+
+The final result is the required left rotation.
+
+---
+
+# 🧠 Algorithm
+
+1. Read the number of elements `N`.
+2. Read the array.
+3. Read the rotation value `K`.
+4. Calculate `K = K % N`.
+5. Reverse the first `K` elements.
+6. Reverse the remaining `N - K` elements.
+7. Reverse the complete array.
+8. Print the rotated array.
+
+---
+
+# 💻 Python Code
+
+```python
+n = int(input())
+
+arr = list(map(int, input().split()))
+
+k = int(input())
+
+
+def reverse_section(arr, start, end):
+    while start < end:
+        arr[start], arr[end] = arr[end], arr[start]
+        start += 1
+        end -= 1
+
+
+k = k % n
+
+reverse_section(arr, 0, k - 1)
+
+reverse_section(arr, k, n - 1)
+
+reverse_section(arr, 0, n - 1)
+
+print(*arr)
+```
+
+---
+
+# 🔍 Code Explanation
+
+## 1. Read the Size of the Array
+
+```python
+n = int(input())
+```
+
+`input()` reads the value as a string.
+
+`int()` converts it into an integer.
+
+For example:
+
+```text
+5
+```
+
+becomes:
+
+```python
+n = 5
+```
+
+---
+
+## 2. Read the Array
+
+```python
+arr = list(map(int, input().split()))
+```
+
+This line performs three operations.
+
+### `input()`
+
+Reads:
+
+```text
+1 2 3 4 5
+```
+
+### `.split()`
+
+Splits the input:
+
+```python
+["1", "2", "3", "4", "5"]
+```
+
+### `map(int, ...)`
+
+Converts the values into integers:
+
+```python
+[1, 2, 3, 4, 5]
+```
+
+Finally:
+
+```python
+arr = [1, 2, 3, 4, 5]
+```
+
+---
+
+## 3. Read the Rotation Value
+
+```python
+k = int(input())
+```
+
+For example:
+
+```text
+2
+```
+
+becomes:
+
+```python
+k = 2
+```
+
+This means the array must be rotated two positions to the left.
+
+---
+
+# 🔁 Reversal Algorithm
+
+## 4. Create the Reverse Function
+
+```python
+def reverse_section(arr, start, end):
+```
+
+This function reverses a specific section of the array.
+
+For example:
+
+```text
+1 2 3 4 5
+```
+
+If:
+
+```text
+start = 0
+end = 1
+```
+
+the function reverses:
+
+```text
+1 2
+```
+
+and produces:
+
+```text
+2 1
+```
+
+---
+
+## 5. Use Two Pointers
+
+Inside the function:
+
+```python
+while start < end:
+```
+
+Two pointers are used:
+
+```text
+start → points to the beginning
+end   → points to the end
+```
+
+The elements at these positions are swapped:
+
+```python
+arr[start], arr[end] = arr[end], arr[start]
+```
+
+Then both pointers move toward the center:
+
+```python
+start += 1
+end -= 1
+```
+
+This continues until:
+
+```text
+start >= end
+```
+
+---
+
+# 📐 Why Use `K % N`?
+
+## 6. Handle Large Values of `K`
+
+```python
+k = k % n
+```
+
+This is important for hidden test cases.
+
+Suppose:
+
+```text
+N = 5
+K = 7
+```
+
+Rotating an array by `5` positions brings it back to its original state.
+
+Therefore:
+
+```text
+7 % 5 = 2
+```
+
+So rotating by `7` positions is equivalent to rotating by `2` positions.
+
+For example:
+
+```text
+K = 12
+N = 5
+```
+
+Then:
+
+```text
+12 % 5 = 2
+```
+
+Therefore, we only need to perform a rotation of `2` positions.
+
+> **Important:** `K % N` requires `N > 0`. If a problem permits an empty array, handle that case separately.
+
+---
+
+# 🔄 Step 1 — Reverse the First K Elements
+
+```python
+reverse_section(arr, 0, k - 1)
+```
+
+For:
+
+```text
+Array = 1 2 3 4 5
+K = 2
+```
+
+we reverse:
+
+```text
+1 2
+```
+
+Result:
+
+```text
+2 1 3 4 5
+```
+
+---
+
+# 🔄 Step 2 — Reverse the Remaining Elements
+
+```python
+reverse_section(arr, k, n - 1)
+```
+
+The remaining section is:
+
+```text
+3 4 5
+```
+
+Reverse it:
+
+```text
+5 4 3
+```
+
+The complete array becomes:
+
+```text
+2 1 5 4 3
+```
+
+---
+
+# 🔄 Step 3 — Reverse the Entire Array
+
+```python
+reverse_section(arr, 0, n - 1)
+```
+
+Reverse:
+
+```text
+2 1 5 4 3
+```
+
+The result is:
+
+```text
+3 4 5 1 2
+```
+
+This is the required left rotation.
+
+---
+
+# 📊 Dry Run
+
+Consider:
+
+```text
+N = 5
+Array = [1, 2, 3, 4, 5]
+K = 2
+```
+
+### Initial Array
+
+```text
+1 2 3 4 5
+```
+
+### Step 1 — Reverse First K Elements
+
+```text
+2 1 3 4 5
+```
+
+### Step 2 — Reverse Remaining Elements
+
+```text
+2 1 5 4 3
+```
+
+### Step 3 — Reverse Entire Array
+
+```text
+3 4 5 1 2
+```
+
+### Final Answer
+
+```text
+3 4 5 1 2
+```
+
+---
+
+# 🔁 Visual Representation
+
+The complete process can be represented as:
+
+```text
+Original Array
+      ↓
+1 2 3 4 5
+      ↓
+K = 2
+      ↓
+Reverse first K elements
+      ↓
+2 1 3 4 5
+      ↓
+Reverse remaining elements
+      ↓
+2 1 5 4 3
+      ↓
+Reverse entire array
+      ↓
+3 4 5 1 2
+      ↓
+Final Answer
+```
+
+---
+
+# 💡 Why Does the Reversal Algorithm Work?
+
+Suppose the array is divided into two parts:
+
+```text
+A B
+```
+
+where:
+
+```text
+A = first K elements
+B = remaining elements
+```
+
+For example:
+
+```text
+A = [1 2]
+B = [3 4 5]
+```
+
+The required left rotation is:
+
+```text
+B A
+```
+
+which is:
+
+```text
+3 4 5 1 2
+```
+
+The reversal algorithm performs:
+
+```text
+A B
+```
+
+First reverse `A`:
+
+```text
+Aᵣ B
+```
+
+Then reverse `B`:
+
+```text
+Aᵣ Bᵣ
+```
+
+Finally reverse the complete array:
+
+```text
+(Bᵣ)ᵣ (Aᵣ)ᵣ
+```
+
+which becomes:
+
+```text
+B A
+```
+
+Therefore, the required rotation is obtained.
+
+---
+
+# 🚫 Why Not Shift Elements One by One?
+
+A simple approach would be to move each element one position at a time.
+
+For example:
+
+```text
+1 2 3 4 5
+```
+
+Rotate once:
+
+```text
+2 3 4 5 1
+```
+
+Rotate again:
+
+```text
+3 4 5 1 2
+```
+
+If `K` is large, repeatedly shifting elements can result in:
+
+```text
+O(N × K)
+```
+
+time complexity.
+
+The reversal algorithm performs the entire rotation in:
+
+```text
+O(N)
+```
+
+time.
+
+Therefore, it is more efficient.
+
+---
+
+# 🚫 Why Not Use Python Slicing?
+
+A shorter Python solution is:
+
+```python
+k = k % n
+arr = arr[k:] + arr[:k]
+```
+
+This produces the correct result.
+
+However, slicing creates additional lists and therefore uses extra memory.
+
+The reversal algorithm performs the rotation **in-place**.
+
+### Comparison
+
+| Approach | Time Complexity | Auxiliary Space |
+|----------|------------------|-----------------|
+| Repeated shifting | `O(N × K)` | `O(1)` |
+| Python slicing | `O(N)` | `O(N)` |
+| **Reversal Algorithm** | **`O(N)`** | **`O(1)`** |
+
+For DSA preparation, the **reversal algorithm is preferred** because it teaches an important in-place array manipulation technique.
+
+---
+
+# ⏱️ Complexity Analysis
+
+## Time Complexity
+
+```text
+O(N)
+```
+
+We reverse three sections of the array:
+
+```text
+First K elements       → O(K)
+Remaining N-K elements → O(N-K)
+Entire array            → O(N)
+```
+
+Therefore:
+
+```text
+O(K) + O(N-K) + O(N)
+```
+
+which simplifies to:
+
+```text
+O(N)
+```
+
+So:
+
+```text
+Time Complexity = O(N)
+```
+
+---
+
+## Space Complexity
+
+```text
+O(1)
+```
+
+The array is modified **in-place**.
+
+The algorithm only uses a few variables:
+
+```text
+start
+end
+k
+```
+
+No additional array proportional to `N` is created.
+
+Therefore:
+
+```text
+Auxiliary Space = O(1)
+```
+
+---
+
+# 🧪 Test Cases
+
+## Test Case 1 — Normal Case
+
+### Input
+
+```text
+5
+1 2 3 4 5
+2
+```
+
+### Output
+
+```text
+3 4 5 1 2
+```
+
+---
+
+## Test Case 2 — Rotate by One Position
+
+### Input
+
+```text
+5
+1 2 3 4 5
+1
+```
+
+### Output
+
+```text
+2 3 4 5 1
+```
+
+---
+
+## Test Case 3 — Rotate by Array Size
+
+### Input
+
+```text
+5
+1 2 3 4 5
+5
+```
+
+### Output
+
+```text
+1 2 3 4 5
+```
+
+Because:
+
+```text
+5 % 5 = 0
+```
+
+the array remains unchanged.
+
+---
+
+## Test Case 4 — K Greater Than N
+
+### Input
+
+```text
+5
+1 2 3 4 5
+7
+```
+
+### Output
+
+```text
+3 4 5 1 2
+```
+
+Because:
+
+```text
+7 % 5 = 2
+```
+
+---
+
+## Test Case 5 — Single Element
+
+### Input
+
+```text
+1
+25
+1
+```
+
+### Output
+
+```text
+25
+```
+
+A single-element array remains unchanged.
+
+---
+
+## Test Case 6 — Negative Numbers
+
+### Input
+
+```text
+6
+-10 -20 -30 -40 -50 -60
+2
+```
+
+### Output
+
+```text
+-30 -40 -50 -60 -10 -20
+```
+
+---
+
+# ⚠️ Important Edge Cases
+
+## 1. K = 0
+
+If:
+
+```text
+K = 0
+```
+
+the array should remain unchanged.
+
+For example:
+
+```text
+1 2 3 4 5
+```
+
+remains:
+
+```text
+1 2 3 4 5
+```
+
+---
+
+## 2. K = N
+
+If:
+
+```text
+K = N
+```
+
+the array returns to its original configuration.
+
+For:
+
+```text
+1 2 3 4 5
+```
+
+and:
+
+```text
+K = 5
+```
+
+the output is:
+
+```text
+1 2 3 4 5
+```
+
+---
+
+## 3. K > N
+
+Always use:
+
+```python
+k = k % n
+```
+
+For example:
+
+```text
+K = 12
+N = 5
+```
+
+becomes:
+
+```text
+12 % 5 = 2
+```
+
+---
+
+## 4. Single Element
+
+For:
+
+```text
+25
+```
+
+there is nothing to rotate.
+
+The result remains:
+
+```text
+25
+```
+
+---
+
+## 5. Negative Numbers
+
+The reversal algorithm works exactly the same way with negative values.
+
+For example:
+
+```text
+-10 -20 -30 -40
+```
+
+rotated left by `2` becomes:
+
+```text
+-30 -40 -10 -20
+```
+
+---
+
+# 🔄 Left Rotation vs Right Rotation
+
+It is important not to confuse **left rotation** and **right rotation**.
+
+## Left Rotation
+
+Example:
+
+```text
+1 2 3 4 5
+```
+
+Left rotate by `2`:
+
+```text
+3 4 5 1 2
+```
+
+The first `K` elements move to the end.
+
+---
+
+## Right Rotation
+
+Example:
+
+```text
+1 2 3 4 5
+```
+
+Right rotate by `2`:
+
+```text
+4 5 1 2 3
+```
+
+The last `K` elements move to the beginning.
+
+### Quick Memory Trick
+
+```text
+LEFT
+
+1 2 | 3 4 5
+ ↓
+3 4 5 | 1 2
+```
+
+```text
+RIGHT
+
+1 2 3 | 4 5
+        ↓
+4 5 | 1 2 3
+```
+
+Always check the question carefully before implementing the rotation.
+
+---
+
+# 🎯 Key DSA Pattern
+
+This problem teaches the:
+
+## **Reversal Algorithm / Two-Pointer Pattern**
+
+The general idea is:
+
+```text
+Divide the array
+      ↓
+Reverse first section
+      ↓
+Reverse second section
+      ↓
+Reverse entire array
+      ↓
+Rotated array
+```
+
+The key operation is:
+
+```python
+arr[start], arr[end] = arr[end], arr[start]
+```
+
+This demonstrates **in-place swapping using two pointers**.
+
+---
+
+# 📚 What You Learn From This Problem
+
+By solving this problem, you practice:
+
+- Array input handling
+- Python lists
+- `input()`
+- `.split()`
+- `map()`
+- Integer conversion
+- Array rotation
+- Left rotation
+- Right rotation concept
+- Reversal algorithm
+- Two-pointer technique
+- In-place array manipulation
+- Swapping elements
+- Modulo operation
+- Handling large `K`
+- Time complexity analysis
+- Space complexity analysis
+
+---
+
+# 🚀 TCS NQT Relevance
+
+This is an important **array manipulation problem** for coding assessments such as **TCS NQT**.
+
+The problem is valuable because it combines several fundamental DSA concepts:
+
+- Arrays
+- Two pointers
+- Reversal
+- Modulo
+- In-place operations
+- Time and space optimization
+
+### Problems Based on Similar Concepts
+
+- Rotate array left by K positions
+- Rotate array right by K positions
+- Reverse an array
+- Reverse a section of an array
+- Reverse words in a string
+- Reverse a linked list
+- Move zeros to the end
+- Rearrange positive and negative elements
+- Rotate a matrix
+- Cyclically rotate an array
+
+### Recommended Thought Process During an Exam
+
+When you see an array rotation problem:
+
+```text
+1. Is it left rotation or right rotation?
+        ↓
+2. What is N?
+        ↓
+3. What is K?
+        ↓
+4. Can K be greater than N?
+        ↓
+5. Use K % N
+        ↓
+6. Can the array be rotated in-place?
+        ↓
+7. Can the reversal algorithm be used?
+        ↓
+8. What is the final complexity?
+```
+
+For this problem:
+
+```text
+Rotation        → Left
+Normalization   → K % N
+Technique       → Reversal Algorithm
+Traversal       → O(N)
+Extra Space     → O(1)
+```
+
+---
+
+# 📌 Summary
+
+| Property | Value |
+|----------|-------|
+| Problem | Rotate Array by K Elements |
+| Rotation | Left Rotation |
+| Technique | Reversal Algorithm |
+| Pattern | Two Pointers / In-Place Manipulation |
+| Time Complexity | `O(N)` |
+| Auxiliary Space | `O(1)` |
+| Built-in Rotation Used | ❌ No |
+| Slicing Used | ❌ No |
+| Modulo Used | ✅ Yes |
+| Handles `K > N` | ✅ Yes |
+| Negative Values | ✅ Handled |
+| Difficulty | Easy–Medium |
+| Language | Python |
+| Suitable For | DSA / Coding Assessments / TCS NQT |
+
+---
+
+## ⭐ Key Takeaway
+
+> **For left rotation by `K` positions, reverse the first `K` elements, reverse the remaining elements, and finally reverse the entire array.**
+
+The key pattern to remember is:
+
+```text
+Original Array
+      ↓
+1 2 3 4 5
+      ↓
+K = 2
+      ↓
+Reverse first K
+      ↓
+2 1 3 4 5
+      ↓
+Reverse remaining
+      ↓
+2 1 5 4 3
+      ↓
+Reverse entire array
+      ↓
+3 4 5 1 2
+```
+
+The most important concepts are:
+
+```text
+K % N
+   +
+Two Pointers
+   +
+In-Place Reversal
+   =
+O(N) Time + O(1) Auxiliary Space
+```
+
+This reversal technique is one of the most useful array-manipulation patterns to remember for DSA and coding assessments.
