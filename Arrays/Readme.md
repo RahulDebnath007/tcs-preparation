@@ -9870,3 +9870,851 @@ Unsorted Array
 ```
 
 This distinction is important when choosing the correct DSA pattern during coding assessments.
+
+
+12.🔄 Remove Duplicates from an Unsorted Array
+
+A fundamental **array traversal and hashing problem** commonly useful for coding assessments such as **TCS NQT**.
+
+The objective is to remove duplicate elements from an **unsorted array** while preserving the **original order of first occurrence**.
+
+Unlike **Remove Duplicates from a Sorted Array**, where the **two-pointer technique** can be used, an unsorted array can contain duplicate values at any position. Therefore, we use a **set** to keep track of elements already encountered.
+
+---
+
+## 📌 Problem Statement
+
+Given an array of `N` integers, remove all duplicate elements and print only the **unique elements**.
+
+The original order of the elements should be preserved.
+
+### Input Format
+
+* The first line contains an integer `N`, representing the number of elements.
+* The second line contains `N` space-separated integers representing the array.
+
+### Output Format
+
+Print the unique elements of the array in the order in which they first appear.
+
+---
+
+# 🧪 Example
+
+### Input
+
+```text
+7
+1 2 3 2 4 1 5
+```
+
+### Output
+
+```text
+1 2 3 4 5
+```
+
+### Explanation
+
+We process the elements from left to right:
+
+```text
+1 → New → Keep
+2 → New → Keep
+3 → New → Keep
+2 → Duplicate → Skip
+4 → New → Keep
+1 → Duplicate → Skip
+5 → New → Keep
+```
+
+Therefore:
+
+```text
+1 2 3 4 5
+```
+
+The original order is preserved.
+
+---
+
+# 💡 Approach
+
+Since the array is **not guaranteed to be sorted**, we cannot directly use the two-pointer approach used for a sorted array.
+
+Instead, use:
+
+* A `set` called `seen` to remember elements already encountered.
+* A `result` list to store unique elements in their original order.
+
+### Step 1: Create a Set
+
+```python
+seen = set()
+```
+
+### Step 2: Create a Result List
+
+```python
+result = []
+```
+
+### Step 3: Traverse the Array
+
+```python
+for num in arr:
+```
+
+### Step 4: Check Whether the Element Is New
+
+```python
+if num not in seen:
+```
+
+### Step 5: Store the New Element
+
+```python
+seen.add(num)
+result.append(num)
+```
+
+### Step 6: Print the Result
+
+```python
+print(*result)
+```
+
+---
+
+# 🧠 Algorithm
+
+1. Read the number of elements `N`.
+2. Read the array.
+3. Create an empty set `seen`.
+4. Create an empty list `result`.
+5. Traverse every element of the array.
+6. If the element is not in `seen`:
+
+   * Add it to `seen`.
+   * Add it to `result`.
+7. If it is already in `seen`, skip it.
+8. Print the unique elements.
+
+---
+
+# 💻 Python Code
+
+```python
+n = int(input())
+
+arr = list(map(int, input().split()))
+
+seen = set()
+result = []
+
+for num in arr:
+    if num not in seen:
+        seen.add(num)
+        result.append(num)
+
+print(*result)
+```
+
+---
+
+# 🔍 Code Explanation
+
+## 1. Read the Size of the Array
+
+```python
+n = int(input())
+```
+
+For example:
+
+```text
+7
+```
+
+becomes:
+
+```python
+n = 7
+```
+
+---
+
+## 2. Read the Array
+
+```python
+arr = list(map(int, input().split()))
+```
+
+For:
+
+```text
+1 2 3 2 4 1 5
+```
+
+the resulting list is:
+
+```python
+arr = [1, 2, 3, 2, 4, 1, 5]
+```
+
+---
+
+## 3. Create the `seen` Set
+
+```python
+seen = set()
+```
+
+The set stores values that have already appeared.
+
+For example, after processing `1`, `2`, and `3`:
+
+```python
+seen = {1, 2, 3}
+```
+
+Set membership checking is **O(1) on average**.
+
+---
+
+## 4. Create the Result List
+
+```python
+result = []
+```
+
+This stores the unique values while preserving their original order.
+
+---
+
+## 5. Traverse the Array
+
+```python
+for num in arr:
+```
+
+For:
+
+```text
+[1, 2, 3, 2, 4, 1, 5]
+```
+
+`num` becomes:
+
+```text
+1
+2
+3
+2
+4
+1
+5
+```
+
+---
+
+## 6. Check for a Duplicate
+
+```python
+if num not in seen:
+```
+
+If the value is already in `seen`, it is a duplicate and is skipped.
+
+For example:
+
+```text
+seen = {1, 2, 3}
+num = 2
+```
+
+Since `2` already exists, nothing is added.
+
+---
+
+## 7. Add a New Element
+
+```python
+seen.add(num)
+result.append(num)
+```
+
+The element is added to both structures.
+
+For example, when `4` is encountered:
+
+```text
+seen   = {1, 2, 3, 4}
+result = [1, 2, 3, 4]
+```
+
+---
+
+## 8. Print the Unique Elements
+
+```python
+print(*result)
+```
+
+For:
+
+```python
+result = [1, 2, 3, 4, 5]
+```
+
+the output is:
+
+```text
+1 2 3 4 5
+```
+
+---
+
+# 📊 Dry Run
+
+Consider:
+
+```text
+N = 7
+Array = [1, 2, 3, 2, 4, 1, 5]
+```
+
+| Step    | Current | In `seen`? | `seen`            | `result`          |
+| ------- | ------- | ---------- | ----------------- | ----------------- |
+| Initial | —       | —          | `{}`              | `[]`              |
+| 1       | 1       | No         | `{1}`             | `[1]`             |
+| 2       | 2       | No         | `{1, 2}`          | `[1, 2]`          |
+| 3       | 3       | No         | `{1, 2, 3}`       | `[1, 2, 3]`       |
+| 4       | 2       | Yes        | `{1, 2, 3}`       | `[1, 2, 3]`       |
+| 5       | 4       | No         | `{1, 2, 3, 4}`    | `[1, 2, 3, 4]`    |
+| 6       | 1       | Yes        | `{1, 2, 3, 4}`    | `[1, 2, 3, 4]`    |
+| 7       | 5       | No         | `{1, 2, 3, 4, 5}` | `[1, 2, 3, 4, 5]` |
+
+### Final Answer
+
+```text
+1 2 3 4 5
+```
+
+---
+
+# 🔁 Visual Representation
+
+```text
+Array
+  ↓
+1 2 3 2 4 1 5
+  ↓
+Initialize seen = {}
+  ↓
+Initialize result = []
+  ↓
+1 → New → Add
+  ↓
+2 → New → Add
+  ↓
+3 → New → Add
+  ↓
+2 → Duplicate → Skip
+  ↓
+4 → New → Add
+  ↓
+1 → Duplicate → Skip
+  ↓
+5 → New → Add
+  ↓
+Result
+  ↓
+1 2 3 4 5
+```
+
+---
+
+# 🚫 Why Not Use the Two-Pointer Technique?
+
+The two-pointer technique works well when the array is **already sorted**:
+
+```text
+1 1 2 2 3 3 4
+```
+
+Duplicates are adjacent.
+
+But an unsorted array can look like:
+
+```text
+1 2 3 2 4 1 5
+```
+
+Here, duplicate values are not necessarily next to each other.
+
+Therefore, for an unsorted array, using a **set/hash table** is the more direct approach.
+
+---
+
+# 🔄 Sorted vs Unsorted Array
+
+| Array Type | Recommended Technique | Time           | Extra Space |
+| ---------- | --------------------- | -------------- | ----------- |
+| Sorted     | Two Pointers          | `O(N)`         | `O(1)`      |
+| Unsorted   | Set / Hashing         | `O(N)` average | `O(N)`      |
+
+This distinction is important when choosing the correct DSA pattern.
+
+---
+
+# 🚫 Why Not Use `set(arr)` Directly?
+
+A short solution is:
+
+```python
+result = list(set(arr))
+```
+
+However, a set by itself should **not be relied upon for preserving the required first-occurrence order**.
+
+When the problem explicitly requires the original order to be preserved, explicitly tracking first occurrences is clearer:
+
+```python
+seen = set()
+result = []
+
+for num in arr:
+    if num not in seen:
+        seen.add(num)
+        result.append(num)
+```
+
+This makes the intent of the algorithm explicit:
+
+> **Keep an element only the first time it appears.**
+
+---
+
+# 🚫 Why Not Use Nested Loops?
+
+Another approach is to compare every element against previously processed elements using nested loops.
+
+However, this can require:
+
+```text
+O(N²)
+```
+
+time.
+
+Using a set provides **O(1) average membership checking**, making the overall expected time:
+
+```text
+O(N)
+```
+
+---
+
+# ⏱️ Complexity Analysis
+
+## Time Complexity
+
+```text
+O(N) average
+```
+
+The array is traversed once, and set membership/add operations are **O(1) on average**.
+
+Therefore:
+
+```text
+Average Time Complexity = O(N)
+```
+
+> **Note:** Worst-case hashing behavior can theoretically degrade, but `O(N)` average time is the standard complexity analysis for this approach.
+
+---
+
+## Space Complexity
+
+```text
+O(N)
+```
+
+In the worst case, all `N` elements are unique.
+
+Therefore:
+
+* `seen` can contain up to `N` elements.
+* `result` can contain up to `N` elements.
+
+Hence:
+
+```text
+Auxiliary Space = O(N)
+```
+
+---
+
+# 🧪 Test Cases
+
+## Test Case 1 — Normal Case
+
+### Input
+
+```text
+7
+1 2 3 2 4 1 5
+```
+
+### Output
+
+```text
+1 2 3 4 5
+```
+
+---
+
+## Test Case 2 — All Elements Are Unique
+
+### Input
+
+```text
+5
+10 20 30 40 50
+```
+
+### Output
+
+```text
+10 20 30 40 50
+```
+
+---
+
+## Test Case 3 — All Elements Are Duplicates
+
+### Input
+
+```text
+5
+7 7 7 7 7
+```
+
+### Output
+
+```text
+7
+```
+
+---
+
+## Test Case 4 — Negative Numbers
+
+### Input
+
+```text
+7
+-1 -2 -1 -3 -2 -4 -3
+```
+
+### Output
+
+```text
+-1 -2 -3 -4
+```
+
+---
+
+## Test Case 5 — Positive and Negative Numbers
+
+### Input
+
+```text
+8
+10 -5 10 20 -5 30 20 -10
+```
+
+### Output
+
+```text
+10 -5 20 30 -10
+```
+
+---
+
+## Test Case 6 — Single Element
+
+### Input
+
+```text
+1
+25
+```
+
+### Output
+
+```text
+25
+```
+
+---
+
+## Test Case 7 — Duplicates at Different Positions
+
+### Input
+
+```text
+8
+5 3 5 2 3 8 2 9
+```
+
+### Output
+
+```text
+5 3 2 8 9
+```
+
+---
+
+# ⚠️ Important Edge Cases
+
+### 1. Single Element
+
+```text
+1
+25
+```
+
+Output:
+
+```text
+25
+```
+
+### 2. All Elements Are Equal
+
+```text
+5
+7 7 7 7 7
+```
+
+Output:
+
+```text
+7
+```
+
+### 3. No Duplicates
+
+```text
+5
+10 20 30 40 50
+```
+
+Output:
+
+```text
+10 20 30 40 50
+```
+
+### 4. Negative Numbers
+
+The set works with negative values as well:
+
+```text
+-1 -2 -1 -3 -2
+```
+
+Output:
+
+```text
+-1 -2 -3
+```
+
+### 5. Duplicates Are Not Adjacent
+
+For:
+
+```text
+1 2 3 2 4 1
+```
+
+the set can detect duplicates regardless of their positions.
+
+---
+
+# 🎯 Key DSA Pattern
+
+This problem teaches the:
+
+## **Hashing / Set-Based Duplicate Detection Pattern**
+
+The general idea is:
+
+```text
+Initialize a set
+      ↓
+Traverse the array
+      ↓
+Check whether element exists
+      ↓
+ ┌───────────────┐
+ │               │
+Already seen    New element
+ │               │
+ ↓               ↓
+Skip            Add to set
+                 ↓
+              Add to result
+      ↓
+Print unique elements
+```
+
+The key operation is:
+
+```python
+if num not in seen:
+```
+
+This pattern is useful for:
+
+* Detecting duplicates
+* Removing duplicates
+* Counting unique elements
+* Finding repeated elements
+* Finding the first non-repeating element
+* Tracking previously seen values
+
+---
+
+# 📚 What You Learn From This Problem
+
+By solving this problem, you practice:
+
+* Array input handling
+* Python lists
+* `input()`
+* `.split()`
+* `map()`
+* Integer conversion
+* Sets
+* Hashing
+* Membership checking
+* `set.add()`
+* `list.append()`
+* Preserving original order
+* Duplicate detection
+* Linear traversal
+* Time complexity analysis
+* Space complexity analysis
+
+---
+
+# 🚀 TCS NQT Relevance
+
+This is a useful **array + hashing problem** for coding assessments such as **TCS NQT**.
+
+The important skill is recognizing when a **set/hash table** is more appropriate than nested loops.
+
+### Problems Based on Similar Concepts
+
+* Remove duplicates from an array
+* Find duplicate elements
+* Find unique elements
+* Count frequency of each element
+* Find the first repeating element
+* Find the first non-repeating element
+* Find common elements between arrays
+* Find union of two arrays
+* Find intersection of two arrays
+* Check whether an array contains duplicates
+
+### Recommended Thought Process During an Exam
+
+When you see a problem asking to remove duplicates from an **unsorted array**:
+
+```text
+1. Is the array sorted?
+        ↓
+2. If not, can I use hashing?
+        ↓
+3. Create a set for seen elements
+        ↓
+4. Traverse the array once
+        ↓
+5. If element is new → store it
+        ↓
+6. If element already exists → skip it
+        ↓
+7. Preserve original order if required
+        ↓
+8. Analyze time and space complexity
+```
+
+For this problem:
+
+```text
+Array Type    → Unsorted
+Technique     → Set / Hashing
+Traversal     → O(N)
+Membership    → O(1) average
+Extra Space   → O(N)
+Answer        → Unique elements in original order
+```
+
+---
+
+# 📌 Summary
+
+| Property                     | Value                              |
+| ---------------------------- | ---------------------------------- |
+| **Problem**                  | Remove Duplicates from Array       |
+| **Array Type**               | Unsorted                           |
+| **Technique**                | Hashing / Set                      |
+| **Pattern**                  | Duplicate Detection                |
+| **Time Complexity**          | `O(N)` average                     |
+| **Auxiliary Space**          | `O(N)`                             |
+| **Original Order Preserved** | ✅ Yes                              |
+| **Two Pointers Used**        | ❌ No                               |
+| **Sorting Required**         | ❌ No                               |
+| **Set Used**                 | ✅ Yes                              |
+| **Negative Values**          | ✅ Handled                          |
+| **Difficulty**               | Easy–Medium                        |
+| **Language**                 | Python                             |
+| **Suitable For**             | DSA / Coding Assessments / TCS NQT |
+
+---
+
+## ⭐ Key Takeaway
+
+> **For an unsorted array, use a set to remember which elements have already appeared. Add an element to the result only when it is encountered for the first time.**
+
+The core code is:
+
+```python
+seen = set()
+result = []
+
+for num in arr:
+    if num not in seen:
+        seen.add(num)
+        result.append(num)
+```
+
+The important distinction to remember is:
+
+```text
+Sorted Array
+→ Two Pointers
+→ O(N) time
+→ O(1) auxiliary space
+
+Unsorted Array
+→ Set / Hashing
+→ O(N) average time
+→ O(N) auxiliary space
+```
+
+This distinction is important when choosing the correct DSA pattern during coding assessments.
