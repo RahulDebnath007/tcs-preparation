@@ -10718,3 +10718,983 @@ Unsorted Array
 ```
 
 This distinction is important when choosing the correct DSA pattern during coding assessments.
+
+
+13.🔁 Find All Repeating Elements in an Array
+
+A fundamental **array traversal and hashing problem** commonly useful for coding assessments such as **TCS NQT**.
+
+The objective is to find all elements that occur **more than once** in an array.
+
+Unlike **Remove Duplicates from an Array**, where we keep the first occurrence of every element, this problem requires us to identify only the elements whose frequency is greater than `1`.
+
+We use a **dictionary/hash map** to store the frequency of every element.
+
+---
+
+## 📌 Problem Statement
+
+Given an array of `N` integers, find and print all elements that occur more than once.
+
+Each repeating element should be printed **only once**, while preserving the order in which the element first appeared in the array.
+
+### Input Format
+
+* The first line contains an integer `N`, representing the number of elements.
+* The second line contains `N` space-separated integers representing the array.
+
+### Output Format
+
+Print all elements whose frequency is greater than `1`.
+
+---
+
+# 🧪 Example
+
+### Input
+
+```text
+8
+5 3 5 2 3 8 2 9
+```
+
+### Output
+
+```text
+5 3 2
+```
+
+### Explanation
+
+The given array is:
+
+```text
+5 3 5 2 3 8 2 9
+```
+
+We count the frequency of every element:
+
+```text
+5 → 2 times → Repeating
+3 → 2 times → Repeating
+2 → 2 times → Repeating
+8 → 1 time  → Not repeating
+9 → 1 time  → Not repeating
+```
+
+Therefore, the repeating elements are:
+
+```text
+5 3 2
+```
+
+Each repeating element is printed only once, and the original first-occurrence order is preserved.
+
+---
+
+# 💡 Approach
+
+Since the array is **not guaranteed to be sorted**, we can use **hashing** to count how many times each element appears.
+
+We use a dictionary called `frequency`.
+
+### Step 1: Create a Frequency Dictionary
+
+```python
+frequency = {}
+```
+
+This dictionary stores:
+
+```text
+element → frequency
+```
+
+### Step 2: Traverse the Array
+
+```python
+for num in arr:
+```
+
+Visit every element of the array.
+
+### Step 3: Update the Frequency
+
+If the element already exists:
+
+```python
+frequency[num] += 1
+```
+
+Otherwise:
+
+```python
+frequency[num] = 1
+```
+
+### Step 4: Find Repeating Elements
+
+After calculating all frequencies:
+
+```python
+for num in frequency:
+```
+
+Check:
+
+```python
+if frequency[num] > 1:
+```
+
+If the frequency is greater than `1`, the element is repeating.
+
+### Step 5: Print the Repeating Elements
+
+```python
+print(num, end=" ")
+```
+
+This prints each repeating element once.
+
+---
+
+# 🧠 Algorithm
+
+1. Read the number of elements `N`.
+2. Read the array.
+3. Create an empty dictionary `frequency`.
+4. Traverse every element of the array.
+5. For each element:
+
+   * If it already exists in `frequency`, increase its count.
+   * Otherwise, initialize its count to `1`.
+6. Traverse the `frequency` dictionary.
+7. If an element has frequency greater than `1`, print it.
+8. Print a newline after the result.
+
+---
+
+# 💻 Python Code
+
+```python
+n = int(input())
+
+arr = list(map(int, input().split()))
+
+frequency = {}
+
+for num in arr:
+    if num in frequency:
+        frequency[num] += 1
+    else:
+        frequency[num] = 1
+
+for num in frequency:
+    if frequency[num] > 1:
+        print(num, end=" ")
+
+print()
+```
+
+---
+
+# 🔍 Code Explanation
+
+## 1. Read the Size of the Array
+
+```python
+n = int(input())
+```
+
+For example:
+
+```text
+8
+```
+
+becomes:
+
+```python
+n = 8
+```
+
+---
+
+## 2. Read the Array
+
+```python
+arr = list(map(int, input().split()))
+```
+
+For:
+
+```text
+5 3 5 2 3 8 2 9
+```
+
+the resulting list is:
+
+```python
+arr = [5, 3, 5, 2, 3, 8, 2, 9]
+```
+
+---
+
+## 3. Create the Frequency Dictionary
+
+```python
+frequency = {}
+```
+
+Initially:
+
+```python
+frequency = {}
+```
+
+It will eventually store:
+
+```text
+5 → 2
+3 → 2
+2 → 2
+8 → 1
+9 → 1
+```
+
+A Python dictionary provides **O(1) average-time lookup and update**.
+
+---
+
+## 4. Traverse the Array
+
+```python
+for num in arr:
+```
+
+For:
+
+```text
+[5, 3, 5, 2, 3, 8, 2, 9]
+```
+
+`num` becomes:
+
+```text
+5
+3
+5
+2
+3
+8
+2
+9
+```
+
+---
+
+## 5. Check Whether the Element Already Exists
+
+```python
+if num in frequency:
+```
+
+If the element is already present, increase its frequency:
+
+```python
+frequency[num] += 1
+```
+
+For example:
+
+```text
+frequency = {5: 1}
+num = 5
+```
+
+becomes:
+
+```text
+frequency = {5: 2}
+```
+
+---
+
+## 6. Initialize a New Element
+
+If the element does not exist:
+
+```python
+else:
+    frequency[num] = 1
+```
+
+For example, when `3` appears for the first time:
+
+```python
+frequency[3] = 1
+```
+
+---
+
+## 7. Find Repeating Elements
+
+After counting all elements:
+
+```python
+for num in frequency:
+```
+
+we visit every unique element and check:
+
+```python
+if frequency[num] > 1:
+```
+
+Only elements occurring more than once are selected.
+
+---
+
+## 8. Print the Repeating Element
+
+```python
+print(num, end=" ")
+```
+
+For the example, this produces:
+
+```text
+5 3 2
+```
+
+Each repeating value is printed only once.
+
+---
+
+# 📊 Dry Run
+
+Consider:
+
+```text
+N = 8
+Array = [5, 3, 5, 2, 3, 8, 2, 9]
+```
+
+### Frequency Calculation
+
+| Step    | Current Element | Frequency After Processing       |
+| ------- | --------------- | -------------------------------- |
+| Initial | —               | `{}`                             |
+| 1       | 5               | `{5: 1}`                         |
+| 2       | 3               | `{5: 1, 3: 1}`                   |
+| 3       | 5               | `{5: 2, 3: 1}`                   |
+| 4       | 2               | `{5: 2, 3: 1, 2: 1}`             |
+| 5       | 3               | `{5: 2, 3: 2, 2: 1}`             |
+| 6       | 8               | `{5: 2, 3: 2, 2: 1, 8: 1}`       |
+| 7       | 2               | `{5: 2, 3: 2, 2: 2, 8: 1}`       |
+| 8       | 9               | `{5: 2, 3: 2, 2: 2, 8: 1, 9: 1}` |
+
+Now check each frequency:
+
+```text
+5 → 2 → Repeating
+3 → 2 → Repeating
+2 → 2 → Repeating
+8 → 1 → Not repeating
+9 → 1 → Not repeating
+```
+
+### Final Answer
+
+```text
+5 3 2
+```
+
+---
+
+# 🔁 Visual Representation
+
+```text
+Array
+  ↓
+5 3 5 2 3 8 2 9
+  ↓
+Count Frequencies
+  ↓
+5 → 2
+3 → 2
+2 → 2
+8 → 1
+9 → 1
+  ↓
+Check frequency > 1
+  ↓
+5 → Repeating
+3 → Repeating
+2 → Repeating
+8 → Skip
+9 → Skip
+  ↓
+Result
+  ↓
+5 3 2
+```
+
+---
+
+# 🚫 Why Not Use Nested Loops?
+
+A straightforward approach is to compare every element with every other element.
+
+This can require:
+
+```text
+O(N²)
+```
+
+time.
+
+Using a dictionary allows us to count frequencies in one traversal, giving an expected:
+
+```text
+O(N)
+```
+
+time complexity.
+
+---
+
+# 🚫 Why Not Sort the Array?
+
+We could sort the array first and identify adjacent duplicates:
+
+```text
+2 2 3 3 5 5 8 9
+```
+
+But sorting requires:
+
+```text
+O(N log N)
+```
+
+time.
+
+The hashing approach avoids sorting and gives:
+
+```text
+O(N) average time
+```
+
+It also preserves the original first-occurrence order.
+
+---
+
+# 🔄 Repeating Elements vs Removing Duplicates
+
+These two problems are different.
+
+For:
+
+```text
+5 3 5 2 3 8 2 9
+```
+
+### Remove Duplicates
+
+Keep every element only once:
+
+```text
+5 3 2 8 9
+```
+
+### Find Repeating Elements
+
+Keep only elements that appear more than once:
+
+```text
+5 3 2
+```
+
+The distinction is:
+
+```text
+Remove Duplicates
+→ Keep every unique element
+
+Find Repeating Elements
+→ Keep only frequency > 1
+```
+
+---
+
+# 🚫 Why Not Use a Set Alone?
+
+A set can tell us whether an element has appeared, but this problem specifically requires knowing **how many times** an element occurs.
+
+Therefore, a **frequency dictionary** is more appropriate:
+
+```python
+frequency = {}
+```
+
+because we need:
+
+```text
+element → count
+```
+
+---
+
+# ⏱️ Complexity Analysis
+
+## Time Complexity
+
+```text
+O(N) average
+```
+
+We traverse the array once to calculate frequencies and then traverse the dictionary containing at most `N` unique elements.
+
+Therefore:
+
+```text
+O(N) + O(N) = O(N)
+```
+
+So the average time complexity is:
+
+```text
+O(N)
+```
+
+> **Note:** Hash-table operations can theoretically degrade in pathological cases, but `O(N)` average time is the standard analysis for Python dictionary-based frequency counting.
+
+---
+
+## Space Complexity
+
+```text
+O(N)
+```
+
+In the worst case, all elements are unique, so the frequency dictionary can contain up to `N` keys.
+
+Therefore:
+
+```text
+Auxiliary Space = O(N)
+```
+
+---
+
+# 🧪 Test Cases
+
+## Test Case 1 — Normal Case
+
+### Input
+
+```text
+8
+5 3 5 2 3 8 2 9
+```
+
+### Output
+
+```text
+5 3 2
+```
+
+---
+
+## Test Case 2 — No Repeating Elements
+
+### Input
+
+```text
+5
+10 20 30 40 50
+```
+
+### Output
+
+```text
+```
+
+There are no repeating elements.
+
+---
+
+## Test Case 3 — All Elements Repeat
+
+### Input
+
+```text
+6
+5 5 10 10 20 20
+```
+
+### Output
+
+```text
+5 10 20
+```
+
+---
+
+## Test Case 4 — One Repeating Element
+
+### Input
+
+```text
+5
+1 2 3 2 4
+```
+
+### Output
+
+```text
+2
+```
+
+---
+
+## Test Case 5 — Negative Numbers
+
+### Input
+
+```text
+7
+-1 -2 -1 -3 -2 -4 -3
+```
+
+### Output
+
+```text
+-1 -2 -3
+```
+
+---
+
+## Test Case 6 — All Elements Are Same
+
+### Input
+
+```text
+5
+7 7 7 7 7
+```
+
+### Output
+
+```text
+7
+```
+
+Even though `7` appears five times, it is printed only once.
+
+---
+
+## Test Case 7 — Repeating Elements at Different Positions
+
+### Input
+
+```text
+8
+10 5 20 10 30 5 40 20
+```
+
+### Output
+
+```text
+10 5 20
+```
+
+---
+
+# ⚠️ Important Edge Cases
+
+### 1. No Repeating Elements
+
+```text
+1 2 3 4 5
+```
+
+There are no elements with frequency greater than `1`.
+
+---
+
+### 2. All Elements Are Equal
+
+```text
+7 7 7 7
+```
+
+Only:
+
+```text
+7
+```
+
+should be printed.
+
+---
+
+### 3. Negative Numbers
+
+The dictionary handles negative integers normally:
+
+```text
+-1 -2 -1 -3 -2
+```
+
+Output:
+
+```text
+-1 -2
+```
+
+---
+
+### 4. Repeating Elements Are Not Adjacent
+
+For:
+
+```text
+5 3 5 2 3 8 2
+```
+
+the repeated values are separated, but hashing can still identify them efficiently.
+
+---
+
+### 5. An Element Appears More Than Twice
+
+For:
+
+```text
+5 5 5 5 2 3
+```
+
+the answer is:
+
+```text
+5
+```
+
+It should **not** be printed four times. Each repeating value is printed once.
+
+---
+
+# 🎯 Key DSA Pattern
+
+This problem teaches the:
+
+## **Hashing / Frequency Counting Pattern**
+
+The general idea is:
+
+```text
+Initialize frequency dictionary
+          ↓
+Traverse the array
+          ↓
+Count every element
+          ↓
+Traverse the frequency table
+          ↓
+Check frequency > 1
+          ↓
+Print repeating elements
+```
+
+The key condition is:
+
+```python
+if frequency[num] > 1:
+```
+
+This pattern is useful for:
+
+* Finding repeating elements
+* Counting frequency
+* Finding duplicate elements
+* Finding unique elements
+* Finding the most frequent element
+* Finding the first repeating element
+* Finding the first non-repeating element
+* Checking whether duplicates exist
+* Solving frequency-based array problems
+
+---
+
+# 📚 What You Learn From This Problem
+
+By solving this problem, you practice:
+
+* Array input handling
+* Python lists
+* `input()`
+* `.split()`
+* `map()`
+* Integer conversion
+* Dictionaries
+* Hashing
+* Frequency counting
+* Dictionary lookup
+* Dictionary update
+* `for` loops
+* Conditional statements
+* Duplicate detection
+* Preserving first-occurrence order
+* Linear traversal
+* Time complexity analysis
+* Space complexity analysis
+
+---
+
+# 🚀 TCS NQT Relevance
+
+This is a useful **array + hashing + frequency counting problem** for coding assessments such as **TCS NQT**.
+
+The important skill is recognizing when a problem can be solved efficiently using a **frequency map** instead of nested loops or sorting.
+
+### Problems Based on Similar Concepts
+
+* Find all repeating elements
+* Remove duplicates from an array
+* Count frequency of each element
+* Find the most frequent element
+* Find the first repeating element
+* Find the first non-repeating element
+* Find unique elements
+* Find duplicate elements
+* Find common elements between arrays
+* Find elements appearing more than once
+
+### Recommended Thought Process During an Exam
+
+When you see:
+
+> **Find all repeating elements**
+
+Think:
+
+```text
+1. Do I need to know how many times each element occurs?
+        ↓
+2. Yes → Use a frequency map
+        ↓
+3. Traverse the array
+        ↓
+4. Count each element
+        ↓
+5. Traverse the frequency map
+        ↓
+6. Check frequency > 1
+        ↓
+7. Print each repeating element once
+        ↓
+8. Analyze complexity
+```
+
+For this problem:
+
+```text
+Technique     → Hashing / Frequency Map
+Counting      → O(N) average
+Checking      → O(N) average
+Total Time    → O(N) average
+Extra Space   → O(N)
+Output        → Elements with frequency > 1
+```
+
+---
+
+# 📌 Summary
+
+| Property                                | Value                              |
+| --------------------------------------- | ---------------------------------- |
+| **Problem**                             | Find All Repeating Elements        |
+| **Array Type**                          | Unsorted                           |
+| **Technique**                           | Hashing / Frequency Map            |
+| **Pattern**                             | Frequency Counting                 |
+| **Time Complexity**                     | `O(N)` average                     |
+| **Auxiliary Space**                     | `O(N)`                             |
+| **Each Repeating Element Printed Once** | ✅ Yes                              |
+| **Original First-Occurrence Order**     | ✅ Preserved                        |
+| **Sorting Required**                    | ❌ No                               |
+| **Nested Loops Required**               | ❌ No                               |
+| **Dictionary Used**                     | ✅ Yes                              |
+| **Negative Values**                     | ✅ Handled                          |
+| **Difficulty**                          | Easy–Medium                        |
+| **Language**                            | Python                             |
+| **Suitable For**                        | DSA / Coding Assessments / TCS NQT |
+
+---
+
+## ⭐ Key Takeaway
+
+> **To find all repeating elements in an unsorted array, count the frequency of every element using a dictionary, then print only the elements whose frequency is greater than `1`.**
+
+The core code is:
+
+```python
+frequency = {}
+
+for num in arr:
+    if num in frequency:
+        frequency[num] += 1
+    else:
+        frequency[num] = 1
+
+for num in frequency:
+    if frequency[num] > 1:
+        print(num, end=" ")
+
+print()
+```
+
+The key condition is:
+
+```python
+frequency[num] > 1
+```
+
+Remember the distinction:
+
+```text
+Remove Duplicates
+→ Keep every unique element
+→ 5 3 2 8 9
+
+Find Repeating Elements
+→ Keep only elements occurring more than once
+→ 5 3 2
+```
+
+The core DSA pattern is:
+
+```text
+Array
+  ↓
+Frequency Map
+  ↓
+Count Occurrences
+  ↓
+frequency > 1
+  ↓
+Repeating Elements
+```
+
+with an average time complexity of:
+
+```text
+O(N)
+```
+
+and auxiliary space of:
+
+```text
+O(N)
+```
